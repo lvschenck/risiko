@@ -1,5 +1,7 @@
 package sw.praktikum.risk5.GUI;
 
+import static java.awt.Color.white;
+
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -168,14 +170,7 @@ public class GamePanelController implements Initializable, GuiInterface {
       this.cards = this.jsonReader.getGameStatePlayerCards();
       this.ownerIds = this.jsonReader.getGameStateCountriesOwner();
       this.troops = this.jsonReader.getGameStateCountriesTroops();
-
-        boolean b = false;
-        for (int troopsCountry : this.jsonReader.getGameStateCountriesTroops()) {
-          if (troopsCountry == 0) {
-            b = true;
-          }
-        }
-        if (b) {
+        if (this.jsonReader.getGameStateCurrentGamePhase() == 0) {
           this.valueFactory = new IntegerSpinnerValueFactory(1, 1, 1);
           this.troupCount.setValueFactory(this.valueFactory);
         } else {
@@ -703,7 +698,7 @@ public class GamePanelController implements Initializable, GuiInterface {
     ((Text) country.getCenter()).setText(String.valueOf(troops));
 
     for (int i = 0; i < playerIds.length; i++) {
-      if (playerIds[i] == player) {
+      if (playerIds[i] == player && playerIds[i] != 0) {
         country.setStyle("-fx-background-color: " + playerColors[i]);
       }
     }
