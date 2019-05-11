@@ -168,6 +168,8 @@ public class Client implements Runnable, ClientInterface {
                 } else {
                   this.gui.setOwnId(maa.getId());
                 }
+
+                RiskMain.getInstance().getDomain().getMenu().connect(true);
               default:
 
                 break;

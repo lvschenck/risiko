@@ -34,6 +34,8 @@ public class MenuPanelController implements Initializable, MenuPanelInterface {
 
 	private Database db;
 
+	private boolean connect = false;
+
 	@FXML
 	public Label playerName;
 
@@ -246,23 +248,29 @@ public class MenuPanelController implements Initializable, MenuPanelInterface {
 	 * @author esali
 	 */
 	private void openJoinLobby() {
-		ClientInterface c = new Client(ipAdress.getText(),RiskMain.getInstance().getDomain().getPlayerName(),null,false);
-		Parent newContent = null;
-		RiskMain.getInstance().getDomain().setGameType(3);
-		try {
-			newContent = FXMLLoader.load(RiskMain.class.getResource("/view/LobbyPanel.fxml"));
+		ClientInterface c = new Client(ipAdress.getText(),
+				RiskMain.getInstance().getDomain().getPlayerName(), null, false);
+		if (this.connect) {
+			Parent newContent = null;
+			RiskMain.getInstance().getDomain().setGameType(3);
+			try {
+				newContent = FXMLLoader.load(RiskMain.class.getResource("/view/LobbyPanel.fxml"));
 
-		} catch (IOException e) {
-			e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			Stage primaryStage = (Stage) ((Node) this.event.getSource()).getScene().getWindow();
+			primaryStage.getScene().setRoot(newContent);
+		}else{
+			connectionJoinError.setOpacity(1.0);
 		}
-		Stage primaryStage = (Stage) ((Node) this.event.getSource()).getScene().getWindow();
-		primaryStage.getScene().setRoot(newContent);
 	}
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		playerName.setText(RiskMain.getInstance().getDomain().getPlayerName());
 		this.db = RiskMain.getInstance().getDomain().getData();
+		RiskMain.getInstance().getDomain().setMenu(this);
 		String avatar = db.getPlayerData(
 				Integer.toString(db.getUserId(RiskMain.getInstance().getDomain().getPlayerName())), "avatar");
 		switch (avatar) {
@@ -297,11 +305,6 @@ public class MenuPanelController implements Initializable, MenuPanelInterface {
 
 	@Override
 	public void connect(boolean b) {
-		System.out.println("connect");
-		if (b) {
-			openJoinLobby();
-		} else {
-			connectionJoinError.setOpacity(1.0);
-		}
+		this.connect = b;
 	}
 }

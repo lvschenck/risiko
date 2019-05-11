@@ -171,7 +171,7 @@
                               </VBox>
                               <VBox alignment="CENTER_RIGHT" GridPane.columnIndex="3" GridPane.hgrow="ALWAYS" GridPane.rowIndex="3" GridPane.vgrow="ALWAYS">
                                  <children>
-                                    <Button maxHeight="50.0" maxWidth="150.0" minHeight="30.0" minWidth="75.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="150.0" text="Connect">
+                                    <Button maxHeight="50.0" maxWidth="150.0" minHeight="30.0" minWidth="75.0" mnemonicParsing="false" onAction="#openJoinLobby" prefHeight="50.0" prefWidth="150.0" text="Connect">
                                        <font>
                                           <Font name="Lucida Fax Regular" size="15.0" />
                                        </font>
