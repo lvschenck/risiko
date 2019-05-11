@@ -109,17 +109,19 @@ public class Server extends Thread implements ServerInterface {
    * @mgass
    */
 
-  protected static void broadcast(String author, String receiver, String chatMessage) {
+  public void broadcast(String author, String receiver, String chatMessage) {
     int idAuthor;
 
     idAuthor = getIDWithUser(author);
 
     if (receiver.equals("all")) {
+      
       Iterator iterator = outputStreams.entrySet().iterator();
       while (iterator.hasNext()) {
         HashMap.Entry hM = (HashMap.Entry) iterator.next();
         Message message;
         message = new MessageChat(chatMessage, author, receiver, false);
+        RiskMain.getInstance().getDomain().getGui().receiveMessageChat(author, chatMessage, false);
         try {
           outputStreams.get(hM.getKey()).writeObject(message);
         } catch (IOException e) {
@@ -130,6 +132,9 @@ public class Server extends Thread implements ServerInterface {
       int idReceiver = getIDWithUser(receiver);
       Message message;
       message = new MessageChat(chatMessage, author, receiver, true);
+      if(receiver.equals(this.id)) {
+        this.gui.receiveMessageChat(author, chatMessage, true);
+      }
       try {
         outputStreams.get(idReceiver).writeObject(message);
       } catch (IOException e) {

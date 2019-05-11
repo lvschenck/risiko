@@ -257,7 +257,7 @@ public class LobbyPanelController implements LobbyPanelInterface {
           countKi++;
           switch (i) {
             case 0:
-              this.clientInterface1 = new Client("localhost", "PrimeTime",
+              this.clientInterface1 = new Client("localhost", "Gott",
                   (String) kiStatus1.getValue(), true);
               System.out.println("client" + countKi);
               break;

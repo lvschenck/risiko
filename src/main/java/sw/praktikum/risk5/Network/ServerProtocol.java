@@ -105,8 +105,8 @@ public class ServerProtocol extends Thread {
               chatMessage = ((MessageChat) message).getChatMessage();
               author = ((MessageChat) message).getAuthor();
               receiver = ((MessageChat) message).getReceiver();
-              Server.broadcast(author, receiver, chatMessage);
-
+              this.server.broadcast(author, receiver, chatMessage);
+              
               break;
             case ERROR:
               

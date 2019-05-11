@@ -23,5 +23,7 @@ public interface ServerInterface {
   void startGame();
   
   void sendMessageAssignId(int id);
+  
+  void broadcast(String author, String receiver, String chatMessage);
 
 }

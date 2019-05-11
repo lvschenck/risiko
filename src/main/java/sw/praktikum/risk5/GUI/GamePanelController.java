@@ -255,20 +255,19 @@ public class GamePanelController implements Initializable, GuiInterface {
 
       }
     }
-
+    if (turnphase == 0) {
+      phaseButton.setText("finish fortifying");
+      headerText.setText("Place " + ownTroopsToPlace + " troops wisely!");
+    } else if (turnphase == 1) {
+      phaseButton.setText("finish attacking");
+      headerText.setText("Conquer!");
+    } else if (turnphase == 2) {
+      phaseButton.setText("finish moving");
+      headerText.setText("Move your troops wisely");
+    }
     if (this.currentPlayer) {
       phaseButton.setDisable(false);
       cardsButton.setDisable(false);
-      if (turnphase == 0) {
-        phaseButton.setText("finish fortifying");
-        headerText.setText("Place " + ownTroopsToPlace + " troops wisely!");
-      } else if (turnphase == 1) {
-        phaseButton.setText("finish attacking");
-        headerText.setText("Conquer!");
-      } else if (turnphase == 2) {
-        phaseButton.setText("finish moving");
-        headerText.setText("Move your troops wisely");
-      }
     } else {
       phaseButton.setDisable(true);
       cardsButton.setDisable(true);
