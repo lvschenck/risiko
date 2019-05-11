@@ -247,15 +247,17 @@ public class LobbyPanelController implements LobbyPanelInterface {
       RiskMain.getInstance().getDomain().setServer(server);
       int countKi = 0;
       for (int i = 0; i < 5; i++) {
+        System.out.println(!((BorderPane) kiPlayerGrid.getChildren().get(i)).getRight()
+            .disableProperty()
+            .getValue());
         if (!((BorderPane) kiPlayerGrid.getChildren().get(i)).getRight()
             .disableProperty()
             .getValue()) {
           countKi++;
-          switch (countKi) {
+          switch (i) {
             case 0:
-              this.clientInterface1 = new Client("localhost", "Optimus Prime",
-                  (String) kiStatus1.getValue(),
-                  true);
+              this.clientInterface1 = new Client("localhost", "PrimeTime",
+                  (String) kiStatus1.getValue(), true);
               System.out.println("client" + countKi);
               break;
             case 1:

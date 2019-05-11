@@ -117,10 +117,9 @@ public class GameController implements GameControllerInterface {
    * @author lroell
    */
   public void receiveData(File json) {
-    System.out.println("receive data");
     this.jsonReader.readJson(json);
     String name = this.jsonReader.getJsonName();
-
+    System.out.println(name);
     if (name.equals("redeemCards")) {
       Player player = this.match.getCurrentPlayer();
       int[] cardsId = this.jsonReader.getCardRedemptionCardsId();

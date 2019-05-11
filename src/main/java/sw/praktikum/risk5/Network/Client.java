@@ -120,9 +120,9 @@ public class Client implements Runnable, ClientInterface {
             this.message = (Message) o;
             switch (this.message.getType()) {
               case CHAT:
-                String chatMessage = ((MessageChat) message).getChatMessage();
-                String author = ((MessageChat) message).getAuthor();
-                boolean single = ((MessageChat) message).getSingle();
+                String chatMessage = ((MessageChat) this.message).getChatMessage();
+                String author = ((MessageChat) this.message).getAuthor();
+                boolean single = ((MessageChat) this.message).getSingle();
                 gui.receiveMessageChat(author, chatMessage, single);
                 System.out.println("Chat angekommen");
                 System.out.println(chatMessage);
@@ -134,7 +134,7 @@ public class Client implements Runnable, ClientInterface {
                 break;
 
               case ERROR:
-                String errorType = ((MessageError) message).getErrorType();
+                String errorType = ((MessageError) this.message).getErrorType();
                 this.gui.receiveMessageError(errorType);
 
                 break;
@@ -162,7 +162,7 @@ public class Client implements Runnable, ClientInterface {
               case DATA:
                 break;
               case ID:
-                MessageAssignId maa = (MessageAssignId) o;
+                MessageAssignId maa = (MessageAssignId) this.message;
                 if (aiBool) {
                   this.ai.setId(maa.getId());
                 } else {

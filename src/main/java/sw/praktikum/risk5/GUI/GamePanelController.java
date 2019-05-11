@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -76,8 +77,8 @@ public class GamePanelController implements Initializable, GuiInterface {
 
   @FXML
   private GridPane cardsPane;
-  //@FXML
-  //private List<Button> cardButtons;
+  // @FXML
+  // private List<Button> cardButtons;
   @FXML
   private ToggleButton card1;
   @FXML
@@ -104,8 +105,8 @@ public class GamePanelController implements Initializable, GuiInterface {
   private int countryId1;
   private int countryId2;
   private SpinnerValueFactory valueFactory;
-  private String[] playerColors = {"#6666ff", "#ff6666", "#ffff66", "#b2ff66", "#66666f",
-      "#c0c0c0"};
+  private String[] playerColors =
+      {"#6666ff", "#ff6666", "#ffff66", "#b2ff66", "#66666f", "#c0c0c0"};
   private boolean start = true;
   private int ownId;
   private int currentPlayerId;
@@ -161,7 +162,7 @@ public class GamePanelController implements Initializable, GuiInterface {
       this.ownerIds = this.jsonReader.getGameStateCountriesOwner();
       this.troops = this.jsonReader.getGameStateCountriesTroops();
       updateCountries(troops, ownerIds);
-      updateTexts(this.jsonReader.getGameStateCurrentGamePhase(),
+      updateTexts(this.jsonReader.getGameStateCurrentTurnPhase(),
           this.jsonReader.getGameStatePlayerUnits());
       this.cards = this.jsonReader.getGameStatePlayerCards();
       this.ownerIds = this.jsonReader.getGameStateCountriesOwner();
@@ -184,8 +185,6 @@ public class GamePanelController implements Initializable, GuiInterface {
       } else if (this.turnPhase != this.jsonReader.getGameStateCurrentGamePhase()) {
         this.turnPhase = this.jsonReader.getGameStateCurrentTurnPhase();
         updateCountries(troops, ownerIds);
-        updateTexts(this.jsonReader.getGameStateCurrentGamePhase(),
-            this.jsonReader.getGameStatePlayerUnits());
       }
     }
 
@@ -239,16 +238,30 @@ public class GamePanelController implements Initializable, GuiInterface {
    *
    * @author lschenck
    */
-  private void updateTexts(int turnphase, int troopsToPlace[]) {
+  private void updateTexts(int turnphase, int[] troopsToPlace) {
 
     int ownTroopsToPlace = 0;
     for (int i = 0; i < troopsToPlace.length; i++) {
       if (playerIds[i] == ownId) {
         ownTroopsToPlace = troopsToPlace[i];
       }
-      ((Label) playerPanes.get(i).getTop()).setText(String.valueOf(troopsToPlace[i]));
+      if (playerIds[i] != 0) {
+        Platform.runLater(
+            () -> ((Label) this.playerPanes.get(0).getTop()).setText("" + troopsToPlace[0]));
+        Platform.runLater(
+            () -> ((Label) this.playerPanes.get(1).getTop()).setText("" + troopsToPlace[1]));
+        Platform.runLater(
+            () -> ((Label) this.playerPanes.get(2).getTop()).setText("" + troopsToPlace[2]));
+        Platform.runLater(
+            () -> ((Label) this.playerPanes.get(3).getTop()).setText("" + troopsToPlace[3]));
+        Platform.runLater(
+            () -> ((Label) this.playerPanes.get(4).getTop()).setText("" + troopsToPlace[4]));
+        Platform.runLater(
+            () -> ((Label) this.playerPanes.get(5).getTop()).setText("" + troopsToPlace[5]));
 
+      }
     }
+
     if (this.currentPlayer) {
       phaseButton.setDisable(false);
       cardsButton.setDisable(false);
@@ -262,7 +275,7 @@ public class GamePanelController implements Initializable, GuiInterface {
         phaseButton.setText("finish moving");
         headerText.setText("Move your troops wisely");
       }
-    }else{
+    } else {
       phaseButton.setDisable(true);
       phaseButton.setDisable(true);
     }
@@ -337,9 +350,8 @@ public class GamePanelController implements Initializable, GuiInterface {
         cavallry = troops / 5;
         troops = troops % 5;
         infantry = troops;
-        jsonSend = this.jsonWriter
-            .writeAttackJson(countryId1, player1Id, cavallry, infantry, artillry, countryId2,
-                player2Id);
+        jsonSend = this.jsonWriter.writeAttackJson(countryId1, player1Id, cavallry, infantry,
+            artillry, countryId2, player2Id);
         // Client interface benutzen um JSON zu schicken, wenn fertig
         break;
       case 'm':
@@ -351,9 +363,8 @@ public class GamePanelController implements Initializable, GuiInterface {
         cavallry = troops / 5;
         troops = troops % 5;
         infantry = troops;
-        jsonSend = this.jsonWriter
-            .writeMoveJson(countryId1, player1Id, cavallry, infantry, artillry, countryId2,
-                player2Id);
+        jsonSend = this.jsonWriter.writeMoveJson(countryId1, player1Id, cavallry, infantry,
+            artillry, countryId2, player2Id);
         // Client interface benutzen um JSON zu schicken, wenn fertig
         break;
       case 'p':
@@ -362,9 +373,9 @@ public class GamePanelController implements Initializable, GuiInterface {
         break;
       case 's':
         break;
-//      case 'r':
-//        this.jsonWriter.writeCardRedemption(cardGroup.getSelected());
-//        break;
+      // case 'r':
+      // this.jsonWriter.writeCardRedemption(cardGroup.getSelected());
+      // break;
       default:
     }
     if (RiskMain.getInstance().getDomain().getIsServer()) {
@@ -375,8 +386,7 @@ public class GamePanelController implements Initializable, GuiInterface {
   }
 
   /*
-   * Sends a message from one player to another possible to either send to one
-   * player or to all
+   * Sends a message from one player to another possible to either send to one player or to all
    *
    * @author esali
    */
@@ -387,8 +397,8 @@ public class GamePanelController implements Initializable, GuiInterface {
     String text = playerName + ":     " + messageInput.getText();
     if (RiskMain.getInstance().getDomain().getIsServer()) {
       this.serverInterface = RiskMain.getInstance().getDomain().getServer();
-      this.serverInterface
-          .sendMessageChat(messageInput.getText(), playerName, recipientList.getValue());
+      this.serverInterface.sendMessageChat(messageInput.getText(), playerName,
+          recipientList.getValue());
     } else {
       this.clientInterface = RiskMain.getInstance().getDomain().getClient();
     }
@@ -433,8 +443,7 @@ public class GamePanelController implements Initializable, GuiInterface {
   }
 
   @FXML
-  private void selectCard1(ActionEvent event) {
-  }
+  private void selectCard1(ActionEvent event) {}
 
   @FXML
   private void selectCard2() {
@@ -667,15 +676,13 @@ public class GamePanelController implements Initializable, GuiInterface {
       this.valueFactory = troupCount.getValueFactory();
       ((Text) countryPanes.get(countryId2).getCenter()).setText(valueFactory.getValue() + "");
 
-      //owner id nicht von 1-42
+      // owner id nicht von 1-42
       sendJson('a', countryId1 + 1, ownerIds[countryId1], (Integer) valueFactory.getValue(),
-          countryId2 + 1,
-          ownerIds[countryId2]);
+          countryId2 + 1, ownerIds[countryId2]);
 
     } else if (turnPhase == 2) {
       sendJson('m', countryId1 + 1, ownerIds[countryId1], (Integer) valueFactory.getValue(),
-          countryId2 + 1,
-          ownerIds[countryId2]);
+          countryId2 + 1, ownerIds[countryId2]);
     }
     closeActionPopUp();
   }
@@ -721,7 +728,7 @@ public class GamePanelController implements Initializable, GuiInterface {
     recipientList.setValue("all");
 
   }
-  
+
   public void setOwnId(int id) {
     this.ownId = id;
   }

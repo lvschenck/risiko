@@ -67,7 +67,7 @@ public class AiMain implements AiInterface {
    */
   @Override
   public void performAction(File json) {
-    File j = json;
+    File j;
     this.receiveData(json);
     System.out.println(this.currentPlayer + ", " + personalId);
     if (this.currentPlayer == personalId) {
@@ -77,7 +77,7 @@ public class AiMain implements AiInterface {
           AiCountry target = this.aiPlacementHandler.placeInEmptyCountries();
           if (target != null) {
             j = this.jsonWriter.writePlaceJson(1, target.getId(), this.personalId);
-            this.sendJson(json, 'p');
+            this.sendJson(j, 'p');
           }
           break;
 
