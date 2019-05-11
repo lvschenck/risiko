@@ -89,7 +89,6 @@ public class Server extends Thread implements ServerInterface {
     Database db = RiskMain.getInstance().getDomain().getData();
     db.createTempUser(username);
     int dbId = db.getUserId(username);
-//    sendMessage(new MessageAssignId(dbId));
     outputStreams.put(dbId, toClient);
     users.put(dbId, username);
     System.out.println("verbunden");
@@ -171,6 +170,7 @@ public class Server extends Thread implements ServerInterface {
     this.gui = RiskMain.getInstance().getDomain().getGui();
     this.gameController = new GameController();
     RiskMain.getInstance().getDomain().setGame(gameController);
+    
     this.gameController.startGame(ids, usernames);
     Message m = new MessageStart();
     this.sendMessage(m);
@@ -203,20 +203,29 @@ public class Server extends Thread implements ServerInterface {
     }
   }
 
+  public void sendMessage(Message m, int id) {
+    try {
+      outputStreams.get(id).writeObject(m);
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+  }
+
 
   @Override
   public void shutDown() {
     MessageShutdown mS = new MessageShutdown();
     this.sendMessage(mS);
+  }
+
+  @Override
+  public void sendMessageData() {
 
   }
 
   @Override
-  public void sendMessageData() {}
-
-  @Override
   public void sendMessageChat(String chatMessage, String author, String receiver) {
-    this.broadcast(author, receiver, chatMessage);
+    broadcast(author, receiver, chatMessage);
   }
 
   @Override
@@ -225,7 +234,7 @@ public class Server extends Thread implements ServerInterface {
       this.gui.receiveMessageError(errorType);
     } else {
       MessageError m = new MessageError(errorType);
-      this.sendMessage(m);
+      this.sendMessage(m, id);
     }
   }
 
@@ -247,7 +256,8 @@ public class Server extends Thread implements ServerInterface {
     MessageLobby ml =
         new MessageLobby(gameName, amountAiWithDifficulty, allPlayerNames, pictureOfPlayers);
     this.sendMessage(ml);
-    this.lobby.receiveMessageLobby(gameName, amountAiWithDifficulty, allPlayerNames, pictureOfPlayers);
+    this.lobby.receiveMessageLobby(gameName, amountAiWithDifficulty, allPlayerNames,
+        pictureOfPlayers);
   }
 
   /**
@@ -260,6 +270,11 @@ public class Server extends Thread implements ServerInterface {
     // muss aufgerufen werden wenn Host auf start drückt
     MessageStart ms = new MessageStart();
     this.sendMessage(ms);
+  }
+
+  public void sendMessageAssignId(int id) {
+    MessageAssignId maa = new MessageAssignId(id);
+    this.sendMessage(maa, id);
   }
 
 }

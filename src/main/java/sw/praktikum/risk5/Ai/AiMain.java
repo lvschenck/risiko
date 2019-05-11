@@ -25,7 +25,6 @@ public class AiMain implements AiInterface {
   private int turnPhase;
   private int gamePhase;
   private int currentPlayer;
-  private boolean active;
   private AiMoveHandler aiMoveHandler;
   private AiPlacementHandler aiPlacementHandler;
   private AiAttackHandler aiAttackHandler;
@@ -46,7 +45,6 @@ public class AiMain implements AiInterface {
     this.aiName = aiName;
     this.turnPhase = 0;
     this.gamePhase = -1;
-    this.active = false;
     this.personalUnitsToPlace = 0;
     this.count = 1;
     this.jsonReader = new ReadJson();
@@ -293,5 +291,10 @@ public class AiMain implements AiInterface {
       }
     }
     this.aiMoveHandler.setAllCountriesFromAi(allCountriesFromAi);
+  }
+
+  @Override
+  public void setId(int id) {
+    this.personalId = id;
   }
 }

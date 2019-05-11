@@ -107,8 +107,8 @@ public class GamePanelController implements Initializable, GuiInterface {
   private String[] playerColors = {"#6666ff", "#ff6666", "#ffff66", "#b2ff66", "#66666f",
       "#c0c0c0"};
   private boolean start = true;
-  private int ownId = 1123123; // Test
-  private int currentPlayerId = 2; // Test
+  private int ownId;
+  private int currentPlayerId;
   private int playerIds[];
   private int[] troops = new int[42]; // Test
   private int[] ownerIds = new int[42]; // Test
@@ -146,6 +146,7 @@ public class GamePanelController implements Initializable, GuiInterface {
         this.ownId = RiskMain.getInstance().getDomain().getData()
             .getUserId(RiskMain.getInstance().getDomain().getPlayerName());
         this.start = false;
+        this.currentPlayerId = this.jsonReader.getGameStateCurrentPlayer();
       }
       if (this.currentPlayerId != this.jsonReader.getGameStateCurrentPlayer()) {
         updateHighlightedPlayer(currentPlayerId, this.jsonReader.getGameStateCurrentPlayer(),
@@ -719,5 +720,9 @@ public class GamePanelController implements Initializable, GuiInterface {
     recipientList.setItems(participantList);
     recipientList.setValue("all");
 
+  }
+  
+  public void setOwnId(int id) {
+    this.ownId = id;
   }
 }

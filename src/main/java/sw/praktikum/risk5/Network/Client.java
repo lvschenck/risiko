@@ -39,7 +39,7 @@ public class Client implements Runnable, ClientInterface {
   private ReadJson reader;
   private GuiInterface gui = RiskMain.getInstance().getDomain().getGui();
   private LobbyPanelInterface lobby = RiskMain.getInstance().getDomain().getLobby();
-  private boolean ki = false;
+  private boolean aiBool = false;
   private AiInterface ai;
 
   public Client(String IP, String username, String type, boolean ai) {
@@ -60,7 +60,7 @@ public class Client implements Runnable, ClientInterface {
         } else if (type.equals("Hard")) {
           this.ai = new AiMain(AiType.HARD, db.getUserId(username), this, username);
         }
-        this.ki = true;
+        this.aiBool = true;
       } else {
         RiskMain.getInstance().getDomain().setClient(this);
         RiskMain.getInstance().getDomain().getMenu().connect(true);
@@ -68,11 +68,12 @@ public class Client implements Runnable, ClientInterface {
     } else {
       RiskMain.getInstance().getDomain().getMenu().connect(false);
     }
-    
+
   }
 
   /**
    * Method tto check if you can connect to the server
+   * 
    * @param IP , the IP of the Host
    * @author mgass
    */
@@ -98,11 +99,13 @@ public class Client implements Runnable, ClientInterface {
     this.t = new Thread(this);
     t.start();
   }
-/**
- * Method to handel incoming jsons and messages from the server
- * @author mgass
- *
- */
+
+  /**
+   * Method to handel incoming jsons and messages from the server
+   * 
+   * @author mgass
+   *
+   */
   public void run() {
 
     while (activeP && !(this.c.isClosed()) && !(this.c.isInputShutdown())) {
@@ -110,7 +113,9 @@ public class Client implements Runnable, ClientInterface {
       try {
 
         Object o = this.fromServer.readObject();
-        if (!ki) {
+        System.out.println(o.getClass().getSimpleName());
+        if (!aiBool || o.getClass().getSimpleName().equals("MessageAssignId")
+            || o.getClass().getSimpleName().equals("MessageStart")) {
           if (!(o.getClass().getSimpleName().equals("File"))) {
             this.message = (Message) o;
             switch (this.message.getType()) {
@@ -139,17 +144,30 @@ public class Client implements Runnable, ClientInterface {
                 this.gui.receiveMessageLoginFail();
                 break;
               case START:
-                this.lobby.receiveMessageStart();
+                if (!this.aiBool) {
+                  this.lobby.receiveMessageStart();
+                }
+                MessageError me = new MessageError("");
+                this.toServer.writeObject(me);
                 break;
               case LOBBY:
-                MessageLobby ml= (MessageLobby) this.message;
+                MessageLobby ml = (MessageLobby) this.message;
                 String gameName = ml.getGameName();
                 int[] amountAiWithDifficulty = ml.getAmountAiwithDifficulty();
                 String[] otherPlayerNames = ml.getOtherPlayerNames();
                 String[] pictureOfPlayers = ml.getPictureOfPlayers();
-                this.lobby.receiveMessageLobby(gameName, amountAiWithDifficulty, otherPlayerNames, pictureOfPlayers);
+                this.lobby.receiveMessageLobby(gameName, amountAiWithDifficulty, otherPlayerNames,
+                    pictureOfPlayers);
                 break;
-                
+              case DATA:
+                break;
+              case ID:
+                MessageAssignId maa = (MessageAssignId) o;
+                if (aiBool) {
+                  this.ai.setId(maa.getId());
+                } else {
+                  this.gui.setOwnId(maa.getId());
+                }
               default:
 
                 break;
@@ -162,9 +180,9 @@ public class Client implements Runnable, ClientInterface {
 
           }
         } else {
-          if (o.getClass().getSimpleName().equals("File")){
-          File f = (File) o;
-          ai.performAction(f);
+          if (o.getClass().getSimpleName().equals("File")) {
+            File f = (File) o;
+            ai.performAction(f);
           }
         }
       } catch (ClassNotFoundException e) {
@@ -178,12 +196,13 @@ public class Client implements Runnable, ClientInterface {
 
     }
   }
-  
-/**
- * Method to send a JSON to the server
- * @mgass
- */
-  
+
+  /**
+   * Method to send a JSON to the server
+   * 
+   * @mgass
+   */
+
   @Override
   public void sendJSON(File f) {
     try {
@@ -196,9 +215,10 @@ public class Client implements Runnable, ClientInterface {
 
   /**
    * Method to send a message to the server
+   * 
    * @mgass
    */
-  
+
   @Override
   public void sendMessage(Message m) {
     try {
@@ -213,12 +233,13 @@ public class Client implements Runnable, ClientInterface {
 
 
   }
-  
+
   /**
    * Method to send a messageChat to the server
+   * 
    * @mgass
    */
-  
+
   @Override
   public void sendMessageChat(String chatmessage, String author, String receiver) {
     MessageChat message;

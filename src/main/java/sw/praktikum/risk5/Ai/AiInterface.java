@@ -18,4 +18,6 @@ public interface AiInterface {
    * @author fahaerte
    */
   void performAction(File file);
+  
+  void setId(int id);
 }

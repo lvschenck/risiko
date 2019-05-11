@@ -21,5 +21,7 @@ public interface ServerInterface {
   void sendMessageStart();
   
   void startGame();
+  
+  void sendMessageAssignId(int id);
 
 }

@@ -26,9 +26,10 @@ public class ServerProtocol extends Thread {
   private String username;
   private String password;
   private int ID=0;
-  private GameControllerInterface gameController = RiskMain.getInstance().getDomain().getGame();
+  private GameControllerInterface gameController;
   private boolean runningGame = true;
   private GuiInterface gui = RiskMain.getInstance().getDomain().getGui();
+  private ServerInterface server = RiskMain.getInstance().getDomain().getServer();
   private Message message;
 
 
@@ -38,7 +39,7 @@ public class ServerProtocol extends Thread {
     try {
       this.toClient = new ObjectOutputStream(s.getOutputStream());
       this.fromClient = new ObjectInputStream(s.getInputStream());
-
+      
     } catch (IOException e) {
       System.out.println("IO-Error");
       e.printStackTrace();
@@ -72,6 +73,7 @@ public class ServerProtocol extends Thread {
                 
                 Server.addUser(ID, toClient, username);
                 this.ID = Server.getID(this.username);
+                this.server.sendMessageAssignId(this.ID);
               } else {
                 MessageLoginFail m = new MessageLoginFail();
                 this.toClient.writeObject(m);
@@ -106,7 +108,9 @@ public class ServerProtocol extends Thread {
               Server.broadcast(author, receiver, chatMessage);
 
               break;
-
+            case ERROR:
+              
+              this.gameController = RiskMain.getInstance().getDomain().getGame();
             default:
 
               break;
@@ -114,7 +118,7 @@ public class ServerProtocol extends Thread {
           }
         } else {
           File f = (File) o;
-          gameController.receiveData(f);
+          this.gameController.receiveData(f);
           System.out.println("JSON");
         }
       } catch (IOException e) {
@@ -125,7 +129,4 @@ public class ServerProtocol extends Thread {
       }
     }
   }
-
-
-
 }
