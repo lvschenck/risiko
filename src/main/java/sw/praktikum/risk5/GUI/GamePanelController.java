@@ -1,7 +1,5 @@
 package sw.praktikum.risk5.GUI;
 
-import static java.awt.Color.white;
-
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -150,7 +148,8 @@ public class GamePanelController implements Initializable, GuiInterface {
             .getUserId(RiskMain.getInstance().getDomain().getPlayerName());
         this.start = false;
         this.currentPlayerId = this.jsonReader.getGameStateCurrentPlayer();
-        updateHighlightedPlayer(this.jsonReader.getGameStateCurrentPlayer(), this.jsonReader.getGameStateCurrentPlayer(), this.jsonReader.getGameStatePlayerUnits());
+        updateHighlightedPlayer(this.jsonReader.getGameStateCurrentPlayer(),
+            this.jsonReader.getGameStateCurrentPlayer(), this.jsonReader.getGameStatePlayerUnits());
       }
       if (this.currentPlayerId != this.jsonReader.getGameStateCurrentPlayer()) {
         updateHighlightedPlayer(currentPlayerId, this.jsonReader.getGameStateCurrentPlayer(),
@@ -170,13 +169,14 @@ public class GamePanelController implements Initializable, GuiInterface {
       this.cards = this.jsonReader.getGameStatePlayerCards();
       this.ownerIds = this.jsonReader.getGameStateCountriesOwner();
       this.troops = this.jsonReader.getGameStateCountriesTroops();
-        if (this.jsonReader.getGameStateCurrentGamePhase() == 0) {
-          this.valueFactory = new IntegerSpinnerValueFactory(1, 1, 1);
-          this.troupCount.setValueFactory(this.valueFactory);
-        } else {
-          this.valueFactory = new IntegerSpinnerValueFactory(1, 250, 3);
-          troupCount.setValueFactory(this.valueFactory);
-      } if (this.turnPhase != this.jsonReader.getGameStateCurrentTurnPhase()) {
+      if (this.jsonReader.getGameStateCurrentGamePhase() == 0) {
+        this.valueFactory = new IntegerSpinnerValueFactory(1, 1, 1);
+        this.troupCount.setValueFactory(this.valueFactory);
+      } else {
+        this.valueFactory = new IntegerSpinnerValueFactory(1, 250, 3);
+        troupCount.setValueFactory(this.valueFactory);
+      }
+      if (this.turnPhase != this.jsonReader.getGameStateCurrentTurnPhase()) {
         this.turnPhase = this.jsonReader.getGameStateCurrentTurnPhase();
         updateCountries(troops, ownerIds);
       }
@@ -400,7 +400,8 @@ public class GamePanelController implements Initializable, GuiInterface {
   @Override
   public void receiveMessageChat(String author, String chatMessage, boolean single) {
     if (single) {
-      messageOutput.appendText(author +" ("+RiskMain.getInstance().getDomain().getPlayerName()+")"+ ":   ");
+      messageOutput.appendText(
+          author + " (" + RiskMain.getInstance().getDomain().getPlayerName() + ")" + ":   ");
       messageOutput.appendText(chatMessage + "\n");
     } else {
       messageOutput.appendText(author + " (all):   ");
@@ -433,7 +434,8 @@ public class GamePanelController implements Initializable, GuiInterface {
   }
 
   @FXML
-  private void selectCard1(ActionEvent event) {}
+  private void selectCard1(ActionEvent event) {
+  }
 
   @FXML
   private void selectCard2() {

@@ -2,6 +2,7 @@ package sw.praktikum.risk5.GUI;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.ClientInfoStatus;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -17,6 +18,7 @@ import javafx.stage.Stage;
 import sw.praktikum.risk5.App.RiskMain;
 import sw.praktikum.risk5.Database.Database;
 import sw.praktikum.risk5.Network.Client;
+import sw.praktikum.risk5.Network.ClientInterface;
 
 /**
  * Handles the input of the Main Menu
@@ -244,6 +246,7 @@ public class MenuPanelController implements Initializable, MenuPanelInterface {
 	 * @author esali
 	 */
 	private void openJoinLobby() {
+		ClientInterface c = new Client(ipAdress.getText(),RiskMain.getInstance().getDomain().getPlayerName(),null,false);
 		Parent newContent = null;
 		RiskMain.getInstance().getDomain().setGameType(3);
 		try {
