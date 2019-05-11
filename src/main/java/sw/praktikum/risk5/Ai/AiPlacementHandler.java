@@ -50,7 +50,7 @@ class AiPlacementHandler {
    * @param troopsToPlace Amount of available Troops
    */
   protected void calculate(int troopsToPlace) {
-
+    System.out.println("State" + this.state);
     if (this.state == 0) {
       switch (this.type) {
         case HARD:
@@ -61,6 +61,7 @@ class AiPlacementHandler {
           this.placementMedium(troopsToPlace);
           break;
         case EASY:
+          System.out.println("lol");
           this.placementEasy(troopsToPlace);
           break;
         default:
@@ -221,12 +222,13 @@ class AiPlacementHandler {
    * @author gschakar
    */
   private void placementEasy(int availableTroops) {
+    System.out.println("Size " + this.allCountriesFromAi().size());
+    
     for (AiCountry a : this.allCountriesFromAi()) {
-      if (true) {
-        this.target = a;
-        this.finalAmount = availableTroops;
-        break;
-      }
+      System.out.println("OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO");
+      this.target = a;
+      this.finalAmount = availableTroops;
+      break;
     }
   }
 
@@ -480,10 +482,11 @@ class AiPlacementHandler {
    * @author gschakar, fahaerte
    */
   private AiCountry placeInEmptyCountriesHard() {
-    
+
     for (int i = 0; i < 6; i++) {
-      if(this.getAiCountriesInContient(i+1).size() == 0 && this.getAmountOfEnemyCountriesInContinent(i+1) == continentSize[i] - 1
-          && !this.moreThanOneEnemiyInContient(i+1)) {
+      if (this.getAiCountriesInContient(i + 1).size() == 0
+          && this.getAmountOfEnemyCountriesInContinent(i + 1) == continentSize[i] - 1
+          && !this.moreThanOneEnemiyInContient(i + 1)) {
         for (AiCountry a : this.allCountries) {
           if (a.getOwner() == 0 && a.getContinent() == i + 1) {
             System.out.println("true");
@@ -492,7 +495,7 @@ class AiPlacementHandler {
         }
       }
     }
-    
+
     this.calculateContinentPriorityHard();
     int preferedContinent = 0;
     AiCountry target = null;
@@ -597,7 +600,7 @@ class AiPlacementHandler {
   protected ArrayList<AiCountry> allCountriesFromAi() {
     ArrayList<AiCountry> allCountriesFromAi = new ArrayList<AiCountry>();
     for (AiCountry a : this.allCountries) {
-      if (a.getId() == this.aiId) {
+      if (a.getOwner() == this.aiId) {
         allCountriesFromAi.add(a);
       }
     }
@@ -607,7 +610,7 @@ class AiPlacementHandler {
   protected int getAmount() {
     return this.finalAmount;
   }
-  
+
   /**
    * Proves if a continent is occupied by more than one player except of the AI.
    * 
@@ -619,7 +622,8 @@ class AiPlacementHandler {
     int owner = 0;
     int amount = 0;
     for (AiCountry a : this.allCountries) {
-      if (a.getOwner() != 0 && a.getOwner() != this.aiId && a.getOwner() != owner && a.getContinent() == continentId) {
+      if (a.getOwner() != 0 && a.getOwner() != this.aiId && a.getOwner() != owner
+          && a.getContinent() == continentId) {
         owner = a.getOwner();
         amount++;
       }

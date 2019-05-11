@@ -25,6 +25,7 @@ public class AiMain implements AiInterface {
   private int turnPhase;
   private int gamePhase;
   private int currentPlayer;
+  private AiType type;
   private AiMoveHandler aiMoveHandler;
   private AiPlacementHandler aiPlacementHandler;
   private AiAttackHandler aiAttackHandler;
@@ -50,11 +51,7 @@ public class AiMain implements AiInterface {
     this.jsonReader = new ReadJson();
     this.jsonWriter = new WriteJson();
     this.allCountries = new ArrayList<AiCountry>(42);
-    this.personalId = aiId;
-    this.aiAttackHandler = new AiAttackHandler(aiId, type);
-    this.aiMoveHandler = new AiMoveHandler(aiId, type);
-    this.aiPlacementHandler = new AiPlacementHandler(aiId, type);
-    this.aiCardRedemptionHandler = new AiCardRedemptionHandler();
+    this.type = type;
     this.cards = new int[3];
     this.client = client;
   }
@@ -80,8 +77,13 @@ public class AiMain implements AiInterface {
             this.sendJson(j, 'p');
           }
           break;
-
         case 1:
+          this.aiPlacementHandler.calculate(this.personalUnitsToPlace);
+          j = this.jsonWriter.writePlaceJson(this.aiPlacementHandler.getAmount(),
+              this.aiPlacementHandler.getTarget().getId(), this.personalId);
+          this.sendJson(j, 'p');
+          break;
+        case 2:
           switch (this.turnPhase) {
             case 0:
 
@@ -296,5 +298,9 @@ public class AiMain implements AiInterface {
   @Override
   public void setId(int id) {
     this.personalId = id;
+    this.aiAttackHandler = new AiAttackHandler(id, type);
+    this.aiMoveHandler = new AiMoveHandler(id, type);
+    this.aiPlacementHandler = new AiPlacementHandler(id, type);
+    this.aiCardRedemptionHandler = new AiCardRedemptionHandler();
   }
 }
