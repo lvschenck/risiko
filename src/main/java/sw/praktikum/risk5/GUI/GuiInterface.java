@@ -14,6 +14,4 @@ public interface GuiInterface {
   void receiveMessageError(String errorType);
 
   void receiveMessageLoginFail();
-  
-  void setOwnId(int id);
 }

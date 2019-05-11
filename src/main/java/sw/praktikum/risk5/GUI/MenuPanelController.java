@@ -240,6 +240,20 @@ public class MenuPanelController implements Initializable, MenuPanelInterface {
 	@FXML
 	private void connectManuell(ActionEvent actionEvent) {
 		this.client = new Client(ipAdress.getText(), RiskMain.getInstance().getDomain().getPlayerName(), null, false);
+		if (this.connect) {
+          Parent newContent = null;
+          RiskMain.getInstance().getDomain().setGameType(3);
+          try {
+              newContent = FXMLLoader.load(RiskMain.class.getResource("/view/LobbyPanel.fxml"));
+
+          } catch (IOException e) {
+              e.printStackTrace();
+          }
+          Stage primaryStage = (Stage) ((Node) this.event.getSource()).getScene().getWindow();
+          primaryStage.getScene().setRoot(newContent);
+      }else{
+          connectionJoinError.setOpacity(1.0);
+      }
 	}
 
 	/**
@@ -252,19 +266,19 @@ public class MenuPanelController implements Initializable, MenuPanelInterface {
 		ClientInterface c = new Client(ipAdress.getText(),
 				RiskMain.getInstance().getDomain().getPlayerName(), null, false);
 		if (this.connect) {
-			Parent newContent = null;
-			RiskMain.getInstance().getDomain().setGameType(3);
-			try {
-				newContent = FXMLLoader.load(RiskMain.class.getResource("/view/LobbyPanel.fxml"));
+          Parent newContent = null;
+          RiskMain.getInstance().getDomain().setGameType(3);
+          try {
+              newContent = FXMLLoader.load(RiskMain.class.getResource("/view/LobbyPanel.fxml"));
 
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-			Stage primaryStage = (Stage) ((Node) this.event.getSource()).getScene().getWindow();
-			primaryStage.getScene().setRoot(newContent);
-		}else{
-			connectionJoinError.setOpacity(1.0);
-		}
+          } catch (IOException e) {
+              e.printStackTrace();
+          }
+          Stage primaryStage = (Stage) ((Node) this.event.getSource()).getScene().getWindow();
+          primaryStage.getScene().setRoot(newContent);
+      }else{
+          connectionJoinError.setOpacity(1.0);
+      }
 	}
 
 	@Override

@@ -350,14 +350,17 @@ class Match {
       if (c.getId() == country.getId()
           && (c.getOwner().getId() == 0 || c.getOwner().getId() == player.getId())
           && player.getAmountOfUnitsToPlace() >= amount) {
+        if (this.currentGamePhase == 0) {
+          this.changeCurrentPlayer();
+          if (c.getOwner().getId() != 0) {
+            return false;
+          }
+        }
         c.setOwner(player);
         player.addCountry(c);
         country.addTroops(amount);
         player.setAmountOfUnitsToPlace(-amount);
         b = true;
-        if (b) {
-          this.changeCurrentPlayer();
-        }
       }
 
       if (c.getOwner().getId() == 0) {
@@ -375,8 +378,11 @@ class Match {
       this.currentGamePhase = 1;
       count++;
     }
-    if(allTroopsSetFirstTime) {
+    if (allTroopsSetFirstTime) {
       this.currentGamePhase = 2;
+    }
+    if (player.getAmountOfUnitsToPlace() == 0 && this.currentGamePhase != 0) {
+      this.changeCurrentPlayer();
     }
     return b;
   }

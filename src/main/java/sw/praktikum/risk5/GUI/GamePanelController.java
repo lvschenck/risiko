@@ -108,7 +108,7 @@ public class GamePanelController implements Initializable, GuiInterface {
   private String[] playerColors =
       {"#6666ff", "#ff6666", "#ffff66", "#b2ff66", "#66666f", "#c0c0c0"};
   private boolean start = true;
-  private int ownId;
+  private int ownId = RiskMain.getInstance().getDomain().getId();
   private int currentPlayerId;
   private int playerIds[];
   private int[] troops = new int[42]; // Test
@@ -719,9 +719,5 @@ public class GamePanelController implements Initializable, GuiInterface {
     recipientList.setItems(participantList);
     recipientList.setValue("all");
 
-  }
-
-  public void setOwnId(int id) {
-    this.ownId = id;
   }
 }

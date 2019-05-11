@@ -36,6 +36,7 @@ public class Domain {
   private boolean isServer= false;
   private String[] countryNames;
   private Database data = new Database();
+  private int id;
   private int gameType; // 1: single, 2: multiplayer_host, 3: multiplayer_join 4: tutorial
 
   public ServerInterface getServer() {
@@ -132,5 +133,13 @@ public class Domain {
 
   public void setCountryNames(String[] countryNames) {
     this.countryNames = countryNames;
+  }
+
+  public int getId() {
+    return this.id;
+  }
+
+  public void setId(int id) {
+    this.id = id;
   }
 }

@@ -34,8 +34,7 @@ public class GameController implements GameControllerInterface {
    *
    * @author lroell
    */
-  public GameController() {
-  }
+  public GameController() {}
 
   /**
    * When the host presses start this method creates a gamController with the players that want to
@@ -141,7 +140,13 @@ public class GameController implements GameControllerInterface {
       Country defendingCountry =
           this.allCountries.get(this.jsonReader.getAttackTargetCountry() - 1);
       int amountDefend = defendingCountry.getTroops();
-
+      System.out.println(amountAttack + "   " + amountDefend + "defenderID" + defendingCountry.getId());
+      try {
+        Thread.sleep(300000);
+      } catch (InterruptedException e) {
+        // TODO Auto-generated catch block
+        e.printStackTrace();
+      }
       boolean b = this.attack(this.jsonReader.getAttackSourcePlayer(),
           this.jsonReader.getAttackSourceCountry(), amountAttack, amountDefend,
           this.jsonReader.getAttackTargetPlayer(), this.jsonReader.getAttackTargetCountry());
@@ -177,9 +182,11 @@ public class GameController implements GameControllerInterface {
       boolean b = this.chooseCountry(this.jsonReader.getPlaceCountry(),
           this.jsonReader.getPlacePlayer(), this.jsonReader.getPlaceNumberOfUnits());
       Player currentPlayer = this.match.getCurrentPlayer();
-      if (currentPlayer.getAmountOfUnitsToPlace() == 0) {
-        this.match.updateStatistics();
-        this.match.endTurnPhase();
+      if (this.match.getCurrentGamePhase() == 2) {
+        if (currentPlayer.getAmountOfUnitsToPlace() == 0) {
+          this.match.updateStatistics();
+          this.match.endTurnPhase();
+        }
       }
       if (b) {
         this.sendJson('r');
