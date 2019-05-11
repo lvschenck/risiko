@@ -247,6 +247,7 @@ public class MenuPanelController implements Initializable, MenuPanelInterface {
 	 * 
 	 * @author esali
 	 */
+	@FXML
 	private void openJoinLobby() {
 		ClientInterface c = new Client(ipAdress.getText(),
 				RiskMain.getInstance().getDomain().getPlayerName(), null, false);
