@@ -197,13 +197,15 @@ class AiPlacementHandler {
     AiCountry countryMostEnemies = null;
     int numberEnemies = 0;
     for (int i = 0; i < this.continentIdsSortedByPriority.length; i++) {
-      if (this.getAiCountriesInContient(continentIdsSortedByPriority[i]).size() != 0) {
-        for (AiCountry a : this.getAiCountriesInContient(continentIdsSortedByPriority[i])) {
+      if (this.getAiCountriesInContient(this.continentIdsSortedByPriority[i]).size() != 0
+          && this.getAmountOfEnemyCountriesInContinent(this.continentIdsSortedByPriority[i]) != 0) {
+        for (AiCountry a : this.getAiCountriesInContient(this.continentIdsSortedByPriority[i])) {
           if (a.getAmountOfEnemyNeighbors(this.aiId) > numberEnemies) {
             numberEnemies = a.getAmountOfEnemyNeighbors(this.aiId);
             countryMostEnemies = a;
           }
         }
+        break;
       }
     }
     this.target = countryMostEnemies;
@@ -534,15 +536,24 @@ class AiPlacementHandler {
    * @author gschakar
    */
   private AiCountry placeInEmptyCountriesMedium() {
+    boolean breakFor = false;
     AiCountry output = null;
-    for (int i = 0; i < this.continentIdsSortedByPriority[i]; i++) {
+
+    for (int i = 0; i < this.continentIdsSortedByPriority.length; i++) {
       for (AiCountry a : this.allCountries) {
         if (a.getContinent() == this.continentIdsSortedByPriority[i] && a.getOwner() == 0) {
           output = a;
           a.setOwner(this.aiId);
           a.setTroops(1);
+          breakFor = true;
           break;
         }
+        if (breakFor) {
+          break;
+        }
+      }
+      if (breakFor) {
+        break;
       }
     }
     return output;
