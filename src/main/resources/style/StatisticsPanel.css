@@ -1,0 +1,40 @@
+.button{
+	-fx-background-color: Transparent;
+	-fx-border-width: 2.0; 
+	-fx-border-color: #072227;
+     -fx-text-fill: #072227;
+    -fx-font-weight: bold;
+    -fx-font-size: 14px;
+    -fx-transition-duration: 0.4s;
+}
+
+.button:hover{
+	-fx-background-color: #072227;
+	-fx-text-fill: #ffffff;
+	}
+
+.backgroundPane{
+  -fx-background-image: url("../images/risk_Background.jpg");
+  -fx-background-size: stretch;
+  -fx-background-repeat: no-repeat;
+}
+
+.backgroundColour{
+  -fx-background-color:#99CDFF ;
+  -fx-opacity: 0.7;
+}
+
+
+.middleColourPane{
+  -fx-background-color: #072227;
+  -fx-opacity: 0.5;
+}
+
+.scrollPane{
+	-fx-background-color: transparent;
+}
+
+.scrollPane .viewport {
+       -fx-background-color: transparent;
+}
+

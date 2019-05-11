@@ -1,0 +1,10 @@
+{
+  "command": {
+    "name": "gameEnded",
+    "positions":{
+      "firstPlace":2,
+      "_comment":"player ID that has won the game",
+      "secondPlace": 4
+    }
+  }
+}

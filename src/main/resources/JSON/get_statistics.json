@@ -1,0 +1,7 @@
+{
+  "command": {
+    "name": "getStatistics",
+    "forPlayer": 4,
+    "_comment": "get statistics for the given player Id"
+  }
+}

@@ -1,0 +1,833 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.Spinner?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<?import java.util.ArrayList?>
+<AnchorPane prefHeight="768.0" prefWidth="1024.0" stylesheets="@../style/GamePanel.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sw.praktikum.risk5.GUI.GamePanelController">
+	<children>
+		<Pane prefHeight="768.0" prefWidth="1024.0" styleClass="backgroundPane" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+		<Pane prefHeight="768.0" prefWidth="1024.0" styleClass="backgroundColour" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+		<Pane prefHeight="768.0" prefWidth="1024.0" styleClass="middleColourPane" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+		<GridPane prefHeight="768.0" prefWidth="1024.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+			<columnConstraints>
+				<ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="10.0" prefWidth="100.0" />
+				<ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="65.0" prefWidth="100.0" />
+				<ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="25.0" prefWidth="100.0" />
+			</columnConstraints>
+			<rowConstraints>
+				<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+			</rowConstraints>
+			<children>
+				<VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+					<children>
+						<BorderPane fx:id="player1Pane" prefHeight="200.0" prefWidth="200.0" styleClass="playerTile">
+							<bottom>
+								<Label styleClass="playerName" text="Player1" BorderPane.alignment="CENTER" />
+							</bottom>
+							<top>
+								<Label styleClass="text" text="Anzahl Truppen ?" BorderPane.alignment="CENTER" />
+							</top>
+							<center>
+								<Pane prefHeight="200.0" prefWidth="50.0" styleClass="avatar" BorderPane.alignment="CENTER" />
+							</center>
+						</BorderPane>
+						<BorderPane fx:id="player2Pane" prefHeight="200.0" prefWidth="200.0" styleClass="playerTile">
+							<bottom>
+								<Label styleClass="playerName" text="Player2" BorderPane.alignment="CENTER" />
+							</bottom>
+							<center>
+								<Pane prefHeight="200.0" prefWidth="50.0" styleClass="avatar" BorderPane.alignment="CENTER" />
+							</center>
+							<top>
+								<Label styleClass="text" text="Anzahl Truppen ?" BorderPane.alignment="CENTER" />
+							</top>
+						</BorderPane>
+						<BorderPane fx:id="player3Pane" prefHeight="200.0" prefWidth="200.0" styleClass="playerTile">
+							<bottom>
+								<Label styleClass="playerName" text="Player3" BorderPane.alignment="CENTER" />
+							</bottom>
+							<top>
+								<Label styleClass="text" text="Anzahl Truppen ?" BorderPane.alignment="CENTER" />
+							</top>
+							<center>
+								<Pane prefHeight="200.0" prefWidth="200.0" styleClass="avatar" BorderPane.alignment="CENTER" />
+							</center>
+						</BorderPane>
+						<BorderPane fx:id="player4Pane" prefHeight="200.0" prefWidth="200.0" styleClass="playerTile">
+							<bottom>
+								<Label styleClass="playerName" text="Player4" BorderPane.alignment="CENTER" />
+							</bottom>
+							<top>
+								<Label styleClass="text" text="Anzahl Truppen ?" BorderPane.alignment="CENTER" />
+							</top>
+							<center>
+								<Pane prefHeight="200.0" prefWidth="200.0" styleClass="avatar" BorderPane.alignment="CENTER" />
+							</center>
+						</BorderPane>
+						<BorderPane fx:id="player5Pane" prefHeight="200.0" prefWidth="200.0" styleClass="playerTile">
+							<bottom>
+								<Label styleClass="playerName" text="Player5" BorderPane.alignment="CENTER" />
+							</bottom>
+							<top>
+								<Label styleClass="text" text="Anzahl Truppen ?" BorderPane.alignment="CENTER" />
+							</top>
+							<center>
+								<Pane prefHeight="200.0" prefWidth="200.0" styleClass="avatar" BorderPane.alignment="CENTER" />
+							</center>
+						</BorderPane>
+						<BorderPane fx:id="player6Pane" prefHeight="200.0" prefWidth="200.0" styleClass="playerTile">
+							<bottom>
+								<Label styleClass="playerName" text="Player6" BorderPane.alignment="CENTER" />
+							</bottom>
+							<top>
+								<Label styleClass="text" text="Anzahl Truppen ?" BorderPane.alignment="CENTER" />
+							</top>
+							<center>
+								<Pane prefHeight="200.0" prefWidth="200.0" styleClass="avatar" BorderPane.alignment="CENTER" />
+							</center>
+						</BorderPane>
+						<fx:define>
+							<ArrayList fx:id="playerPanes">
+								<fx:reference source="player1Pane" />
+								<fx:reference source="player2Pane" />
+								<fx:reference source="player3Pane" />
+								<fx:reference source="player4Pane" />
+								<fx:reference source="player5Pane" />
+								<fx:reference source="player6Pane" />
+							</ArrayList>
+						</fx:define>
+					</children>
+				</VBox>
+				<Pane id="tempfind" prefHeight="770.0" prefWidth="697.0" GridPane.columnIndex="1">
+					<children>
+						<StackPane alignment="BOTTOM_CENTER" prefHeight="768.0" prefWidth="876.0">
+							<children>
+								<GridPane>
+									<columnConstraints>
+										<ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+									</columnConstraints>
+									<rowConstraints>
+										<RowConstraints minHeight="10.0" percentHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+										<RowConstraints minHeight="10.0" percentHeight="75.0" prefHeight="30.0" vgrow="SOMETIMES" />
+										<RowConstraints minHeight="10.0" percentHeight="15.0" prefHeight="30.0" vgrow="SOMETIMES" />
+									</rowConstraints>
+									<children>
+										<VBox alignment="TOP_CENTER" prefHeight="83.0" prefWidth="876.0">
+											<children>
+												<Text fx:id="headerText" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="headerText" text="Conquer!">
+													<VBox.margin>
+														<Insets top="20.0" />
+													</VBox.margin>
+												</Text>
+											</children>
+										</VBox>
+										<VBox alignment="CENTER" GridPane.rowIndex="1">
+											<children>
+												<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#getClickPosition" prefHeight="552.0" prefWidth="876.0" styleClass="map">
+													<children>
+														<BorderPane fx:id="EastAfrica" styleClass="countryCircle" translateX="75.0" translateY="50.0">
+															<center>
+																<Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" BorderPane.alignment="CENTER">
+																	<font>
+																		<Font size="14.0" />
+																	</font>
+																</Text>
+															</center>
+														</BorderPane>
+														<BorderPane fx:id="China" styleClass="countryCircle" translateX="267.0" translateY="-70.0">
+															<center>
+																<Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" BorderPane.alignment="CENTER">
+																	<font>
+																		<Font size="14.0" />
+																	</font>
+																</Text>
+															</center>
+														</BorderPane>
+														<BorderPane fx:id="Ukraine" styleClass="countryCircle" translateX="110.0" translateY="-175.0">
+															<center>
+																<Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" BorderPane.alignment="CENTER">
+																	<font>
+																		<Font size="14.0" />
+																	</font>
+																</Text>
+															</center>
+														</BorderPane>
+														<BorderPane fx:id="Afghanistan" styleClass="countryCircle" translateX="175.0" translateY="-110.0">
+															<center>
+																<Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" BorderPane.alignment="CENTER">
+																	<font>
+																		<Font size="14.0" />
+																	</font>
+																</Text>
+															</center>
+														</BorderPane>
+														<BorderPane fx:id="Ural" styleClass="countryCircle" translateX="182.0" translateY="-203.0">
+															<center>
+																<Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" BorderPane.alignment="CENTER">
+																	<font>
+																		<Font size="14.0" />
+																	</font>
+																</Text>
+															</center>
+														</BorderPane>
+														<BorderPane fx:id="MiddleEast" styleClass="countryCircle" translateX="108.0" translateY="-35.0">
+															<center>
+																<Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" BorderPane.alignment="CENTER">
+																	<font>
+																		<Font size="14.0" />
+																	</font>
+																</Text>
+															</center>
+														</BorderPane>
+														<BorderPane fx:id="India" styleClass="countryCircle" translateX="200.0" translateY="-7.0">
+															<center>
+																<Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" BorderPane.alignment="CENTER">
+																	<font>
+																		<Font size="14.0" />
+																	</font>
+																</Text>
+															</center>
+														</BorderPane>
+														<BorderPane fx:id="Siberia" styleClass="countryCircle" translateX="256.0" translateY="-208.0">
+															<center>
+																<Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" BorderPane.alignment="CENTER">
+																	<font>
+																		<Font size="14.0" />
+																	</font>
+																</Text>
+															</center>
+														</BorderPane>
+														<BorderPane fx:id="Japan" styleClass="countryCircle" translateX="400.0" translateY="-95.0">
+															<center>
+																<Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" BorderPane.alignment="CENTER">
+																	<font>
+																		<Font size="14.0" />
+																	</font>
+																</Text>
+															</center>
+														</BorderPane>
+														<BorderPane fx:id="Mongolia" styleClass="countryCircle" translateX="320.0" translateY="-120.0">
+															<center>
+																<Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" BorderPane.alignment="CENTER">
+																	<font>
+																		<Font size="14.0" />
+																	</font>
+																</Text>
+															</center>
+														</BorderPane>
+														<BorderPane fx:id="Irkutsk" styleClass="countryCircle" translateX="316.0" translateY="-175.0">
+															<center>
+																<Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" BorderPane.alignment="CENTER">
+																	<font>
+																		<Font size="14.0" />
+																	</font>
+																</Text>
+															</center>
+														</BorderPane>
+														<BorderPane fx:id="Yakutsk" styleClass="countryCircle" translateX="311.0" translateY="-245.0">
+															<center>
+																<Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" BorderPane.alignment="CENTER">
+																	<font>
+																		<Font size="14.0" />
+																	</font>
+																</Text>
+															</center>
+														</BorderPane>
+														<BorderPane fx:id="Kamchatka" styleClass="countryCircle" translateX="370.0" translateY="-205.0">
+															<center>
+																<Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" BorderPane.alignment="CENTER">
+																	<font>
+																		<Font size="14.0" />
+																	</font>
+																</Text>
+															</center>
+														</BorderPane>
+														<BorderPane fx:id="Siam" styleClass="countryCircle" translateX="275.0">
+															<center>
+																<Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" BorderPane.alignment="CENTER">
+																	<font>
+																		<Font size="14.0" />
+																	</font>
+																</Text>
+															</center>
+														</BorderPane>
+														<BorderPane fx:id="Egypt" styleClass="countryCircle" translateX="25.0" translateY="-15.0">
+															<center>
+																<Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" BorderPane.alignment="CENTER">
+																	<font>
+																		<Font size="14.0" />
+																	</font>
+																</Text>
+															</center>
+														</BorderPane>
+														<BorderPane fx:id="NorthAfrica" styleClass="countryCircle" translateX="-45.0" translateY="10.0">
+															<center>
+																<Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" BorderPane.alignment="CENTER">
+																	<font>
+																		<Font size="14.0" />
+																	</font>
+																</Text>
+															</center>
+														</BorderPane>
+														<BorderPane fx:id="Congo" styleClass="countryCircle" translateX="30.0" translateY="85.0">
+															<center>
+																<Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" BorderPane.alignment="CENTER">
+																	<font>
+																		<Font size="14.0" />
+																	</font>
+																</Text>
+															</center>
+														</BorderPane>
+														<BorderPane fx:id="SouthAfrica" styleClass="countryCircle" translateX="35.0" translateY="160.0">
+															<center>
+																<Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" BorderPane.alignment="CENTER">
+																	<font>
+																		<Font size="14.0" />
+																	</font>
+																</Text>
+															</center>
+														</BorderPane>
+														<BorderPane fx:id="Madagascar" styleClass="countryCircle" translateX="113.0" translateY="157.0">
+															<center>
+																<Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" BorderPane.alignment="CENTER">
+																	<font>
+																		<Font size="14.0" />
+																	</font>
+																</Text>
+															</center>
+														</BorderPane>
+														<BorderPane fx:id="Scandinavia" styleClass="countryCircle" translateX="25.0" translateY="-230.0">
+															<center>
+																<Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" BorderPane.alignment="CENTER">
+																	<font>
+																		<Font size="14.0" />
+																	</font>
+																</Text>
+															</center>
+														</BorderPane>
+														<BorderPane fx:id="Iceland" styleClass="countryCircle" translateX="-112.0" translateY="-210.0">
+															<center>
+																<Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" BorderPane.alignment="CENTER">
+																	<font>
+																		<Font size="14.0" />
+																	</font>
+																</Text>
+															</center>
+														</BorderPane>
+														<BorderPane fx:id="GreatBritain" styleClass="countryCircle" translateX="-70.0" translateY="-180.0">
+															<center>
+																<Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" BorderPane.alignment="CENTER">
+																	<font>
+																		<Font size="14.0" />
+																	</font>
+																</Text>
+															</center>
+														</BorderPane>
+														<BorderPane fx:id="SouthernEurope" styleClass="countryCircle" translateX="60.0" translateY="-120.0">
+															<center>
+																<Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" BorderPane.alignment="CENTER">
+																	<font>
+																		<Font size="14.0" />
+																	</font>
+																</Text>
+															</center>
+														</BorderPane>
+														<BorderPane fx:id="NorthernEurope" styleClass="countryCircle" translateX="10.0" translateY="-157.0">
+															<center>
+																<Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" BorderPane.alignment="CENTER">
+																	<font>
+																		<Font size="14.0" />
+																	</font>
+																</Text>
+															</center>
+														</BorderPane>
+														<BorderPane fx:id="WesternEurope" styleClass="countryCircle" translateX="-45.0" translateY="-100.0">
+															<center>
+																<Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" BorderPane.alignment="CENTER">
+																	<font>
+																		<Font size="14.0" />
+																	</font>
+																</Text>
+															</center>
+														</BorderPane>
+														<BorderPane fx:id="Argentinia" styleClass="countryCircle" translateX="-192.0" translateY="205.0">
+															<center>
+																<Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" BorderPane.alignment="CENTER">
+																	<font>
+																		<Font size="14.0" />
+																	</font>
+																</Text>
+															</center>
+														</BorderPane>
+														<BorderPane fx:id="Peru" styleClass="countryCircle" translateX="-220.0" translateY="125.0">
+															<center>
+																<Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" BorderPane.alignment="CENTER">
+																	<font>
+																		<Font size="14.0" />
+																	</font>
+																</Text>
+															</center>
+														</BorderPane>
+														<BorderPane fx:id="Brazil" styleClass="countryCircle" translateX="-150.0" translateY="95.0">
+															<center>
+																<Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" BorderPane.alignment="CENTER">
+																	<font>
+																		<Font size="14.0" />
+																	</font>
+																</Text>
+															</center>
+														</BorderPane>
+														<BorderPane fx:id="Venezuela" styleClass="countryCircle" translateX="-200.0" translateY="45.0">
+															<center>
+																<Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" BorderPane.alignment="CENTER">
+																	<font>
+																		<Font size="14.0" />
+																	</font>
+																</Text>
+															</center>
+														</BorderPane>
+														<BorderPane fx:id="Greenland" styleClass="countryCircle" translateX="-170.0" translateY="-225.0">
+															<center>
+																<Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" BorderPane.alignment="CENTER">
+																	<font>
+																		<Font size="14.0" />
+																	</font>
+																</Text>
+															</center>
+														</BorderPane>
+														<BorderPane fx:id="Alaska" styleClass="countryCircle" translateX="-390.0" translateY="-200.0">
+															<center>
+																<Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" BorderPane.alignment="CENTER">
+																	<font>
+																		<Font size="14.0" />
+																	</font>
+																</Text>
+															</center>
+														</BorderPane>
+														<BorderPane fx:id="NorthWestTerritory" styleClass="countryCircle" translateX="-310.0" translateY="-210.0">
+															<center>
+																<Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" BorderPane.alignment="CENTER">
+																	<font>
+																		<Font size="14.0" />
+																	</font>
+																</Text>
+															</center>
+														</BorderPane>
+														<BorderPane fx:id="Alberta" styleClass="countryCircle" translateX="-328.0" translateY="-155.0">
+															<center>
+																<Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" BorderPane.alignment="CENTER">
+																	<font>
+																		<Font size="14.0" />
+																	</font>
+																</Text>
+															</center>
+														</BorderPane>
+														<BorderPane fx:id="Ontario" styleClass="countryCircle" translateX="-270.0" translateY="-145.0">
+															<center>
+																<Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" BorderPane.alignment="CENTER">
+																	<font>
+																		<Font size="14.0" />
+																	</font>
+																</Text>
+															</center>
+														</BorderPane>
+														<BorderPane fx:id="WesternUnitedStates" styleClass="countryCircle" translateX="-300.0" translateY="-90.0">
+															<center>
+																<Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" BorderPane.alignment="CENTER">
+																	<font>
+																		<Font size="14.0" />
+																	</font>
+																</Text>
+															</center>
+														</BorderPane>
+														<BorderPane fx:id="EasternUnitedStates" styleClass="countryCircle" translateX="-248.0" translateY="-84.0">
+															<center>
+																<Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" BorderPane.alignment="CENTER">
+																	<font>
+																		<Font size="14.0" />
+																	</font>
+																</Text>
+															</center>
+														</BorderPane>
+														<BorderPane fx:id="CentralAmerica" styleClass="countryCircle" translateX="-290.0" translateY="-10.0">
+															<center>
+																<Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" BorderPane.alignment="CENTER">
+																	<font>
+																		<Font size="14.0" />
+																	</font>
+																</Text>
+															</center>
+														</BorderPane>
+														<BorderPane fx:id="Quebec" styleClass="countryCircle" translateX="-180.0" translateY="-140.0">
+															<center>
+																<Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" BorderPane.alignment="CENTER">
+																	<font>
+																		<Font size="14.0" />
+																	</font>
+																</Text>
+															</center>
+														</BorderPane>
+														<BorderPane fx:id="Indonesia" styleClass="countryCircle" translateX="305.0" translateY="80.0">
+															<center>
+																<Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" BorderPane.alignment="CENTER">
+																	<font>
+																		<Font size="14.0" />
+																	</font>
+																</Text>
+															</center>
+														</BorderPane>
+														<BorderPane fx:id="NewGuinea" styleClass="countryCircle" translateX="400.0" translateY="80.0">
+															<center>
+																<Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" BorderPane.alignment="CENTER">
+																	<font>
+																		<Font size="14.0" />
+																	</font>
+																</Text>
+															</center>
+														</BorderPane>
+														<BorderPane fx:id="WesternAustralia" styleClass="countryCircle" translateX="330.0" translateY="180.0">
+															<center>
+																<Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" BorderPane.alignment="CENTER">
+																	<font>
+																		<Font size="14.0" />
+																	</font>
+																</Text>
+															</center>
+														</BorderPane>
+														<BorderPane fx:id="EasternAustralia" styleClass="countryCircle" translateX="400.0" translateY="180.0">
+															<center>
+																<Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" BorderPane.alignment="CENTER">
+																	<font>
+																		<Font size="14.0" />
+																	</font>
+																</Text>
+															</center>
+														</BorderPane>
+														<Pane styleClass="fillPane" translateX="-339.0" translateY="156.0" />
+														<fx:define>
+															<ArrayList fx:id="countryPanes">
+																<fx:reference source="Alaska" />
+																<fx:reference source="NorthWestTerritory" />
+																<fx:reference source="Alberta" />
+																<fx:reference source="WesternUnitedStates" />
+																<fx:reference source="CentralAmerica" />
+																<fx:reference source="Greenland" />
+																<fx:reference source="Ontario" />
+																<fx:reference source="Quebec" />
+																<fx:reference source="EasternUnitedStates" />
+																<fx:reference source="Venezuela" />
+																<fx:reference source="Peru" />
+																<fx:reference source="Brazil" />
+																<fx:reference source="Argentinia" />
+																<fx:reference source="Iceland" />
+																<fx:reference source="Scandinavia" />
+																<fx:reference source="Ukraine" />
+																<fx:reference source="GreatBritain" />
+																<fx:reference source="NorthernEurope" />
+																<fx:reference source="WesternEurope" />
+																<fx:reference source="SouthernEurope" />
+																<fx:reference source="NorthAfrica" />
+																<fx:reference source="Egypt" />
+																<fx:reference source="Congo" />
+																<fx:reference source="EastAfrica" />
+																<fx:reference source="SouthAfrica" />
+																<fx:reference source="Madagascar" />
+																<fx:reference source="Siberia" />
+																<fx:reference source="Ural" />
+																<fx:reference source="China" />
+																<fx:reference source="Afghanistan" />
+																<fx:reference source="MiddleEast" />
+																<fx:reference source="India" />
+																<fx:reference source="Siam" />
+																<fx:reference source="Yakutsk" />
+																<fx:reference source="Irkutsk" />
+																<fx:reference source="Mongolia" />
+																<fx:reference source="Japan" />
+																<fx:reference source="Kamchatka" />
+																<fx:reference source="Indonesia" />
+																<fx:reference source="NewGuinea" />
+																<fx:reference source="WesternAustralia" />
+																<fx:reference source="EasternAustralia" />
+															</ArrayList>
+														</fx:define>
+													</children>
+												</StackPane>
+											</children>
+										</VBox>
+										<StackPane fx:id="popUpPane" maxHeight="50.0" GridPane.rowIndex="2">
+											<GridPane.margin>
+												<Insets bottom="10.0" />
+											</GridPane.margin>
+											<children>
+												<GridPane fx:id="cardsPane" minHeight="220.0" opacity="0.0" styleClass="cardPane">
+													<columnConstraints>
+														<ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+														<ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+														<ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+														<ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+														<ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+													</columnConstraints>
+													<rowConstraints>
+														<RowConstraints minHeight="10.0" percentHeight="75.0" prefHeight="30.0" vgrow="SOMETIMES" />
+														<RowConstraints minHeight="10.0" percentHeight="25.0" prefHeight="30.0" vgrow="SOMETIMES" />
+													</rowConstraints>
+													<children>
+														<VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+															<children>
+                                                <ToggleButton fx:id="card1" mnemonicParsing="false" onAction="#selectCard1" prefHeight="147.0" prefWidth="106.0" styleClass="cardButton" />
+															</children>
+														</VBox>
+														<VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1">
+                                             <children>
+                                                <ToggleButton fx:id="card2" mnemonicParsing="false" onAction="#selectCard2" prefHeight="147.0" prefWidth="106.0" styleClass="cardButton" />
+                                             </children>
+														</VBox>
+														<VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="2">
+                                             <children>
+                                                <ToggleButton fx:id="card3" mnemonicParsing="false" onAction="#selectCard3" prefHeight="147.0" prefWidth="106.0" styleClass="cardButton" />
+                                             </children>
+														</VBox>
+														<VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="3">
+                                             <children>
+                                                <ToggleButton fx:id="card4" mnemonicParsing="false" onAction="#selectCard4" prefHeight="147.0" prefWidth="106.0" styleClass="cardButton" />
+                                             </children>
+														</VBox>
+														<VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="4">
+                                             <children>
+                                                <ToggleButton fx:id="card5" mnemonicParsing="false" onAction="#selectCard5" prefHeight="147.0" prefWidth="106.0" styleClass="cardButton" />
+                                             </children>
+														</VBox>
+														<HBox alignment="BOTTOM_RIGHT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="1">
+															<children>
+																<Button mnemonicParsing="false" onAction="#cancelCards" text="Cancel">
+																	<HBox.margin>
+																		<Insets bottom="10.0" right="10.0" />
+																	</HBox.margin>
+																</Button>
+															</children>
+														</HBox>
+														<HBox alignment="BOTTOM_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="1">
+															<children>
+																<Button mnemonicParsing="false" onAction="#useCards" text="Use Cards">
+																	<HBox.margin>
+																		<Insets bottom="10.0" />
+																	</HBox.margin>
+																</Button>
+															</children>
+														</HBox>
+													</children>
+												</GridPane>
+												<GridPane fx:id="errorPopup" alignment="CENTER" opacity="0.0" styleClass="actionPopup">
+													<columnConstraints>
+														<ColumnConstraints hgrow="SOMETIMES" percentWidth="25.0" />
+														<ColumnConstraints hgrow="SOMETIMES" percentWidth="25.0" />
+														<ColumnConstraints hgrow="SOMETIMES" percentWidth="25.0" />
+														<ColumnConstraints hgrow="SOMETIMES" percentWidth="25.0" />
+													</columnConstraints>
+													<rowConstraints>
+														<RowConstraints percentHeight="65.0" vgrow="SOMETIMES" />
+														<RowConstraints percentHeight="35.0" vgrow="SOMETIMES" />
+													</rowConstraints>
+													<opaqueInsets>
+														<Insets />
+													</opaqueInsets>
+													<children>
+														<VBox alignment="CENTER" GridPane.columnSpan="4" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.vgrow="ALWAYS">
+															<children>
+																<Button maxHeight="50.0" maxWidth="150.0" minHeight="30.0" minWidth="75.0" mnemonicParsing="false" onAction="#closeErrorPopUp" prefHeight="50.0" prefWidth="150.0" text="Cancel">
+																	<font>
+																		<Font size="15.0" />
+																	</font>
+																</Button>
+															</children>
+														</VBox>
+														<VBox alignment="CENTER" GridPane.columnSpan="4">
+															<children>
+																<Text fx:id="errorPopUpText" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
+															</children>
+														</VBox>
+													</children>
+												</GridPane>
+												<GridPane fx:id="actionPopup" alignment="CENTER" opacity="0.0" styleClass="actionPopup">
+													<columnConstraints>
+														<ColumnConstraints hgrow="SOMETIMES" percentWidth="25.0" />
+														<ColumnConstraints hgrow="SOMETIMES" percentWidth="25.0" />
+														<ColumnConstraints hgrow="SOMETIMES" percentWidth="25.0" />
+														<ColumnConstraints hgrow="SOMETIMES" percentWidth="25.0" />
+													</columnConstraints>
+													<rowConstraints>
+														<RowConstraints percentHeight="65.0" vgrow="SOMETIMES" />
+														<RowConstraints percentHeight="35.0" vgrow="SOMETIMES" />
+													</rowConstraints>
+													<opaqueInsets>
+														<Insets />
+													</opaqueInsets>
+													<children>
+														<VBox alignment="CENTER_LEFT" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.vgrow="ALWAYS">
+															<children>
+																<Button maxHeight="50.0" maxWidth="150.0" minHeight="30.0" minWidth="75.0" mnemonicParsing="false" onAction="#closeActionPopUp" prefHeight="50.0" prefWidth="150.0" text="Cancel">
+																	<font>
+																		<Font size="15.0" />
+																	</font>
+																</Button>
+															</children>
+														</VBox>
+														<VBox alignment="CENTER_RIGHT" GridPane.columnIndex="3" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.vgrow="ALWAYS">
+															<children>
+																<Button maxHeight="50.0" maxWidth="150.0" minHeight="30.0" minWidth="75.0" mnemonicParsing="false" onAction="#confirmPopUpSelection" prefHeight="50.0" prefWidth="150.0" text="Confirm">
+																	<font>
+																		<Font name="Lucida Fax Regular" size="15.0" />
+																	</font>
+																</Button>
+															</children>
+														</VBox>
+														<VBox alignment="CENTER" GridPane.columnSpan="3">
+															<children>
+																<Text fx:id="actionPopUpText" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
+															</children>
+														</VBox>
+														<Spinner fx:id="troupCount" GridPane.columnIndex="3" />
+													</children>
+												</GridPane>
+												<HBox alignment="CENTER" maxHeight="50.0" maxWidth="1.7976931348623157E308" prefHeight="17.0" prefWidth="876.0" spacing="10.0">
+													<children>
+														<Button fx:id="cardsButton" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="50.0" mnemonicParsing="false" onAction="#showCards" prefWidth="172.0" text="Use Cards" HBox.hgrow="ALWAYS">
+															<font>
+																<Font size="10.0" />
+															</font>
+														</Button>
+														<Button fx:id="phaseButton" accessibleText="country1&#10;c2&#10;c3&#10;c4&#10;c5&#10;" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="50.0" mnemonicParsing="false" onAction="#finishPhase" prefWidth="172.0" text="Finish fortifying" HBox.hgrow="ALWAYS">
+															<font>
+																<Font size="10.0" />
+															</font>
+														</Button>
+														<Button fx:id="roundButton" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="50.0" mnemonicParsing="false" onAction="#finishRound" prefWidth="172.0" text="Finish round" HBox.hgrow="ALWAYS">
+															<font>
+																<Font size="10.0" />
+															</font>
+														</Button>
+													</children>
+													<StackPane.margin>
+														<Insets bottom="50.0" top="50.0" />
+													</StackPane.margin>
+												</HBox>
+											</children>
+										</StackPane>
+									</children>
+								</GridPane>
+							</children>
+						</StackPane>
+					</children>
+				</Pane>
+				<HBox alignment="CENTER_RIGHT" prefHeight="768.0" prefWidth="308.0" GridPane.columnIndex="2">
+					<children>
+						<GridPane alignment="TOP_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="775.0" prefWidth="265.0">
+							<columnConstraints>
+								<ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="40.0" prefWidth="100.0" />
+								<ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="40.0" prefWidth="100.0" />
+								<ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="20.0" prefWidth="100.0" />
+							</columnConstraints>
+							<rowConstraints>
+								<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+								<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+								<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+								<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+								<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+								<RowConstraints />
+							</rowConstraints>
+							<children>
+								<VBox GridPane.columnIndex="1">
+									<children>
+										<HBox alignment="TOP_RIGHT">
+											<children>
+												<MenuButton id="menuButton" mnemonicParsing="false" popupSide="LEFT">
+													<items>
+														<MenuItem mnemonicParsing="false" onAction="#leaveGame" text="Leave game" />
+													</items>
+													<graphic>
+														<HBox alignment="CENTER_RIGHT" fillHeight="false">
+															<children>
+																<ImageView fitHeight="40.0" fitWidth="55.0" pickOnBounds="true" preserveRatio="true">
+																	<image>
+																		<Image url="@../images/Menu-thin-circular-outlined-button.svg.png" />
+																	</image>
+																</ImageView>
+															</children>
+														</HBox>
+													</graphic>
+													<HBox.margin>
+														<Insets top="20.0" />
+													</HBox.margin>
+												</MenuButton>
+											</children>
+										</HBox>
+									</children>
+									<padding>
+										<Insets top="5.0" />
+									</padding>
+								</VBox>
+								<VBox fx:id="ChatPane" alignment="TOP_CENTER" prefHeight="145.0" prefWidth="102.0" GridPane.columnSpan="2" GridPane.rowIndex="1" GridPane.rowSpan="4">
+									<children>
+										<TextArea fx:id="messageOutput" editable="false" prefHeight="400.0" prefWidth="300.0" styleClass="chat" />
+										<TextField fx:id="messageInput" prefHeight="0.0" prefWidth="154.0" promptText="your message" styleClass="chat" />
+										<HBox alignment="CENTER_LEFT" prefHeight="35.0" prefWidth="144.0">
+											<children>
+												<Text strokeType="OUTSIDE" strokeWidth="0.0" text="Send message to:">
+													<font>
+														<Font name="Malgun Gothic" size="12.0" />
+													</font>
+												</Text>
+												<ChoiceBox fx:id="recipientList" prefWidth="150.0" styleClass="chat">
+													<HBox.margin>
+														<Insets left="5.0" />
+													</HBox.margin>
+												</ChoiceBox>
+											</children>
+											<padding>
+												<Insets top="10.0" />
+											</padding>
+										</HBox>
+										<Button mnemonicParsing="false" onAction="#sendMessage" text="Send message">
+											<VBox.margin>
+												<Insets top="10.0" />
+											</VBox.margin>
+										</Button>
+									</children>
+								</VBox>
+							</children>
+							<opaqueInsets>
+								<Insets />
+							</opaqueInsets>
+						</GridPane>
+					</children>
+					<GridPane.margin>
+						<Insets right="10.0" />
+					</GridPane.margin>
+				</HBox>
+			</children>
+		</GridPane>
+	</children>
+
+</AnchorPane>

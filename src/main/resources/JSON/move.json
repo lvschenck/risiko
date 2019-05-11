@@ -1,0 +1,22 @@
+{
+  "command": {
+    "name": "move",
+    "source": {
+      "country": 3,
+      "_comment_country": "country ID",
+      "player": 45,
+      "_comment_player": "player ID",
+      "unitsToMove": {
+        "infantry": 4,
+        "cavalry": 2,
+        "artillery": 0
+      }
+    },
+    "target": {
+      "country": 5,
+      "_comment_country": "country ID, has to be adjecent to the source country",
+      "player": 45,
+      "_comment_player": "player ID"
+    }
+  }
+}
