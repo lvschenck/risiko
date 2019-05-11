@@ -10,7 +10,7 @@ import sw.praktikum.risk5.Database.Database;
 /**
  * Class that simulates a single risk match
  *
- * @author lroell, Fabian
+ * @author lroell, fahaerte
  */
 
 class Match {
@@ -27,7 +27,7 @@ class Match {
   private Database data = RiskMain.getInstance().getDomain().getData();
 
   /**
-   * Contructor for the class Match
+   * Constructor for the class Match
    * 
    * @author lroell
    * @param allCards All cards, initialized by GameController
@@ -112,9 +112,9 @@ class Match {
   }
 
   /**
-   * returns the cards of each player
+   * Returns the cards of each player.
    * 
-   * @author Fabian
+   * @author fahaerte
    * @return 2-D int array with all Cards from each player
    */
   protected int[][] getPlayerCards() {
@@ -135,7 +135,7 @@ class Match {
   /**
    * Returns the countries ids
    * 
-   * @author Fabian
+   * @author fahaerte
    * @return all ids from the countries
    */
   protected int[] getCountriesIds() {
@@ -151,7 +151,7 @@ class Match {
 
   /**
    * 
-   * @author Fabian
+   * @author fahaerte
    * @return
    */
   protected int[] getCountriesOwners() {
@@ -172,7 +172,7 @@ class Match {
 
   /**
    * 
-   * @author Fabian
+   * @author fahaerte
    * @return
    */
   protected String[] getCountriesName() {
@@ -188,7 +188,7 @@ class Match {
 
   /**
    * 
-   * @author Fabian
+   * @author fahaerte
    * @return
    */
   protected int[] getCountriesTroops() {
@@ -204,7 +204,7 @@ class Match {
 
   /**
    * 
-   * @author Fabian
+   * @author fahaerte
    * @return
    */
   protected int[][] getCountriesNeighbors() {
@@ -226,7 +226,7 @@ class Match {
 
   /**
    * 
-   * @author Fabian
+   * @author fahaerte
    * @return
    */
   protected int[] getPlayersId() {
@@ -242,7 +242,7 @@ class Match {
 
   /**
    * 
-   * @author Fabian
+   * @author fahaerte
    * @return
    */
   protected boolean[] getPlayerAi() {
@@ -258,7 +258,7 @@ class Match {
 
   /**
    * 
-   * @author Fabian
+   * @author fahaerte
    * @return
    */
   protected String[] getPlayerNames() {
@@ -274,7 +274,7 @@ class Match {
 
   /**
    * 
-   * @author Fabian
+   * @author fahaerte
    * @return
    */
   protected int[] getPlayersUnitsToPlace() {
@@ -371,7 +371,7 @@ class Match {
   /**
    * Fortifying of your position. The method checks wwether the inputs were valid
    * 
-   * @author Fabian
+   * @author fahaerte
    * @param sourcePlayerId : Player ID
    * @param sourceCountry : Country ID
    * @param amount : amount of troops to place
@@ -412,7 +412,7 @@ class Match {
   /**
    * Searches a player by his id and returns the player
    * 
-   * @author Fabian
+   * @author fahaerte
    * @param id of the player
    * @return Player: the player if found, else null
    */
@@ -433,7 +433,7 @@ class Match {
    * Adds card to the available cards
    * 
    * @param c: Card to add
-   * @author Fabian
+   * @author fahaerte
    */
   protected void addAvailableCard(Card c) {
     this.availableCards.add(c);
@@ -442,7 +442,7 @@ class Match {
   /**
    * Searches a country by his id and returns the country
    * 
-   * @author Fabian
+   * @author fahaerte
    * @param id
    * @return Country
    */
@@ -461,7 +461,7 @@ class Match {
   /**
    * Finds and returns a specified card from allCards
    * 
-   * @author Fabian
+   * @author fahaerte
    * @param id The id of the searched card
    * @return
    */
@@ -481,7 +481,7 @@ class Match {
   }
 
   protected void updateStatistics() {
-    // länder zum höchsten punkt verschiedenen Plätze
+    // laender zum hoechsten punkt verschiedenen Plaetze
     int amountOfTroops = 0;
     int amountOfCountries = 0;
     Iterator<Country> it = this.countries.iterator();
