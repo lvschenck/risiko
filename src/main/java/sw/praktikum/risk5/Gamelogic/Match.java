@@ -22,6 +22,7 @@ class Match {
   private Player currentPlayer;
   private int currentTurnPhase;
   private int currentGamePhase;
+  private int count = 0;
   private int matchId; // fehlt noch
   private Statistics stats;
   private Database data = RiskMain.getInstance().getDomain().getData();
@@ -65,7 +66,7 @@ class Match {
     }
   }
 
-  protected void changeCurrentPlayer(){
+  protected void changeCurrentPlayer() {
     Iterator<Player> it = this.players.iterator();
     while (it.hasNext()) {
       if (it.next().equals(this.currentPlayer)) {
@@ -85,14 +86,14 @@ class Match {
    */
   protected void establishOrder() {
     Iterator<Player> it = this.players.iterator();
-    while(it.hasNext()) {
+    while (it.hasNext()) {
       Player tmp = it.next();
-      if(tmp.getId()==1) {
+      if (tmp.getId() == 1) {
         this.currentPlayer = tmp;
       }
     }
-//    int random = (int) (Math.random() * this.players.size());
-//    this.currentPlayer = this.players.get(random);
+    // int random = (int) (Math.random() * this.players.size());
+    // this.currentPlayer = this.players.get(random);
   }
 
   protected int getCurrentPlayerId() {
@@ -347,23 +348,35 @@ class Match {
     while (it.hasNext()) {
       Country c = it.next();
       if (c.getId() == country.getId()
-          && (c.getOwner().getId() == 0 || c.getOwner().getId() == player.getId()) && player.getAmountOfUnitsToPlace() >= amount) {
+          && (c.getOwner().getId() == 0 || c.getOwner().getId() == player.getId())
+          && player.getAmountOfUnitsToPlace() >= amount) {
         c.setOwner(player);
         player.addCountry(c);
         country.addTroops(amount);
         player.setAmountOfUnitsToPlace(-amount);
         b = true;
-        if(b) {
+        if (b) {
           this.changeCurrentPlayer();
         }
       }
 
-      if(c.getOwner().getId() == 0) {
+      if (c.getOwner().getId() == 0) {
         countriesOccupied = false;
       }
     }
-    if (countriesOccupied){
+    boolean allTroopsSetFirstTime = true;
+    for (Player p : this.players) {
+      if (!(p.getAmountOfUnitsToPlace() == 0)) {
+        allTroopsSetFirstTime = false;
+      }
+    }
+    if (countriesOccupied && this.count == 0) {
+      System.out.println("AMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMK");
       this.currentGamePhase = 1;
+      count++;
+    }
+    if(allTroopsSetFirstTime) {
+      this.currentGamePhase = 2;
     }
     return b;
   }
