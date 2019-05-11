@@ -132,7 +132,7 @@ public class LobbyPanelController implements LobbyPanelInterface {
     if (RiskMain.getInstance().getDomain().getIsServer()) {
       this.serverInterface = RiskMain.getInstance().getDomain().getServer();
       this.serverInterface
-          .sendMessageChat(playerName, messageInput.getText(), recipientList.getValue());
+          .sendMessageChat(RiskMain.getInstance().getDomain().getPlayerName(), messageInput.getText(), recipientList.getValue());
     } else {
       this.clientPlayerInterface = RiskMain.getInstance().getDomain().getClient();
     }
