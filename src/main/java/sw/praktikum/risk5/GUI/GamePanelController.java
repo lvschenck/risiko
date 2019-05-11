@@ -169,7 +169,6 @@ public class GamePanelController implements Initializable, GuiInterface {
       this.ownerIds = this.jsonReader.getGameStateCountriesOwner();
       this.troops = this.jsonReader.getGameStateCountriesTroops();
 
-      if (this.jsonReader.getGameStateCurrentGamePhase() == 0) {
         boolean b = false;
         for (int troopsCountry : this.jsonReader.getGameStateCountriesTroops()) {
           if (troopsCountry == 0) {
@@ -182,8 +181,7 @@ public class GamePanelController implements Initializable, GuiInterface {
         } else {
           this.valueFactory = new IntegerSpinnerValueFactory(1, 250, 3);
           troupCount.setValueFactory(this.valueFactory);
-        }
-      } else if (this.turnPhase != this.jsonReader.getGameStateCurrentGamePhase()) {
+      } if (this.turnPhase != this.jsonReader.getGameStateCurrentGamePhase()) {
         this.turnPhase = this.jsonReader.getGameStateCurrentTurnPhase();
         updateCountries(troops, ownerIds);
       }
