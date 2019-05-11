@@ -14,7 +14,8 @@ class AiPlacementHandler {
 
   private ArrayList<AiCountry> allCountries;
   private double[] continentPriority;
-  private int[] continentIdsSortedByPriority = {6, 2, 1, 4, 3, 5};
+  private final int[] continentIdsSortedByPriority = {6, 2, 1, 4, 3, 5};
+  private final int[] continentSize = {9, 4, 6, 7, 12, 4};
   private int aiId;
   private AiType type;
   private AiCountry priorityAttackCountry;
@@ -116,7 +117,7 @@ class AiPlacementHandler {
 
     if (this.state == 0) {
       ArrayList<AiCountry> countriesInContinent =
-          this.getOwnCountriesInContinent(this.getMaxPriorityForContinent());
+          this.getAiCountriesInContient(this.getMaxPriorityForContinent());
 
       for (AiCountry c : countriesInContinent) {
         c.setOffensivePriority(this.getRatioOfTroopsToNeighourTroops(c)
@@ -365,23 +366,6 @@ class AiPlacementHandler {
   }
 
   /**
-   * This method finds and returns all countries of a continent which belong to the AI.
-   * 
-   * @param continentId the id of the requested continent
-   * @return HashSet of countries whose owner is the AI (in the specific continent)
-   * @author gschakar
-   */
-  private ArrayList<AiCountry> getOwnCountriesInContinent(int continentId) {
-    ArrayList<AiCountry> res = new ArrayList<AiCountry>();
-    for (AiCountry a : this.allCountries) {
-      if (a.getContinent() == continentId && a.getOwner() == this.aiId) {
-        res.add(a);
-      }
-    }
-    return res;
-  }
-
-  /**
    * This method calculates the ratio of your troops in comparison of all enemies neighbor troops.
    * 
    * @param c the parameter is a AiCountry of which you want to check the neighbors
@@ -493,9 +477,20 @@ class AiPlacementHandler {
    * This method places at the start of a match troops in a country of the continent with the
    * highest priority for the hard AI.
    * 
-   * @author gschakar
+   * @author gschakar, fahaerte
    */
   private AiCountry placeInEmptyCountriesHard() {
+    for (int i = 0; i < 6; i++) {
+      if(this.getAiCountriesInContient(i+1).size() == 0 && this.getAmountOfEnemyCountriesInContinent(i+1) == continentSize[i]
+          && this.moreThanOneEnemiyInContient(i+1)) {
+        for (AiCountry a : this.allCountries) {
+          if (a.getOwner() == 0 && a.getContinent() == i + 1) {
+            return target;
+          }
+        }
+      }
+    }
+    
     this.calculateContinentPriorityHard();
     int preferedContinent = 0;
     AiCountry target = null;
@@ -609,5 +604,27 @@ class AiPlacementHandler {
 
   protected int getAmount() {
     return this.finalAmount;
+  }
+  
+  /**
+   * Proves if a continent is occupied by more than one player except of the AI.
+   * 
+   * @author fahaerte
+   * @param continentId The required continent
+   * @return True if there's more than one enemy player.
+   */
+  private boolean moreThanOneEnemiyInContient(int continentId) {
+    int owner = 0;
+    int amount = 0;
+    for (AiCountry a : this.allCountries) {
+      if (a.getOwner() != 0 && a.getOwner() != this.aiId && a.getOwner() != owner && a.getContinent() == continentId) {
+        owner = a.getOwner();
+        amount++;
+      }
+    }
+    if (amount > 1) {
+      return true;
+    }
+    return false;
   }
 }
