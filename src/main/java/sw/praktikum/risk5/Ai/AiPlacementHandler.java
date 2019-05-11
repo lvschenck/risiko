@@ -480,12 +480,14 @@ class AiPlacementHandler {
    * @author gschakar, fahaerte
    */
   private AiCountry placeInEmptyCountriesHard() {
+    
     for (int i = 0; i < 6; i++) {
-      if(this.getAiCountriesInContient(i+1).size() == 0 && this.getAmountOfEnemyCountriesInContinent(i+1) == continentSize[i]
-          && this.moreThanOneEnemiyInContient(i+1)) {
+      if(this.getAiCountriesInContient(i+1).size() == 0 && this.getAmountOfEnemyCountriesInContinent(i+1) == continentSize[i] - 1
+          && !this.moreThanOneEnemiyInContient(i+1)) {
         for (AiCountry a : this.allCountries) {
           if (a.getOwner() == 0 && a.getContinent() == i + 1) {
-            return target;
+            System.out.println("true");
+            return a;
           }
         }
       }
