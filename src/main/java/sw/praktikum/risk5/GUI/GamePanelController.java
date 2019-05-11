@@ -148,6 +148,7 @@ public class GamePanelController implements Initializable, GuiInterface {
             .getUserId(RiskMain.getInstance().getDomain().getPlayerName());
         this.start = false;
         this.currentPlayerId = this.jsonReader.getGameStateCurrentPlayer();
+        updateHighlightedPlayer(this.jsonReader.getGameStateCurrentPlayer(), this.jsonReader.getGameStateCurrentPlayer(), this.jsonReader.getGameStatePlayerUnits());
       }
       if (this.currentPlayerId != this.jsonReader.getGameStateCurrentPlayer()) {
         updateHighlightedPlayer(currentPlayerId, this.jsonReader.getGameStateCurrentPlayer(),

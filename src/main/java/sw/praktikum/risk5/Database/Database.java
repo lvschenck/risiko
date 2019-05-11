@@ -164,6 +164,7 @@ public class Database {
       Element ai = new Element("ai " + i);
       ai.setAttribute("name", "AI" + i);
       ai.setAttribute("ID", Integer.toString(-i));
+      ai.setAttribute("avatar", "player-ki");
       savedPlayers.add(ai);
     }
     saveChanges();

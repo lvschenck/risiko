@@ -405,7 +405,7 @@ public class LobbyPanelController implements LobbyPanelInterface {
         directStart = true;
         kiSelected = false;
         startGame.setText("Start Game");
-        lobbyHeader.setText("Gamelobby " + RiskMain.getInstance().getDomain().getGameName());
+        lobbyHeader.setText("Gamelobby " + "Single Player");
         break;
       case 2:
         kiSelected = false;
