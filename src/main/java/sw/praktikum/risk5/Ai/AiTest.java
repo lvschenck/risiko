@@ -16,68 +16,82 @@ class AiTest {
     int[] countriesOwner = new int[42];
     int[] countriesUnits = new int[42];
     int[] pIds = {1, 2};
-    int[] playerTroops = {10, 20};
+    int[] playerTroops = {40, 40};
     int[][] playerCards = {{1, 3, 0, 0, 0}, {0, 0, 0, 0, 0}};
     String[] pNames = {"a", "b"};
-    boolean[] pAi = {true, false};
+    boolean[] pAi = {true, true};
     for (int i = 0; i < 42; i++) {
       names[i] = "a";
       countriesId[i] = i + 1;
-      countriesOwner[i] = i % 2 + 1;
-      countriesUnits[i] = 1;
+      countriesOwner[i] = 0;
+      countriesUnits[i] = 0;
     }
 
-//    AiMain ai = new AiMain(AiType.HARD, 1, null);
-
-//    File result = ai.performAction(writer.writeGetGameStateJson(names, countriesId, countriesOwner,
-//        countriesUnits, neigh, "", 0, pIds, pAi, pNames, playerTroops, playerCards, 1, 0, 1));
-//    reader.readPlaceJSON(result);
+    int currentPlayer = 1;
+    int currentTurnPhase = 0;
+    int currentGamePhase = 0;
+//    AiMain ai = new AiMain(AiType.EASY, 1, null);
+//    AiMain ai2 = new AiMain(AiType.EASY, 2, null);
 //
-//    countriesUnits[reader.getPlaceCountry() - 1] += reader.getPlaceNumberOfUnits();
-//    result = ai.performAction(writer.writeGetGameStateJson(names, countriesId, countriesOwner,
-//        countriesUnits, neigh, "", 0, pIds, pAi, pNames, playerTroops, playerCards, 1, 1, 1));
+//    System.out.println("start");
+//    System.out.println();
+//    
+//    //Choosing countries
+//    for (int i = 0; i < 21; i++) {
+//      File result = ai.performAction(writer.writeGetGameStateJson(names, countriesId,
+//          countriesOwner, countriesUnits, neigh, "", 0, pIds, pAi, pNames, playerTroops,
+//          playerCards, currentPlayer, currentTurnPhase, currentGamePhase));
+//      reader.readPlaceJSON(result);
 //
-//    System.out.println("After place:");
+//      countriesUnits[reader.getPlaceCountry() - 1] += reader.getPlaceNumberOfUnits();
+//      countriesOwner[reader.getPlaceCountry() - 1] = reader.getPlacePlayer();
+//     
+//      currentPlayer = 2;
+//      result = ai2.performAction(writer.writeGetGameStateJson(names, countriesId, countriesOwner,
+//          countriesUnits, neigh, "", 0, pIds, pAi, pNames, playerTroops, playerCards, currentPlayer,
+//          currentTurnPhase, currentGamePhase));
+//      reader.readPlaceJSON(result);
+//      
+//      countriesUnits[reader.getPlaceCountry() - 1] += reader.getPlaceNumberOfUnits();
+//      countriesOwner[reader.getPlaceCountry() - 1] = reader.getPlacePlayer();
+//      currentPlayer = 1;
+//      playerTroops[0] -= 1;
+//      playerTroops[1] -= 1;
+//    }
+//    
+//    //Troops Placement
+//    currentTurnPhase = 0;
+//    currentGamePhase = 1;
+//    currentPlayer = 1;
+//    while (playerTroops[0] != 0 && playerTroops[1] != 0) {
+//      
+//      File result = ai.performAction(writer.writeGetGameStateJson(names, countriesId,
+//          countriesOwner, countriesUnits, neigh, "", 0, pIds, pAi, pNames, playerTroops,
+//          playerCards, currentPlayer, currentTurnPhase, currentGamePhase));
+//      reader.readPlaceJSON(result);
+//
+//      countriesUnits[reader.getPlaceCountry() - 1] += reader.getPlaceNumberOfUnits();
+//      countriesOwner[reader.getPlaceCountry() - 1] = reader.getPlacePlayer();
+//      playerTroops[0] -= reader.getPlaceNumberOfUnits();
+//      
+//      currentPlayer = 2;
+//      result = ai2.performAction(writer.writeGetGameStateJson(names, countriesId, countriesOwner,
+//          countriesUnits, neigh, "", 0, pIds, pAi, pNames, playerTroops, playerCards, currentPlayer,
+//          currentTurnPhase, currentGamePhase));
+//      reader.readPlaceJSON(result);
+//      
+//      countriesUnits[reader.getPlaceCountry() - 1] += reader.getPlaceNumberOfUnits();
+//      countriesOwner[reader.getPlaceCountry() - 1] = reader.getPlacePlayer();
+//      currentPlayer = 1;
+//      playerTroops[1] -= reader.getPlaceNumberOfUnits();
+//    }
+//    
+//    System.out.println();
+//    System.out.println("After place Rest Troops");
 //    for (int i = 0; i < 42; i++) {
 //      System.out.println("ID: " + countriesId[i]);
 //      System.out.println("Owner: " + countriesOwner[i]);
 //      System.out.println("Units: " + countriesUnits[i]);
-//    }
-//    System.out.println();
-//
-//    result = ai.performAction(writer.writeGetGameStateJson(names, countriesId, countriesOwner,
-//        countriesUnits, neigh, "", 0, pIds, pAi, pNames, playerTroops, playerCards, 1, 2, 1));
-//    
-//    reader.readMoveJSON(result);
-//    System.out.println("Source country: " + reader.getMoveSourceCountry());
-//    System.out.println("Target Country: " + reader.getMoveTargetCountry());
-//    System.out.println("Troops: " + reader.getMoveUnitsInfantry());
-    
-//    reader.readAttackJSON(result);
-//
-//    System.out.println("attack");
-//    System.out.println("amount Troops: " + reader.getAttackInfantry());
-//    System.out.println("source country: " + reader.getAttackSourceCountry());
-//    System.out.println("source player: " + reader.getAttackSourcePlayer());
-//    System.out.println("target country: " + reader.getAttackTargetCountry());
-//    System.out.println("target player: " + reader.getAttackTargetPlayer());
-//    System.out.println("performed");
-//    System.out.println();
-//
-//    countriesOwner[39] = 1;
-//    countriesUnits[39] = 3;
-//    countriesUnits[40] = 2;
-//
-//    result = ai.performAction(writer.writeGetGameStateJson(names, countriesId, countriesOwner,
-//        countriesUnits, neigh, "", 0, pIds, pAi, pNames, playerTroops, playerCards, 1, 1, 1));
-//
-//    reader.readAttackJSON(result);
-//
-//    System.out.println("amount Troops: " + reader.getAttackInfantry());
-//    System.out.println("source country: " + reader.getAttackSourceCountry());
-//    System.out.println("source player: " + reader.getAttackSourcePlayer());
-//    System.out.println("target country: " + reader.getAttackTargetCountry());
-//    System.out.println("target player: " + reader.getAttackTargetPlayer());
-//    System.out.println("performed");
-  }
+    }
+   
 }
