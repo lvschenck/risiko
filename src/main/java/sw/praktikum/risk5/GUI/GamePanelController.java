@@ -176,7 +176,7 @@ public class GamePanelController implements Initializable, GuiInterface {
         } else {
           this.valueFactory = new IntegerSpinnerValueFactory(1, 250, 3);
           troupCount.setValueFactory(this.valueFactory);
-      } if (this.turnPhase != this.jsonReader.getGameStateCurrentGamePhase()) {
+      } if (this.turnPhase != this.jsonReader.getGameStateCurrentTurnPhase()) {
         this.turnPhase = this.jsonReader.getGameStateCurrentTurnPhase();
         updateCountries(troops, ownerIds);
       }
@@ -271,7 +271,7 @@ public class GamePanelController implements Initializable, GuiInterface {
       }
     } else {
       phaseButton.setDisable(true);
-      phaseButton.setDisable(true);
+      cardsButton.setDisable(true);
     }
   }
 
