@@ -136,8 +136,6 @@ public class LobbyPanelController implements LobbyPanelInterface {
     } else {
       this.clientPlayerInterface = RiskMain.getInstance().getDomain().getClient();
     }
-    messageInput.setText("");
-    messageOutput.appendText(text + "\n");
   }
 
   /**
@@ -147,8 +145,13 @@ public class LobbyPanelController implements LobbyPanelInterface {
    */
   @Override
   public void receiveMessageChat(String author, String chatMessage, boolean single) {
-    messageOutput.appendText(author + ":   ");
-    messageOutput.appendText(chatMessage + "\n");
+    if (single) {
+      messageOutput.appendText(author +"("+RiskMain.getInstance().getDomain().getPlayerName()+")"+ ":   ");
+      messageOutput.appendText(chatMessage + "\n");
+    } else {
+      messageOutput.appendText(author + "(all):   ");
+      messageOutput.appendText(chatMessage + "\n");
+    }
   }
 
   @Override
@@ -190,7 +193,6 @@ public class LobbyPanelController implements LobbyPanelInterface {
             .setDisable(false);
       });
       kiPlayerSize += 1;
-      System.out.println(kiPlayerSize + "playerss");
     }
   }
 
@@ -202,7 +204,6 @@ public class LobbyPanelController implements LobbyPanelInterface {
         ((BorderPane) kiPlayerGrid.getChildren().get(kiPlayerSize)).getRight().setDisable(true);
       });
       kiPlayerSize -= 1;
-      System.out.println(kiPlayerSize + "playersssssssss");
     }
   }
 

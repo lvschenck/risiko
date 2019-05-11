@@ -121,13 +121,14 @@ public class Server extends Thread implements ServerInterface {
         HashMap.Entry hM = (HashMap.Entry) iterator.next();
         Message message;
         message = new MessageChat(chatMessage, author, receiver, false);
-        RiskMain.getInstance().getDomain().getGui().receiveMessageChat(author, chatMessage, false);
+
         try {
           outputStreams.get(hM.getKey()).writeObject(message);
         } catch (IOException e) {
           e.printStackTrace();
         }
       }
+      this.gui.receiveMessageChat(author, chatMessage, false);
     } else {
       int idReceiver = getIDWithUser(receiver);
       Message message;

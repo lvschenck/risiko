@@ -395,18 +395,15 @@ public class GamePanelController implements Initializable, GuiInterface {
     } else {
       this.clientInterface = RiskMain.getInstance().getDomain().getClient();
     }
-    messageInput.setText("");
-    messageOutput.appendText(text + "\n");
   }
 
   @Override
   public void receiveMessageChat(String author, String chatMessage, boolean single) {
     if (single) {
-      popUpPane.toFront();
-      errorPopup.toFront();
-      errorPopUpText.setText("server is closed");
+      messageOutput.appendText(author +" ("+RiskMain.getInstance().getDomain().getPlayerName()+")"+ ":   ");
+      messageOutput.appendText(chatMessage + "\n");
     } else {
-      messageOutput.appendText(author + ":   ");
+      messageOutput.appendText(author + " (all):   ");
       messageOutput.appendText(chatMessage + "\n");
     }
   }

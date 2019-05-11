@@ -102,6 +102,8 @@ public class ServerProtocol extends Thread {
               String author;
               String receiver;
 
+
+              System.out.println("chat case");
               chatMessage = ((MessageChat) message).getChatMessage();
               author = ((MessageChat) message).getAuthor();
               receiver = ((MessageChat) message).getReceiver();
