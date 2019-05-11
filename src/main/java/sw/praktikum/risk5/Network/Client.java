@@ -123,7 +123,11 @@ public class Client implements Runnable, ClientInterface {
                 String chatMessage = ((MessageChat) this.message).getChatMessage();
                 String author = ((MessageChat) this.message).getAuthor();
                 boolean single = ((MessageChat) this.message).getSingle();
-                gui.receiveMessageChat(author, chatMessage, single);
+                if (false) {
+
+                } else {
+                  this.lobby.receiveMessageChat(author, chatMessage, single);
+                }
                 System.out.println("Chat angekommen");
                 System.out.println(chatMessage);
                 System.out.println(author);
