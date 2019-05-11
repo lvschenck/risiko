@@ -287,7 +287,7 @@
                     <Insets />
                   </GridPane.margin>
                   <left>
-                    <HBox onMouseClicked="#chooseAvatarKi" prefWidth="50.0" styleClass="avatar" BorderPane.alignment="CENTER" />
+                    <HBox onMouseClicked="#chooseAvatarKi" prefWidth="50.0" styleClass="player-ki" BorderPane.alignment="CENTER" />
                   </left>
                            <right>
                     <ChoiceBox fx:id="kiStatus1" prefHeight="25.0" prefWidth="163.0" BorderPane.alignment="CENTER">
@@ -308,7 +308,7 @@
                     <Insets />
                   </GridPane.margin>
                   <left>
-                    <HBox onMouseClicked="#chooseAvatarKi" prefWidth="50.0" styleClass="avatar" BorderPane.alignment="CENTER" />
+                    <HBox onMouseClicked="#chooseAvatarKi" prefWidth="50.0" styleClass="player-ki" BorderPane.alignment="CENTER" />
                   </left>
                            <right>
                     <ChoiceBox fx:id="kiStatus2" prefHeight="25.0" prefWidth="163.0" BorderPane.alignment="CENTER">
@@ -329,7 +329,7 @@
                     <Insets />
                   </GridPane.margin>
                   <left>
-                    <HBox onMouseClicked="#chooseAvatarKi" prefWidth="50.0" styleClass="avatar" BorderPane.alignment="CENTER" />
+                    <HBox onMouseClicked="#chooseAvatarKi" prefWidth="50.0" styleClass="player-ki" BorderPane.alignment="CENTER" />
                   </left>
                            <right>
                     <ChoiceBox fx:id="kiStatus3" prefHeight="25.0" prefWidth="163.0" BorderPane.alignment="CENTER">
@@ -350,7 +350,7 @@
                     <Insets />
                   </GridPane.margin>
                   <left>
-                    <HBox onMouseClicked="#chooseAvatarKi" prefWidth="50.0" styleClass="avatar" BorderPane.alignment="CENTER" />
+                    <HBox onMouseClicked="#chooseAvatarKi" prefWidth="50.0" styleClass="player-ki" BorderPane.alignment="CENTER" />
                   </left>
                            <right>
                     <ChoiceBox fx:id="kiStatus4" prefHeight="25.0" prefWidth="163.0" styleClass="kiStatus-menu-item" BorderPane.alignment="CENTER">
@@ -371,7 +371,7 @@
                     <Insets />
                   </GridPane.margin>
                   <left>
-                    <HBox onMouseClicked="#chooseAvatarKi" prefWidth="50.0" styleClass="avatar" BorderPane.alignment="CENTER" />
+                    <HBox onMouseClicked="#chooseAvatarKi" prefWidth="50.0" styleClass="player-ki" BorderPane.alignment="CENTER" />
                   </left>
                            <right>
                     <ChoiceBox fx:id="kiStatus5" prefHeight="25.0" prefWidth="163.0" BorderPane.alignment="CENTER">

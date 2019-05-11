@@ -158,7 +158,6 @@ public class LobbyPanelController implements LobbyPanelInterface {
     int aiCount = 0;
     for (int i = 0; i < allPlayerNames.length; i++) {
       if ((db.getPlayerData(String.valueOf(db.getUserId(allPlayerNames[i])), "avatar").equals("player-ki"))){
-        addKiPlayer();
         switch (aiCount){
           case 1: kiStatus1.setValue(String.valueOf(amountAiWithDifficulty[aiCount]));
           break;
@@ -191,6 +190,7 @@ public class LobbyPanelController implements LobbyPanelInterface {
             .setDisable(false);
       });
       kiPlayerSize += 1;
+      System.out.println(kiPlayerSize + "playerss");
     }
   }
 
@@ -202,6 +202,7 @@ public class LobbyPanelController implements LobbyPanelInterface {
         ((BorderPane) kiPlayerGrid.getChildren().get(kiPlayerSize)).getRight().setDisable(true);
       });
       kiPlayerSize -= 1;
+      System.out.println(kiPlayerSize + "playersssssssss");
     }
   }
 
@@ -282,6 +283,11 @@ public class LobbyPanelController implements LobbyPanelInterface {
                   true);
               System.out.println("client" + countKi);
               break;
+          }
+          try{
+            Thread.sleep(10);
+          }catch (InterruptedException e){
+            e.printStackTrace();
           }
         }
       }
