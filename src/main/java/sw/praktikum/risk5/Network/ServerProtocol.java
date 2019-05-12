@@ -25,7 +25,7 @@ public class ServerProtocol extends Thread {
   private boolean activeP = true;
   private String username;
   private String password;
-  private int ID=0;
+  private int ID = 0;
   private GameControllerInterface gameController;
   private boolean runningGame = true;
   private GuiInterface gui = RiskMain.getInstance().getDomain().getGui();
@@ -40,7 +40,7 @@ public class ServerProtocol extends Thread {
     try {
       this.toClient = new ObjectOutputStream(s.getOutputStream());
       this.fromClient = new ObjectInputStream(s.getInputStream());
-      
+
     } catch (IOException e) {
       System.out.println("IO-Error");
       e.printStackTrace();
@@ -66,17 +66,25 @@ public class ServerProtocol extends Thread {
                 this.username = ((MessageLogin) message).getUsername();
                 this.avatar = ((MessageLogin) message).getPicture();
                 int i = 2;
+                //if(!(this.avatar.equals("player-ki"))){
                 do {
                   if (!Server.checkUsernameAvaible(username)) {
                     this.username = username + i;
                     i++;
                   }
                 } while (!(Server.checkUsernameAvaible(this.username)));
-                Server.addUser(ID, toClient, username);
+                Server.addUser(toClient, username);
                 this.ID = Server.getID(this.username);
                 this.server.sendMessageAssignId(this.ID);
                 RiskMain.getInstance().getDomain().getData().setPlayerData("avatar", this.avatar, String.valueOf(this.ID));
-                
+                // } else {
+                // Server.addUser(i, toClient, this.username,true);
+                // this.id = Server.getID(this.username);
+                // this.server.sendMessageAssignId(this.ID);
+                // RiskMain.getInstance().getDomain().getData().setPlayerData("avatar", this.avatar,
+                // String.valueOf(this.ID));
+                // }
+
               } else {
                 MessageLoginFail m = new MessageLoginFail();
                 this.toClient.writeObject(m);

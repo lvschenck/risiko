@@ -38,6 +38,7 @@ public class Server extends Thread implements ServerInterface {
   private LobbyPanelInterface lobby = RiskMain.getInstance().getDomain().getLobby();
   private int id;
   private Database db = RiskMain.getInstance().getDomain().getData();
+  private int[] ids;
 
 
 
@@ -86,19 +87,28 @@ public class Server extends Thread implements ServerInterface {
   }
 
 
-  protected static void addUser(int ID, ObjectOutputStream toClient, String username) {
+  protected static void addUser(ObjectOutputStream toClient, String username) {
     Database db = RiskMain.getInstance().getDomain().getData();
     db.createTempUser(username);
     int dbId = db.getUserId(username);
     outputStreams.put(dbId, toClient);
     users.put(dbId, username);
     System.out.println("verbunden");
-
   }
 
-  protected static void RemoveUser(int ID) {
-    users.remove(ID);
-    outputStreams.remove(ID);
+  protected static void addUser(ObjectOutputStream toClient, String username, boolean ai) {
+    Database db = RiskMain.getInstance().getDomain().getData();
+    int dbId = db.getUserId(username);
+    outputStreams.put(dbId, toClient);
+    users.put(dbId, username);
+    System.out.println("verbunden");
+  }
+
+  protected static void RemoveUser(int id) {
+    Database db = RiskMain.getInstance().getDomain().getData();
+    db.deleteUser(users.get(id));
+    users.remove(id);
+    outputStreams.remove(id);
     // mögliche Chat Nachricht dass User spiel verlassen hat
   }
 
@@ -176,7 +186,7 @@ public class Server extends Thread implements ServerInterface {
     Message m = new MessageStart();
     this.sendMessage(m);
     int length = users.size();
-    int[] ids = new int[length];
+    this.ids = new int[length];
     String[] usernames = new String[length];
     int i = 0;
     Iterator iterator = users.entrySet().iterator();

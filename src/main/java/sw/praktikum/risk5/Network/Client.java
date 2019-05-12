@@ -141,6 +141,10 @@ public class Client implements Runnable, ClientInterface {
                 } else {
                   this.gui.receiveMessageShutdown();
                 }
+                MessageLogoff mlogoff = new MessageLogoff();
+
+                this.toServer.writeObject(mlogoff);
+
                 this.fromServer.close();
                 this.toServer.close();
                 this.activeP = false;
@@ -283,6 +287,7 @@ public class Client implements Runnable, ClientInterface {
 
 
   }
+
   /**
    * Method to set Lobby instance for Client
    * 
@@ -292,7 +297,6 @@ public class Client implements Runnable, ClientInterface {
   @Override
   public void setLobby() {
     this.lobby = RiskMain.getInstance().getDomain().getLobby();
-
   }
 }
 
