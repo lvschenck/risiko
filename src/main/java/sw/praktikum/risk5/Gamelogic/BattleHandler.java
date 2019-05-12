@@ -92,10 +92,8 @@ class BattleHandler {
     int amountDef = 0;
     if (attackingTroops >= 3) {
       amountAtt = 3;
-    } else if (attackingTroops == 2) {
-      amountAtt = 2;
     } else {
-      amountAtt = 1;
+      amountAtt = attackingTroops;
     }
 
     if (defendingTroops >= 2) {
@@ -123,11 +121,13 @@ class BattleHandler {
           countryConquered = true;
           this.currentMatch.checkAmountCountries();
           this.currentMatch.updateStatistics();
+          attackingCountry.addTroops((-1) * attackingTroops);
+          defendingCountry.addTroops(attackingTroops);
           break;
         }
 
       } else { // Verteidiger gewinnt Wuerfel
-        attackingCountry.addTroops(-1);
+        attackingTroops--;
       }
     }
 

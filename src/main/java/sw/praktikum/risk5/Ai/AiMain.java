@@ -246,7 +246,7 @@ public class AiMain implements AiInterface {
    * @param j The first letter of the command in the json-file.
    * @author lroell
    */
-  protected void sendJson(File json, char j) {
+  private void sendJson(File json, char j) {
     System.out.println("sendet AI");
     switch (j) {
       case 'a':
