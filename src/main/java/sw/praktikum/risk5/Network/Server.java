@@ -129,13 +129,22 @@ public class Server extends Thread implements ServerInterface {
           e.printStackTrace();
         }
       }
+      if(RiskMain.getInstance().getDomain().getInLobby()) {
+        this.lobby.receiveMessageChat(author, chatMessage, false);
+      }else {
       this.gui.receiveMessageChat(author, chatMessage, false);
+      }
     } else {
       int idReceiver = getIDWithUser(receiver);
       Message message;
       message = new MessageChat(chatMessage, author, receiver, true);
       if(receiver.equals(this.id)) {
+        if(RiskMain.getInstance().getDomain().getInLobby()) {
+          this.lobby.receiveMessageChat(author, chatMessage, true);
+        }else {
+                 
         this.gui.receiveMessageChat(author, chatMessage, true);
+        }
       }
       try {
         outputStreams.get(idReceiver).writeObject(message);
@@ -161,6 +170,7 @@ public class Server extends Thread implements ServerInterface {
   }
 
   public void startGame() {
+    RiskMain.getInstance().getDomain().setInLobby(false);
     int length = users.size();
     int[] ids = new int[length];
     String[] usernames = new String[length];

@@ -124,10 +124,10 @@ public class Client implements Runnable, ClientInterface {
                 String chatMessage = ((MessageChat) this.message).getChatMessage();
                 String author = ((MessageChat) this.message).getAuthor();
                 boolean single = ((MessageChat) this.message).getSingle();
-                if (false) {
-
-                } else {
+                if (RiskMain.getInstance().getDomain().getInLobby()) {
                   this.lobby.receiveMessageChat(author, chatMessage, single);
+                } else {
+                  this.gui.receiveMessageChat(author, chatMessage, single);
                 }
                 System.out.println("Chat angekommen");
                 System.out.println(chatMessage);
@@ -151,6 +151,7 @@ public class Client implements Runnable, ClientInterface {
               case START:
                 if (!this.aiBool) {
                   this.lobby.receiveMessageStart();
+                  RiskMain.getInstance().getDomain().setInLobby(false);
                 }
                 MessageError me = new MessageError("");
                 this.toServer.writeObject(me);
