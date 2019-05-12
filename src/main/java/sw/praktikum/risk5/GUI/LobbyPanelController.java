@@ -133,7 +133,7 @@ public class LobbyPanelController implements LobbyPanelInterface {
     String playerName = RiskMain.getInstance().getDomain().getPlayerName();
     System.out.println(messageInput.getText());
     String text = playerName + ":     " + messageInput.getText();
-    if (RiskMain.getInstance().getDomain().getIsServer()) {
+    if (RiskMain.getInstance().getDomain().isServer()) {
       this.serverInterface = RiskMain.getInstance().getDomain().getServer();
       this.serverInterface
           .sendMessageChat(RiskMain.getInstance().getDomain().getPlayerName(),
@@ -523,7 +523,7 @@ public class LobbyPanelController implements LobbyPanelInterface {
         break;
     }
     RiskMain.getInstance().getDomain().setLobby(this);
-    if(!RiskMain.getInstance().getDomain().getIsServer()){
+    if(!RiskMain.getInstance().getDomain().isClient()){
       RiskMain.getInstance().getDomain().getClient().setLobby();
     }
   }

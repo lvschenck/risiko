@@ -97,7 +97,7 @@ public class Domain {
     this.playerName = name;
   }
 
-  public Boolean getIsServer() {
+  public Boolean isServer() {
     return isServer;
   }
 

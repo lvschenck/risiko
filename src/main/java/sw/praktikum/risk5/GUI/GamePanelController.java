@@ -371,7 +371,7 @@ public class GamePanelController implements Initializable, GuiInterface {
       // break;
       default:
     }
-    if (RiskMain.getInstance().getDomain().getIsServer()) {
+    if (RiskMain.getInstance().getDomain().isServer()) {
       RiskMain.getInstance().getDomain().getGame().receiveData(jsonSend);
     } else {
       RiskMain.getInstance().getDomain().getClient().sendJSON(jsonSend);
@@ -388,7 +388,7 @@ public class GamePanelController implements Initializable, GuiInterface {
     String playerName = RiskMain.getInstance().getDomain().getPlayerName();
     System.out.println(messageInput.getText());
     String text = playerName + ":     " + messageInput.getText();
-    if (RiskMain.getInstance().getDomain().getIsServer()) {
+    if (RiskMain.getInstance().getDomain().isServer()) {
       this.serverInterface = RiskMain.getInstance().getDomain().getServer();
       this.serverInterface.sendMessageChat(messageInput.getText(), playerName,
           recipientList.getValue());
@@ -705,7 +705,7 @@ public class GamePanelController implements Initializable, GuiInterface {
   @Override
   public void initialize(URL location, ResourceBundle resources) {
     RiskMain.getInstance().getDomain().setGui(this);
-    if (RiskMain.getInstance().getDomain().getIsServer()) {
+    if (RiskMain.getInstance().getDomain().isServer()) {
       RiskMain.getInstance().getDomain().getServer().startGame();
     }
 
