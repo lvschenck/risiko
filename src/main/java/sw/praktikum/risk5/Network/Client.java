@@ -7,6 +7,7 @@ import java.io.ObjectOutputStream;
 import java.net.InetAddress;
 import java.net.Socket;
 import java.net.UnknownHostException;
+import java.util.ArrayList;
 import sw.praktikum.risk5.Ai.*;
 import sw.praktikum.risk5.App.*;
 import sw.praktikum.risk5.Database.Database;
@@ -157,7 +158,7 @@ public class Client implements Runnable, ClientInterface {
               case LOBBY:
                 MessageLobby ml = (MessageLobby) this.message;
                 String gameName = ml.getGameName();
-                int[] amountAiWithDifficulty = ml.getAmountAiwithDifficulty();
+                ArrayList<Integer> amountAiWithDifficulty = ml.getAmountAiwithDifficulty();
                 String[] otherPlayerNames = ml.getOtherPlayerNames();
                 String[] pictureOfPlayers = ml.getPictureOfPlayers();
                 this.lobby.receiveMessageLobby(gameName, amountAiWithDifficulty, otherPlayerNames,

@@ -1,14 +1,16 @@
 package sw.praktikum.risk5.Message;
 
+import java.util.ArrayList;
+
 public class MessageLobby extends Message {
   private static final long serialVersionUID = 1L;
   
   private String gameName;
-  private int[] amountAiwithDifficulty;
+  private ArrayList<Integer> amountAiwithDifficulty;
   private String[] otherPlayerNames;
   private String[] pictureOfPlayers;
   
-  public MessageLobby(String gameName, int[] amountAiwithDifficulty, String[] otherPlayerNames, String[] pictureOfPlayers) {
+  public MessageLobby(String gameName, ArrayList<Integer> amountAiwithDifficulty, String[] otherPlayerNames, String[] pictureOfPlayers) {
     super(MessageType.LOBBY);
     this.setGameName(gameName);
     this.setAmountAiwithDifficulty(amountAiwithDifficulty);
@@ -24,11 +26,11 @@ public class MessageLobby extends Message {
     this.gameName = gameName;
   }
 
-  public int[] getAmountAiwithDifficulty() {
+  public ArrayList<Integer> getAmountAiwithDifficulty() {
     return this.amountAiwithDifficulty;
   }
 
-  public void setAmountAiwithDifficulty(int[] amountAiwithDifficulty) {
+  public void setAmountAiwithDifficulty(ArrayList<Integer> amountAiwithDifficulty) {
     this.amountAiwithDifficulty = amountAiwithDifficulty;
   }
 

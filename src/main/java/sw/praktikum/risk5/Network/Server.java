@@ -8,6 +8,7 @@ import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.SocketException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -256,7 +257,7 @@ public class Server extends Thread implements ServerInterface {
    * @param allPlayerNames the names of all players in the current lobby
    * @param pictureOfPlayers the picture of all players in the current lobby
    */
-  public void sendMessageLobby(String gameName, int[] amountAiWithDifficulty,
+  public void sendMessageLobby(String gameName, ArrayList<Integer> amountAiWithDifficulty,
       String[] allPlayerNames, String[] pictureOfPlayers) {
     // muss aufgerufen werden wenn neuer Spieler joint
     MessageLobby ml =
