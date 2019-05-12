@@ -12,9 +12,9 @@ import sw.praktikum.risk5.Network.ClientInterface;
 import sw.praktikum.risk5.Network.ServerInterface;
 
 /**
- * Class in which the game risk is controlled
+ * Class in which the game risk is controlled.
  *
- * @author lroell, Fabian
+ * @author lroell, fahaerte
  */
 public class GameController implements GameControllerInterface {
 
@@ -30,13 +30,6 @@ public class GameController implements GameControllerInterface {
   private Statistics stats;
 
   /**
-   * Cunstructor that creates needed instances of classes
-   *
-   * @author lroell
-   */
-  public GameController() {}
-
-  /**
    * When the host presses start this method creates a gamController with the players that want to
    * play the game. This method also initializes all needed instances for the game.
    *
@@ -46,10 +39,10 @@ public class GameController implements GameControllerInterface {
    */
   public void startGame(int[] ids, String[] usernames) {
     this.server = RiskMain.getInstance().getDomain().getServer();
-    String gameName = RiskMain.getInstance().getDomain().getGameName();
     this.initCountrys();
     this.initializeCards(this.allCountries);
     this.stats = new Statistics();
+    String gameName = RiskMain.getInstance().getDomain().getGameName();
     this.match = new Match(this.allCards, this.allCountries, gameName, this.stats);
     for (int i = 0; i < ids.length; i++) {
       this.createPlayer(usernames[i], ids[i]);
@@ -63,7 +56,7 @@ public class GameController implements GameControllerInterface {
   }
 
   /**
-   * Sends Json to server
+   * Sends Json to server.
    *
    * @param json first letter of json File
    * @author lroell
@@ -140,7 +133,8 @@ public class GameController implements GameControllerInterface {
       Country defendingCountry =
           this.allCountries.get(this.jsonReader.getAttackTargetCountry() - 1);
       int amountDefend = defendingCountry.getTroops();
-      System.out.println(amountAttack + "   " + amountDefend + "defenderID" + defendingCountry.getId());
+      System.out
+          .println(amountAttack + "   " + amountDefend + "defenderID" + defendingCountry.getId());
       try {
         Thread.sleep(300000);
       } catch (InterruptedException e) {
@@ -197,7 +191,7 @@ public class GameController implements GameControllerInterface {
   }
 
   /**
-   * When a player presses the leave-button this method replaces the player with a medium-Ai
+   * When a player presses the leave-button this method replaces the player with a medium-AI.
    *
    * @param id of the player
    * @author lroell
@@ -211,7 +205,7 @@ public class GameController implements GameControllerInterface {
 
   /**
    * Places troops on a country the player chooses. Used to first own a country or to place troops
-   * on a country you already own
+   * on a country you already own.
    *
    * @param amount the amount of troops the player want to place in the country
    * @param playerId the Player who wants to take a country
@@ -225,7 +219,7 @@ public class GameController implements GameControllerInterface {
   }
 
   /**
-   * Fortifying of your position
+   * Fortifying of your position.
    *
    * @param sourcePlayerId the player'id
    * @param sourceCountry the id of the source country
@@ -233,7 +227,7 @@ public class GameController implements GameControllerInterface {
    * @param targetPlayer the target player id
    * @param targetCountry the target country id
    * @return boolean whether everything was valid or not
-   * @author Fabian
+   * @author fahaerte
    */
   protected boolean fortifyPosition(int sourcePlayerId, Country sourceCountry, int amount,
       int targetPlayer, Country targetCountry) {
@@ -243,7 +237,7 @@ public class GameController implements GameControllerInterface {
 
   /**
    * gives a player a defined amount of troops depending on his conquered countries at the beginning
-   * of every round
+   * of every round.
    *
    * @param player the player who receives troops
    * @author lroell
@@ -252,30 +246,26 @@ public class GameController implements GameControllerInterface {
     player.receiveTroops();
   }
 
-  protected ArrayList<Card> getHoldingCards(Player player) {
-    return player.getHoldingCards();
-  }
-
   /**
-   * Invokes the method redeemCards of the class Player Redeem Cards of a player
+   * Invokes the method redeemCards of the class Player Redeem Cards of a player.
    *
    * @param player Player who wants to redeem cards
    * @param cards 3 cards that should be turned in
-   * @author Fabian
+   * @author fahaerte
    */
   protected boolean redeemCards(Player player, Card[] cards) {
     return player.redeemCards(cards);
   }
 
   /**
-   * calculates the attack
+   * Calculates the attack.
    *
    * @param attacker The attacking country
    * @param diceAtt the dice of the attacker
    * @param target the attacked country,
    * @param dieDef the dice of the defender
    * @return The winner of the battle
-   * @author Fabian
+   * @author fahaerte
    */
   protected boolean attack(int attackerId, int attackerCountry, int attackingTroops,
       int defendingTroops, int targetId, int targetCountry) {
@@ -284,7 +274,7 @@ public class GameController implements GameControllerInterface {
   }
 
   /**
-   * Ends a match
+   * Ends a match.
    *
    * @author lroell
    */
@@ -294,7 +284,7 @@ public class GameController implements GameControllerInterface {
   }
 
   /**
-   * creates a player with an unique ID
+   * Creates a player with an unique ID.
    *
    * @param name the player's name
    * @param id the player's id
@@ -307,7 +297,7 @@ public class GameController implements GameControllerInterface {
   }
 
   /**
-   * deletes a player with a specified ID
+   * Deletes a player with a specified ID.
    *
    * @param id the player's id
    * @author lroell
@@ -316,12 +306,17 @@ public class GameController implements GameControllerInterface {
     this.match.deletePlayer(id);
   }
 
+  /**
+   * Returns the amount of player that are currently involved in a match.
+   * 
+   * @author lroell
+   */
   public int getPlayerLength() {
     return this.match.getPlayers().size();
   }
 
   /**
-   * This method initializes all countries and safes them in a class' instance
+   * This method initializes all countries and safes them in a class' instance.
    *
    * @author gschakar
    */
@@ -443,11 +438,12 @@ public class GameController implements GameControllerInterface {
             getCountryFromList("Ukraine"), getCountryFromList("Northern-Europe")};
     southernEu.setNeighbors(southernEuNeigh);
 
-    Country nAfrica = getCountryFromList("North-Africa");
-    Country[] nAfricaNeigh = {getCountryFromList("Western-Europe"), getCountryFromList("Brazil"),
-        getCountryFromList("Egypt"), getCountryFromList("Southern-Europe"),
-        getCountryFromList("East-Africa"), getCountryFromList("Congo")};
-    nAfrica.setNeighbors(nAfricaNeigh);
+    Country northAfrica = getCountryFromList("North-Africa");
+    Country[] northAfricaNeigh =
+        {getCountryFromList("Western-Europe"), getCountryFromList("Brazil"),
+            getCountryFromList("Egypt"), getCountryFromList("Southern-Europe"),
+            getCountryFromList("East-Africa"), getCountryFromList("Congo")};
+    northAfrica.setNeighbors(northAfricaNeigh);
 
     Country egypt = getCountryFromList("Egypt");
     Country[] egyptNeigh =
@@ -587,7 +583,7 @@ public class GameController implements GameControllerInterface {
   }
 
   /**
-   * This method return a county from the country list by using a String for the search
+   * This method return a county from the country list by using a String for the search.
    *
    * @param s String value to search for the country
    * @return the requested country
@@ -604,7 +600,7 @@ public class GameController implements GameControllerInterface {
   }
 
   /**
-   * initializes all 42 cards and wildcards
+   * Initializes all 42 cards and wildcards.
    *
    * @param country ArrayList with all countries
    * @return ArrayList<Card> all initialized cards

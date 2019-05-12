@@ -2,16 +2,15 @@ package sw.praktikum.risk5.Gamelogic;
 
 import java.io.File;
 
-
 /**
- * Interface for the GameController Used for Package - Communication
+ * Interface for the GameController Used for Package - Communication.
  * 
- * @author lroell, Fabian
+ * @author lroell, fahaerte
  */
 public interface GameControllerInterface {
 
   /**
-   * Recieves the json data from the GUI
+   * Recieves the json data from the GUI.
    * 
    * @author lroell
    * @param f JSON file to be read
@@ -19,7 +18,7 @@ public interface GameControllerInterface {
   void receiveData(File f);
 
   /**
-   * Starts a game
+   * Starts a game.
    * 
    * @author lroell
    * @param ids all ids
@@ -28,16 +27,17 @@ public interface GameControllerInterface {
   void startGame(int[] ids, String[] usernames);
 
   /**
-   * receives this message when a player 
+   * Receives this message when a player.
+   * 
    * @author lroell
    * @param id Message id
    */
   void receiveMessageLogoff(int id);
-  
+
   /**
-   * gets the current player length
+   * Retruns the current player length.
+   * 
    * @author lroell
    */
   int getPlayerLength();
-
 }

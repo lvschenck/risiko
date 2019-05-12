@@ -13,13 +13,14 @@ class Country {
   private String name;
   private int id;
   private int troops = 0;
-  private Player owner = new Player(0,"");
+  private Player owner = new Player(0, "");
   private HashSet<Country> neighbors = new HashSet<Country>();
   private ContinentEnum continent;
 
   /**
-   * @author fahaerte
+   * Constructor for a country-object.
    * 
+   * @author fahaerte
    * @param n The country's name
    * @param id The coutry's ID
    */

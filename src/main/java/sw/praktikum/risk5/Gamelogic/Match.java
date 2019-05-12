@@ -8,7 +8,7 @@ import sw.praktikum.risk5.App.RiskMain;
 import sw.praktikum.risk5.Database.Database;
 
 /**
- * Class that simulates a single risk match
+ * Class that simulates a single risk match.
  *
  * @author lroell, fahaerte
  */
@@ -28,7 +28,7 @@ class Match {
   private Database data = RiskMain.getInstance().getDomain().getData();
 
   /**
-   * Constructor for the class Match
+   * Constructor for the class Match.
    * 
    * @author lroell
    * @param allCards All cards, initialized by GameController
@@ -50,7 +50,7 @@ class Match {
 
   /**
    * When receiving skip_turn.json or a player placed all troops or a player moved once this method
-   * is called. The method increases the turnphase
+   * is called. The method increases the turnphase.
    * 
    * @author lroell
    */
@@ -66,6 +66,11 @@ class Match {
     }
   }
 
+  /**
+   * Changes the instance currentPlayer.
+   * 
+   * @author lroell
+   */
   protected void changeCurrentPlayer() {
     Iterator<Player> it = this.players.iterator();
     while (it.hasNext()) {
@@ -134,10 +139,10 @@ class Match {
   }
 
   /**
-   * Returns the countries ids
+   * Returns the countries IDs.
    * 
    * @author fahaerte
-   * @return all ids from the countries
+   * @return all IDs from the countries
    */
   protected int[] getCountriesIds() {
     int[] ids = new int[42];
@@ -151,9 +156,10 @@ class Match {
   }
 
   /**
+   * Returns an int array with the owner of each country ordered by the countries' IDs.
    * 
    * @author fahaerte
-   * @return
+   * @return the int-Array
    */
   protected int[] getCountriesOwners() {
     int[] ownerIds = new int[42];
@@ -172,9 +178,10 @@ class Match {
   }
 
   /**
+   * Returns an String array with the name of each country ordered by the countries' IDs.
    * 
    * @author fahaerte
-   * @return
+   * @return the String-array
    */
   protected String[] getCountriesName() {
     String[] names = new String[42];
@@ -188,9 +195,10 @@ class Match {
   }
 
   /**
+   * Returns an int array with the troops of each country ordered by the countries' IDs.
    * 
    * @author fahaerte
-   * @return
+   * @return the int-array
    */
   protected int[] getCountriesTroops() {
     int[] troops = new int[42];
@@ -204,9 +212,10 @@ class Match {
   }
 
   /**
+   * Returns an 2-D int-Array with the neighbors of each country ordered by the countries' IDs.
    * 
    * @author fahaerte
-   * @return
+   * @return the int-Array
    */
   protected int[][] getCountriesNeighbors() {
     int[][] neigbors = new int[42][7];
@@ -226,9 +235,10 @@ class Match {
   }
 
   /**
+   * Returns the ID of each player.
    * 
    * @author fahaerte
-   * @return
+   * @return the int-Array with all IDs.
    */
   protected int[] getPlayersId() {
     int[] ids = new int[this.players.size()];
@@ -242,9 +252,10 @@ class Match {
   }
 
   /**
+   * Returns a boolean Array with boolean values. The value is true if the player is an AI-player.
    * 
    * @author fahaerte
-   * @return
+   * @return The boolean values
    */
   protected boolean[] getPlayerAi() {
     boolean[] ais = new boolean[this.players.size()];
@@ -258,9 +269,10 @@ class Match {
   }
 
   /**
+   * Returns the name of each player as an String-array.
    * 
    * @author fahaerte
-   * @return
+   * @return the String array
    */
   protected String[] getPlayerNames() {
     String[] names = new String[this.players.size()];
@@ -274,9 +286,10 @@ class Match {
   }
 
   /**
+   * Returns the amount of units to place for each player.
    * 
    * @author fahaerte
-   * @return
+   * @return the int-array
    */
   protected int[] getPlayersUnitsToPlace() {
     int[] units = new int[this.players.size()];
@@ -290,11 +303,11 @@ class Match {
   }
 
   /**
-   * creates a player with an unique ID
+   * Creates a player with an unique ID.
    * 
    * @author lroell
-   * @param newP: Player that should be created
-   * @return int: ID of the created player
+   * @param newP Player that should be created
+   * @return int ID of the created player
    */
   protected int createPlayer(Player newP) {
     this.players.add(newP);
@@ -303,9 +316,9 @@ class Match {
   }
 
   /**
-   * deletes a player with an ID
+   * Deletes a player with an ID.
    * 
-   * @param id: ID of the Player
+   * @param id ID of the Player
    * @author lroell
    */
   protected void deletePlayer(int id) {
@@ -332,9 +345,9 @@ class Match {
 
   /**
    * Places troops on a country the player chooses Used to first own a country or to place troops on
-   * a country you already own
+   * a country you already own.
    * 
-   * @param amount: the amount of troops the player want to place in the country
+   * @param amount the amount of troops the player want to place in the country
    * @return boolen true, if troops placed successfully
    * @author lroell
    */
@@ -388,15 +401,15 @@ class Match {
   }
 
   /**
-   * Fortifying of your position. The method checks wwether the inputs were valid
+   * Fortifying of your position. The method checks wether the inputs were valid.
    * 
    * @author fahaerte
-   * @param sourcePlayerId : Player ID
-   * @param sourceCountry : Country ID
-   * @param amount : amount of troops to place
-   * @param targetPlayerId : PlayerID of the target. Should be equal to sourcePlayerID
-   * @param targetCountry : Country ID
-   * @return boolean: success of the action
+   * @param sourcePlayerId Player ID
+   * @param sourceCountry Country ID
+   * @param amount amount of troops to place
+   * @param targetPlayerId PlayerID of the target. Should be equal to sourcePlayerID
+   * @param targetCountry Country ID
+   * @return boolean success of the action
    */
   protected boolean fortifyPosition(int sourcePlayerId, Country sourceCountry, int amount,
       int targetPlayerId, Country targetCountry) {
@@ -416,7 +429,7 @@ class Match {
   }
 
   /**
-   * Ends a single match and sets the Instance "Match" on "null" for each player
+   * Ends a single match and sets the Instance "Match" on "null" for each player.
    * 
    * @author lroell
    */
@@ -429,11 +442,11 @@ class Match {
   }
 
   /**
-   * Searches a player by his id and returns the player
+   * Searches a player by his id and returns the player.
    * 
    * @author fahaerte
    * @param id of the player
-   * @return Player: the player if found, else null
+   * @return Player the player if found, else null
    */
   protected Player findPlayer(int id) {
     Player p;
@@ -449,9 +462,9 @@ class Match {
   }
 
   /**
-   * Adds card to the available cards
+   * Adds card to the available cards.
    * 
-   * @param c: Card to add
+   * @param c Card to add
    * @author fahaerte
    */
   protected void addAvailableCard(Card c) {
@@ -459,11 +472,11 @@ class Match {
   }
 
   /**
-   * Searches a country by his id and returns the country
+   * Searches a country by his id and returns the country.
    * 
    * @author fahaerte
-   * @param id
-   * @return Country
+   * @param id the country's id
+   * @return the required country
    */
   protected Country findCountry(int id) {
     Iterator<Country> it = this.countries.iterator();
@@ -477,28 +490,15 @@ class Match {
     return null;
   }
 
-  /**
-   * Finds and returns a specified card from allCards
-   * 
-   * @author fahaerte
-   * @param id The id of the searched card
-   * @return
-   */
-  protected Card findCard(int id) {
-    Iterator<Card> it = this.allCards.iterator();
-    while (it.hasNext()) {
-      Card c = it.next();
-      if (id == c.getCountry().getId()) {
-        return c;
-      }
-    }
-    return null;
-  }
-
   protected int getMatchId() {
     return this.matchId;
   }
 
+  /**
+   * Updates the statistics.
+   * 
+   * @author lroell
+   */
   protected void updateStatistics() {
     // laender zum hoechsten punkt verschiedenen Plaetze
     int amountOfTroops = 0;
@@ -516,8 +516,8 @@ class Match {
   }
 
   /**
-   * checks if a player has countries. When a player has zero countries he gets deleted and the
-   * player who defeated him gets his holding cards
+   * Checks if a player has countries. When a player has zero countries he gets deleted and the
+   * player who defeated him gets his holding cards.
    * 
    * @author lroell
    */
@@ -563,7 +563,6 @@ class Match {
         default:
           System.out.println("Truppen platzieren fehler anfang");
           break;
-
       }
     }
   }

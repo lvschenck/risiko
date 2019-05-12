@@ -21,17 +21,17 @@ class Player {
   private int amountOfUnitsToPlace;
   private int amountRedeems;
 
-/**
- * Constructor for a player object.
- * 
- * @author lroell
- * @param playerId The player's ID
- * @param playerName The player's name
- */
+  /**
+   * Constructor for a player object.
+   * 
+   * @author lroell
+   * @param playerId The player's ID
+   * @param playerName The player's name
+   */
   protected Player(int playerId, String playerName) {
     this.id = playerId;
     this.name = playerName;
-    this.conqueredCountries  = new HashSet<Country>();
+    this.conqueredCountries = new HashSet<Country>();
     this.holdingCards = new ArrayList<Card>();
     this.conquered = false;
     this.ai = false;
@@ -147,7 +147,8 @@ class Player {
    * 
    * @author lroell
    * @param c The received card
-   * @return True if the card is available and if the player conquered a country in his turn. False if not.
+   * @return True if the card is available and if the player conquered a country in his turn. False
+   *         if not.
    */
   protected boolean drawCard(Card c) {
     ArrayList<Card> availableCards = this.match.getAvailableCards();

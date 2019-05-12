@@ -1,7 +1,7 @@
 package sw.praktikum.risk5.Gamelogic;
 
 /**
- * Class simulates a Card in risk
+ * Class simulates a Card in risk.
  *
  * @author fahaerte
  */
@@ -13,7 +13,7 @@ class Card {
   private int id;
 
   /**
-   * Constructor for a card-object
+   * Constructor for a card-object.
    * 
    * @author fahaerte
    * @param country The country that is displayed on a card
