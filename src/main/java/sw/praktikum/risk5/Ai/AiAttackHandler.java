@@ -293,12 +293,15 @@ class AiAttackHandler {
    */
 
   private void setStillInProgressEasy() {
+    System.out.println("check attack - easy ");
     boolean continueAttacking = false;
     for (AiCountry c : this.ownedCountries) {
       if (c.getTroops() > 1) {
+        System.out.println(c.getId() + " has more than one troop");
         for (AiCountry c2 : c.getNeighborsSet()) {
           if (c2.getOwner() != this.aiId) {
             continueAttacking = true;
+            System.out.println("attack! - easy");
             break;
           }
         }
