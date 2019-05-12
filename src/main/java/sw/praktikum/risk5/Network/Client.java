@@ -179,6 +179,8 @@ public class Client implements Runnable, ClientInterface {
                     pictureOfPlayers);
                 break;
               case DATA:
+                MessageData md = (MessageData) this.message;
+                RiskMain.getInstance().getDomain().getData().implementGame(username,md.getPlayerData() ,md.getGame());
                 break;
               case ID:
                 MessageAssignId maa = (MessageAssignId) this.message;
