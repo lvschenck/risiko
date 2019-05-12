@@ -172,29 +172,30 @@ public class LobbyPanelController implements LobbyPanelInterface {
     System.out.println("receive message lobby gui");
     switch (allPlayerNames.length) {
       case 6:
-        ((Label) player6Pane.getCenter()).setText(playerNames[5]);
+        ((Label) player6Pane.getCenter()).setText(allPlayerNames[5]);
         ((HBox) player6Pane.getLeft()).getStyleClass().clear();
         ((HBox) player6Pane.getLeft()).getStyleClass().add(pictureOfPlayers[5]);
       case 5:
-        ((Label) player5Pane.getCenter()).setText(playerNames[4]);
+        ((Label) player5Pane.getCenter()).setText(allPlayerNames[4]);
         ((HBox) player5Pane.getLeft()).getStyleClass().clear();
         ((HBox) player5Pane.getLeft()).getStyleClass().add(pictureOfPlayers[4]);
       case 4:
-        ((Label) player4Pane.getCenter()).setText(playerNames[3]);
+        ((Label) player4Pane.getCenter()).setText(allPlayerNames[3]);
         ((HBox) player4Pane.getLeft()).getStyleClass().clear();
         ((HBox) player4Pane.getLeft()).getStyleClass().add(pictureOfPlayers[3]);
       case 3:
-        ((Label) player3Pane.getCenter()).setText(playerNames[2]);
+        ((Label) player3Pane.getCenter()).setText(allPlayerNames[2]);
         ((HBox) player3Pane.getLeft()).getStyleClass().clear();
         ((HBox) player3Pane.getLeft()).getStyleClass().add(pictureOfPlayers[2]);
       case 2:
-        System.out.println("lobby player 2" + playerNames[1]);
+        System.out.println("lobby player 2" + allPlayerNames[1]);
         player2Pane.setOpacity(1.0);
-        ((Label) player2Pane.getCenter()).setText(playerNames[1]);
+        ((Label) player2Pane.getCenter()).setText(allPlayerNames[1]);
         ((HBox) player2Pane.getLeft()).getStyleClass().clear();
         ((HBox) player2Pane.getLeft()).getStyleClass().add(pictureOfPlayers[1]);
       case 1:
-        ((Label) player1Pane.getCenter()).setText(playerNames[0]);
+        System.out.println(allPlayerNames[0] + ":: " + allPlayerNames);
+        ((Label) player1Pane.getCenter()).setText(allPlayerNames[0]);
         ((HBox) player1Pane.getLeft()).getStyleClass().clear();
         ((HBox) player1Pane.getLeft()).getStyleClass().add(pictureOfPlayers[0]);
         break;
@@ -203,7 +204,7 @@ public class LobbyPanelController implements LobbyPanelInterface {
     this.pictures = pictureOfPlayers;
     this.amountAiWithDifficulty = amountAiWithDifficulty;
     RiskMain.getInstance().getDomain().setGameName(gameName);
-    this.lobbyHeader.setText(gameName);
+    this.lobbyHeader.setText("Gamelobby " + gameName);
     int aiCount = 0;
     for (int i = 0; i < allPlayerNames.length; i++) {
       if ((db.getPlayerData(String.valueOf(db.getUserId(allPlayerNames[i])), "avatar")
