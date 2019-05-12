@@ -126,6 +126,7 @@ public class GameController implements GameControllerInterface {
       }
     } else if (name.equals("skip_turn")) {
       this.match.endTurnPhase();
+      this.sendJson('r');
     } else if (name.equals("attack")) {
       this.jsonReader.readAttackJSON(json);
       int amountAttack = this.jsonReader.getAttackInfantry()

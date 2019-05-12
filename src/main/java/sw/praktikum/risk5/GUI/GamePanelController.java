@@ -78,7 +78,7 @@ public class GamePanelController implements Initializable, GuiInterface {
   @FXML
   private GridPane cardsPane;
   @FXML
-	private List<ToggleButton> cardButtons;
+  private List<ToggleButton> cardButtons;
   @FXML
   private ToggleButton card1;
   @FXML
@@ -122,10 +122,10 @@ public class GamePanelController implements Initializable, GuiInterface {
   private Database db;
 
   private ObservableList<String> participantList = FXCollections.observableArrayList("all");
-	private int selectedCards;
-	private int cardCode;
-	private int[] selectedCardsArray;
-	private int[] cardsOfCurrentPlayer;
+  private int selectedCards;
+  private int cardCode;
+  private int[] selectedCardsArray;
+  private int[] cardsOfCurrentPlayer;
 
   /**
    * When receiving a GameState-json this method updates all values.
@@ -256,7 +256,7 @@ public class GamePanelController implements Initializable, GuiInterface {
       }
     }
     if (turnphase == 0) {
-      phaseButton.setText("finish fortifying");
+      phaseButton.setText("finish placing");
       headerText.setText("Place " + ownTroopsToPlace + " troops wisely!");
     } else if (turnphase == 1) {
       Platform.runLater(() -> phaseButton.setText("finish attacking"));
@@ -265,7 +265,8 @@ public class GamePanelController implements Initializable, GuiInterface {
       Platform.runLater(() -> phaseButton.setText("finish moving"));
       Platform.runLater(() -> headerText.setText("Move your troops wisely"));
     }
-    if (this.currentPlayer) {
+    if (this.currentPlayer && turnphase != 0) {
+      System.out.println("hallooooooooooo");
       phaseButton.setDisable(false);
       cardsButton.setDisable(false);
     } else {
@@ -365,6 +366,7 @@ public class GamePanelController implements Initializable, GuiInterface {
         // Client interface benutzen um JSON zu schicken, wenn fertig
         break;
       case 's':
+        jsonSend = this.jsonWriter.writeSkipTurnJson();
         break;
       // case 'r':
       // this.jsonWriter.writeCardRedemption(cardGroup.getSelected());
@@ -410,166 +412,168 @@ public class GamePanelController implements Initializable, GuiInterface {
   }
 
   /**
-	 * opens Pane with Cards of the User
-	 * 
-	 * @author esali
-	 * @param actionEvent
-	 */
-	@FXML
-	private void showCards(ActionEvent actionEvent) {
-		popUpPane.toFront();
-		cardsPane.setOpacity(1.0);
-		cardsPane.toFront();
-		selectedCards = 0;
+   * opens Pane with Cards of the User
+   * 
+   * @author esali
+   * @param actionEvent
+   */
+  @FXML
+  private void showCards(ActionEvent actionEvent) {
+    popUpPane.toFront();
+    cardsPane.setOpacity(1.0);
+    cardsPane.toFront();
+    selectedCards = 0;
 
-		this.cards = jsonReader.getGameStatePlayerCards();
-		cardsOfCurrentPlayer = cards[jsonReader.getGameStateCurrentPlayer()];
-		cardsOfCurrentPlayer = new int[] {44 , 2, 3, 4, 5};
-		for (int i = 0; i < cardsOfCurrentPlayer.length; i++) {
-			for (CountryValue value : CountryValue.values()) {
-				if (cardsOfCurrentPlayer[i]-1 == value.ordinal()) {
-					cardCode = value.getCardCode();
-					switch(cardCode) {
-					case 1:
-						System.out.println("Karte ist infantry");
-						cardButtons.get(i).getStyleClass().clear();
-						cardButtons.get(i).getStyleClass().add("cardButton");
-						break;
-					case 2:
-						System.out.println("Karte ist artillery");
-						cardButtons.get(i).getStyleClass().clear();
-						cardButtons.get(i).getStyleClass().add("cardButton1");
-						break;
-					case 3:
-						System.out.println("Karte ist cavalry");
-						cardButtons.get(i).getStyleClass().clear();
-						cardButtons.get(i).getStyleClass().add("cardButton2");
-						break;
-					default:
-						System.out.println("switch CardCode - default");
-						break;
-					}
-				}	
-			}
-			if (cardsOfCurrentPlayer[i] == 43 || cardsOfCurrentPlayer[i] == 44) {
-				System.out.println("Karte ist Joker");
-				cardButtons.get(i).getStyleClass().clear();
-				cardButtons.get(i).getStyleClass().add("cardButtonJoker");
-			}
-			if (cardsOfCurrentPlayer[i] == 0) {
-				System.out.println("Karte existiert nicht");
-				cardButtons.get(i).setOpacity(0.0);
-			}
-		}
-	}
+    this.cards = jsonReader.getGameStatePlayerCards();
+    cardsOfCurrentPlayer = cards[jsonReader.getGameStateCurrentPlayer()];
+    cardsOfCurrentPlayer = new int[] {44, 2, 3, 4, 5};
+    for (int i = 0; i < cardsOfCurrentPlayer.length; i++) {
+      for (CountryValue value : CountryValue.values()) {
+        if (cardsOfCurrentPlayer[i] - 1 == value.ordinal()) {
+          cardCode = value.getCardCode();
+          switch (cardCode) {
+            case 1:
+              System.out.println("Karte ist infantry");
+              cardButtons.get(i).getStyleClass().clear();
+              cardButtons.get(i).getStyleClass().add("cardButton");
+              break;
+            case 2:
+              System.out.println("Karte ist artillery");
+              cardButtons.get(i).getStyleClass().clear();
+              cardButtons.get(i).getStyleClass().add("cardButton1");
+              break;
+            case 3:
+              System.out.println("Karte ist cavalry");
+              cardButtons.get(i).getStyleClass().clear();
+              cardButtons.get(i).getStyleClass().add("cardButton2");
+              break;
+            default:
+              System.out.println("switch CardCode - default");
+              break;
+          }
+        }
+      }
+      if (cardsOfCurrentPlayer[i] == 43 || cardsOfCurrentPlayer[i] == 44) {
+        System.out.println("Karte ist Joker");
+        cardButtons.get(i).getStyleClass().clear();
+        cardButtons.get(i).getStyleClass().add("cardButtonJoker");
+      }
+      if (cardsOfCurrentPlayer[i] == 0) {
+        System.out.println("Karte existiert nicht");
+        cardButtons.get(i).setOpacity(0.0);
+      }
+    }
+  }
 
-	@FXML
-	private void useCards(ActionEvent actionEvent) {
-		int a= 0;
-		selectedCardsArray = new int[] {0, 0, 0};
-		for (int i=0; i< 5; i++) {
-			if (cardButtons.get(i).isSelected()) {
-				System.out.println("Karte" + i +"ist ausgew�hlt");
-				selectedCardsArray[a] = cardsOfCurrentPlayer[i];
-				a++;
-			}
-		}
-		System.out.println("IDs selected Cards: " + selectedCardsArray[0] + ", " + selectedCardsArray[1] + ", " + selectedCardsArray[2]);
-		File json =jsonWriter.writeCardRedemption(selectedCardsArray[0], selectedCardsArray[1], selectedCardsArray[2]);
-		if (RiskMain.getInstance().getDomain().isServer()) {
-			RiskMain.getInstance().getDomain().getServer().sendJSON(json);
-		} else {
-			RiskMain.getInstance().getDomain().getClient().sendJSON(json);
-			int i = 0;
-		}
-		cardsPane.setOpacity(0.0);
-		cardsPane.toBack();
-		popUpPane.toBack();
-	}
+  @FXML
+  private void useCards(ActionEvent actionEvent) {
+    int a = 0;
+    selectedCardsArray = new int[] {0, 0, 0};
+    for (int i = 0; i < 5; i++) {
+      if (cardButtons.get(i).isSelected()) {
+        System.out.println("Karte" + i + "ist ausgew�hlt");
+        selectedCardsArray[a] = cardsOfCurrentPlayer[i];
+        a++;
+      }
+    }
+    System.out.println("IDs selected Cards: " + selectedCardsArray[0] + ", " + selectedCardsArray[1]
+        + ", " + selectedCardsArray[2]);
+    File json = jsonWriter.writeCardRedemption(selectedCardsArray[0], selectedCardsArray[1],
+        selectedCardsArray[2]);
+    if (RiskMain.getInstance().getDomain().isServer()) {
+      RiskMain.getInstance().getDomain().getServer().sendJSON(json);
+    } else {
+      RiskMain.getInstance().getDomain().getClient().sendJSON(json);
+      int i = 0;
+    }
+    cardsPane.setOpacity(0.0);
+    cardsPane.toBack();
+    popUpPane.toBack();
+  }
 
-	@FXML
-	private void cancelCards(ActionEvent actionEvent) {
-		cardsPane.setOpacity(0.0);
-		cardsPane.toBack();
-		popUpPane.toBack();
-		selectedCards = 0;
-		System.out.println("Cancel Cards");
-	}
+  @FXML
+  private void cancelCards(ActionEvent actionEvent) {
+    cardsPane.setOpacity(0.0);
+    cardsPane.toBack();
+    popUpPane.toBack();
+    selectedCards = 0;
+    System.out.println("Cancel Cards");
+  }
 
-	@FXML
-	private void selectCard1(ActionEvent event) {
-		if (!cardButtons.get(0).isSelected()) {
-			selectedCards--;
-			cardButtons.get(0).setSelected(false);
-		} else {
-			if (selectedCards < 3) {
-				cardButtons.get(0).setSelected(true);
-				selectedCards++;
-			} else {
-				cardButtons.get(0).setSelected(false);
-			}
-		}
-	}
+  @FXML
+  private void selectCard1(ActionEvent event) {
+    if (!cardButtons.get(0).isSelected()) {
+      selectedCards--;
+      cardButtons.get(0).setSelected(false);
+    } else {
+      if (selectedCards < 3) {
+        cardButtons.get(0).setSelected(true);
+        selectedCards++;
+      } else {
+        cardButtons.get(0).setSelected(false);
+      }
+    }
+  }
 
-	@FXML
-	private void selectCard2() {
-		if (!cardButtons.get(1).isSelected()) {
-			selectedCards--;
-			cardButtons.get(1).setSelected(false);
-		} else {
-			if (selectedCards < 3) {
-				cardButtons.get(1).setSelected(true);
-				selectedCards++;
-			} else {
-				cardButtons.get(1).setSelected(false);
-			}
-		}
-	}
+  @FXML
+  private void selectCard2() {
+    if (!cardButtons.get(1).isSelected()) {
+      selectedCards--;
+      cardButtons.get(1).setSelected(false);
+    } else {
+      if (selectedCards < 3) {
+        cardButtons.get(1).setSelected(true);
+        selectedCards++;
+      } else {
+        cardButtons.get(1).setSelected(false);
+      }
+    }
+  }
 
-	@FXML
-	private void selectCard3() {
-		if (!cardButtons.get(2).isSelected()) {
-			selectedCards--;
-			cardButtons.get(2).setSelected(false);
-		} else {
-			if (selectedCards < 3) {
-				cardButtons.get(2).setSelected(true);
-				selectedCards++;
-			} else {
-				cardButtons.get(2).setSelected(false);
-			}
-		}
-	}
+  @FXML
+  private void selectCard3() {
+    if (!cardButtons.get(2).isSelected()) {
+      selectedCards--;
+      cardButtons.get(2).setSelected(false);
+    } else {
+      if (selectedCards < 3) {
+        cardButtons.get(2).setSelected(true);
+        selectedCards++;
+      } else {
+        cardButtons.get(2).setSelected(false);
+      }
+    }
+  }
 
-	@FXML
-	private void selectCard4() {
-		if (!cardButtons.get(3).isSelected()) {
-			selectedCards--;
-			cardButtons.get(3).setSelected(false);
-		} else {
-			if (selectedCards < 3) {
-				cardButtons.get(3).setSelected(true);
-				selectedCards++;
-			} else {
-				cardButtons.get(3).setSelected(false);
-			}
-		}
-	}
+  @FXML
+  private void selectCard4() {
+    if (!cardButtons.get(3).isSelected()) {
+      selectedCards--;
+      cardButtons.get(3).setSelected(false);
+    } else {
+      if (selectedCards < 3) {
+        cardButtons.get(3).setSelected(true);
+        selectedCards++;
+      } else {
+        cardButtons.get(3).setSelected(false);
+      }
+    }
+  }
 
-	@FXML
-	private void selectCard5() {
-		if (!cardButtons.get(4).isSelected()) {
-			selectedCards--;
-			cardButtons.get(4).setSelected(false);
-		} else {
-			if (selectedCards < 3) {
-				cardButtons.get(4).setSelected(true);
-				selectedCards++;
-			} else {
-				cardButtons.get(4).setSelected(false);
-			}
-		}
-	}
+  @FXML
+  private void selectCard5() {
+    if (!cardButtons.get(4).isSelected()) {
+      selectedCards--;
+      cardButtons.get(4).setSelected(false);
+    } else {
+      if (selectedCards < 3) {
+        cardButtons.get(4).setSelected(true);
+        selectedCards++;
+      } else {
+        cardButtons.get(4).setSelected(false);
+      }
+    }
+  }
 
   /**
    * Action upon finishing a turnphase.
@@ -578,12 +582,14 @@ public class GamePanelController implements Initializable, GuiInterface {
    */
   @FXML
   private void finishPhase() {
+    System.out.println("fibishphase");
+    System.out.println(turnPhase);
     if (turnPhase == 0) {
       phaseButton.setText("finish attacking");
-      turnPhase++;
+
     } else if (turnPhase == 1) {
       phaseButton.setText("finish moving");
-      this.jsonWriter.writeSkipTurnJson();
+      this.sendJson('s', 0, 0, 0, 0, 0);
       turnPhase++;
     } else if (turnPhase == 2) {
       phaseButton.setText("finish fortifying");
@@ -833,6 +839,6 @@ public class GamePanelController implements Initializable, GuiInterface {
   @Override
   public void receiveMessageShutdown() {
     // TODO Auto-generated method stub
-    
+
   }
 }
