@@ -116,6 +116,7 @@ class BattleHandler {
         defendingCountry.addTroops(-1);
 
         if (defendingCountry.getTroops() == 0) { // Wenn Land erobert
+          System.out.println("LOL");
           defendingCountry.setOwner(attackingCountry.getOwner());
           attackingCountry.getOwner().addCountry(defendingCountry);
           attackingCountry.getOwner().setConquered(true);

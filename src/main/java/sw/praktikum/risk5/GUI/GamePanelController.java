@@ -259,11 +259,11 @@ public class GamePanelController implements Initializable, GuiInterface {
       phaseButton.setText("finish fortifying");
       headerText.setText("Place " + ownTroopsToPlace + " troops wisely!");
     } else if (turnphase == 1) {
-      phaseButton.setText("finish attacking");
-      headerText.setText("Conquer!");
+      Platform.runLater(() -> phaseButton.setText("finish attacking"));
+      Platform.runLater(() -> headerText.setText("Conquer!"));
     } else if (turnphase == 2) {
-      phaseButton.setText("finish moving");
-      headerText.setText("Move your troops wisely");
+      Platform.runLater(() -> phaseButton.setText("finish moving"));
+      Platform.runLater(() -> headerText.setText("Move your troops wisely"));
     }
     if (this.currentPlayer) {
       phaseButton.setDisable(false);
@@ -434,8 +434,7 @@ public class GamePanelController implements Initializable, GuiInterface {
   }
 
   @FXML
-  private void selectCard1(ActionEvent event) {
-  }
+  private void selectCard1(ActionEvent event) {}
 
   @FXML
   private void selectCard2() {
