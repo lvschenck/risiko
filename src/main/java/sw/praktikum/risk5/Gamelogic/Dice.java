@@ -56,24 +56,23 @@ class Dice {
       return dice;
     }
 
-    int max = dice[0];
-    int[] result = new int[dice.length];
+    int cache = 0;
 
-    for (int i = 0; i < dice.length; i++) {
-      if (dice[i] > max) {
-        max = dice[i];
-      }
+    if (dice[0] < dice[1]) {
+      cache = dice[0];
+      dice[0] = dice[1];
+      dice[1] = cache;
     }
-
-    result[0] = max;
-
-    if (dice[1] >= dice[2]) {
-      result[1] = dice[1];
-      result[2] = dice[2];
-    } else {
-      result[1] = dice[2];
-      result[2] = dice[1];
+    if (dice[0] < dice[2]) {
+      cache = dice[0];
+      dice[0] = dice[2];
+      dice[2] = cache;
     }
-    return result;
+    if (dice[1] < dice[2]) {
+      cache = dice[1];
+      dice[1] = dice[2];
+      dice[2] = cache;
+    }
+    return dice;
   }
 }
