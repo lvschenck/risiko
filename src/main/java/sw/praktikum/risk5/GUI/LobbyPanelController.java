@@ -25,6 +25,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import sw.praktikum.risk5.App.RiskMain;
 import sw.praktikum.risk5.Database.Database;
+import sw.praktikum.risk5.Message.MessageAssignId;
 import sw.praktikum.risk5.Message.MessageLobby;
 import sw.praktikum.risk5.Network.Client;
 import sw.praktikum.risk5.Network.ClientInterface;
@@ -248,6 +249,16 @@ public class LobbyPanelController implements LobbyPanelInterface {
 
   @Override
   public void sendMessageLobby() {
+    if(this.amountAiWithDifficulty == null || this.amountAiWithDifficulty.get(0) == null){
+      this.amountAiWithDifficulty = new ArrayList<Integer>();
+      amountAiWithDifficulty.add(9);
+    }
+    if(this.playerNames == null){
+      this.playerNames = new String[]{RiskMain.getInstance().getDomain().getPlayerName()};
+    }
+    if(this.pictures == null){
+      this.pictures = new String[]{RiskMain.getInstance().getDomain().getData().getPlayerData(String.valueOf(RiskMain.getInstance().getDomain().getData().getUserId(RiskMain.getInstance().getDomain().getPlayerName())),"avatar")};
+    }
   this.serverInterface.sendMessageLobby(RiskMain.getInstance().getDomain().getGameName(), this.amountAiWithDifficulty, this.playerNames, this.pictures);
   }
 
@@ -474,9 +485,8 @@ public class LobbyPanelController implements LobbyPanelInterface {
    * @author lvschenck
    */
   public void initialize() {
-    this.amountAiWithDifficulty = new ArrayList<Integer>();
-//    this.playerNames = new String[]{RiskMain.getInstance().getDomain().getPlayerName()};
     this.db = RiskMain.getInstance().getDomain().getData();
+    this.amountAiWithDifficulty = new ArrayList<Integer>();
     ((Label) player1Pane.getCenter()).setText(RiskMain.getInstance().getDomain().getPlayerName());
     String avatar = db.getPlayerData(
         String.valueOf(db.getUserId(RiskMain.getInstance().getDomain().getPlayerName())), "avatar");
@@ -538,8 +548,11 @@ public class LobbyPanelController implements LobbyPanelInterface {
         break;
     }
     RiskMain.getInstance().getDomain().setLobby(this);
+
     if(RiskMain.getInstance().getDomain().isClient()){
       RiskMain.getInstance().getDomain().getClient().setLobby();
+      MessageAssignId lobby = new MessageAssignId(0);
+      RiskMain.getInstance().getDomain().getClient().sendMessage(lobby);
     }
   }
 
