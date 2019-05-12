@@ -64,6 +64,7 @@ public class Client implements Runnable, ClientInterface {
         this.aiBool = true;
       } else {
         RiskMain.getInstance().getDomain().setClient(this);
+        RiskMain.getInstance().getDomain().setClient(true);
         RiskMain.getInstance().getDomain().getMenu().connect(true);
       }
     } else {

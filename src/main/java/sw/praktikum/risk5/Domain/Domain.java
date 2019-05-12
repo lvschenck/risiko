@@ -34,6 +34,7 @@ public class Domain {
   private LobbyPanelInterface lobby;
   private String playerName;
   private boolean isServer= false;
+  private boolean isClient = false;
   private String[] countryNames;
   private Database data = new Database();
   private boolean inLobby = true;
@@ -150,5 +151,13 @@ public class Domain {
 
   public void setInLobby(boolean inLobby) {
     this.inLobby = inLobby;
+  }
+
+  public boolean isClient() {
+    return isClient;
+  }
+
+  public void setClient(boolean isClient) {
+    this.isClient = isClient;
   }
 }
