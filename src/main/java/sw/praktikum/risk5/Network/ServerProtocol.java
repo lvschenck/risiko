@@ -116,9 +116,14 @@ public class ServerProtocol extends Thread {
               
               this.gameController = RiskMain.getInstance().getDomain().getGame();
               
+              break;
               
             case UPDATELOBBY:
+             
               RiskMain.getInstance().getDomain().getLobby().sendMessageLobby();
+              
+              break;
+              
             default:
 
               break;
