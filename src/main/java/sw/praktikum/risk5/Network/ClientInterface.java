@@ -1,6 +1,7 @@
 package sw.praktikum.risk5.Network;
 
 import java.io.File;
+import sw.praktikum.risk5.GUI.LobbyPanelController;
 import sw.praktikum.risk5.Message.Message;
 
 public interface ClientInterface {

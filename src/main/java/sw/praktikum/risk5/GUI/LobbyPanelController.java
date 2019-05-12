@@ -523,6 +523,9 @@ public class LobbyPanelController implements LobbyPanelInterface {
         break;
     }
     RiskMain.getInstance().getDomain().setLobby(this);
+    if(!RiskMain.getInstance().getDomain().getIsServer()){
+      RiskMain.getInstance().getDomain().getClient().setLobby();
+    }
   }
 
 }
