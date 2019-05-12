@@ -84,7 +84,8 @@ class BattleHandler {
     // Prueft alle Errors
     if ((!attackingCountry.getNeighbors().contains(defendingCountry)) || attackerId == targetId
         || !(attackerId == attackingCountry.getOwner().getId()) || attackingCountry.getTroops() <= 1
-        || attackingCountry.getTroops() < attackingTroops) {
+        || attackingCountry.getTroops() <= attackingTroops) {
+      System.out.println("PIPI");
       return false;
     }
 
@@ -127,6 +128,7 @@ class BattleHandler {
         }
 
       } else { // Verteidiger gewinnt Wuerfel
+        System.out.println("verloren");
         attackingTroops--;
       }
     }

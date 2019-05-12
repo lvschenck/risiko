@@ -133,43 +133,38 @@ public class GameController implements GameControllerInterface {
       Country defendingCountry =
           this.allCountries.get(this.jsonReader.getAttackTargetCountry() - 1);
       int amountDefend = defendingCountry.getTroops();
-      System.out
-          .println(amountAttack + "   " + amountDefend + "defenderID" + defendingCountry.getId());
-      //Test
-      int[] countrieOwner = this.match.getCountriesOwners();
-      int[] countrieTroops = this.match.getCountriesTroops();
-      System.out.println("CountrieOwner");
-      for (int i = 0; i< 42; i++) {
-        System.out.println(countrieOwner[i]);
-      }
-      System.out.println("CountrieTroops");
-      for (int i = 0; i< 42; i++) {
-        System.out.println(countrieTroops[i]);
-      }
+//      System.out
+//          .println(amountAttack + "   " + amountDefend + "defenderID" + defendingCountry.getId());
+//      //Test
+//      int[] countrieOwner = this.match.getCountriesOwners();
+//      int[] countrieTroops = this.match.getCountriesTroops();
+//      System.out.println("CountrieOwner");
+//      for (int i = 0; i< 42; i++) {
+//        System.out.println(countrieOwner[i]);
+//      }
+//      System.out.println("CountrieTroops");
+//      for (int i = 0; i< 42; i++) {
+//        System.out.println(countrieTroops[i]);
+//      }
       
       //Test
       boolean b = this.attack(this.jsonReader.getAttackSourcePlayer(),
           this.jsonReader.getAttackSourceCountry(), amountAttack, amountDefend,
           this.jsonReader.getAttackTargetPlayer(), this.jsonReader.getAttackTargetCountry());
       
-      int[] countrieOwner2 = this.match.getCountriesOwners();
-      int[] countrieTroops2 = this.match.getCountriesTroops();
+//      int[] countrieOwner2 = this.match.getCountriesOwners();
+//      int[] countrieTroops2 = this.match.getCountriesTroops();
       
-      System.out.println("---------------------------------------");
-      System.out.println("CountrieOwner");
-      for (int i = 0; i< 42; i++) {
-        System.out.println(countrieOwner2[i]);
-      }
-      System.out.println("CountrieTroops");
-      for (int i = 0; i< 42; i++) {
-        System.out.println(countrieTroops2[i]);
-      }
-      try {
-        Thread.sleep(3000000);
-      } catch (InterruptedException e) {
-        // TODO Auto-generated catch block
-        e.printStackTrace();
-      }
+//      System.out.println("---------------------------------------");
+//      System.out.println("CountrieOwner");
+//      for (int i = 0; i< 42; i++) {
+//        System.out.println(countrieOwner2[i]);
+//      }
+//      System.out.println("CountrieTroops");
+//      for (int i = 0; i< 42; i++) {
+//        System.out.println(countrieTroops2[i]);
+//      }
+//      
       if (b) {
         this.sendJson('r');
       } else {
