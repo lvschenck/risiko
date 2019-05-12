@@ -228,21 +228,18 @@ public class LobbyPanelController implements LobbyPanelInterface {
 
   @Override
   public void receiveMessageStart() {
+
     System.out.println("spielstart nanan");
     Parent newContent = null;
 
-    FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/GamePanel.fxml"));
-
-    // GamePanelController controller = new GamePanelController(userName,
-    // serverInterface);
-    // loader.setController(controller);
     Parent root = null;
     try {
+      FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/GamePanel.fxml"));
       root = loader.load();
     } catch (IOException e) {
       e.printStackTrace();
     }
-    Stage primaryStage = (Stage) lobbyHeader.getScene().getWindow();
+    Stage primaryStage = (Stage) kiPane.getScene().getWindow();
     primaryStage.getScene().setRoot(root);
   }
 
@@ -387,7 +384,7 @@ public class LobbyPanelController implements LobbyPanelInterface {
               break;
           }
           try {
-            Thread.sleep(5);
+            Thread.sleep(50);
           } catch (InterruptedException e) {
             e.printStackTrace();
           }
