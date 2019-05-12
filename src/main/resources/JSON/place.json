@@ -1,1 +1,1 @@
-{"command":{"name":"placeArmy","target":{"country":39,"_comment_country":"country ID, has to be a country that belongs to the player","numberOfUnits":16,"_comment_player":"player ID","player":107}}}
+{"command":{"name":"placeArmy","target":{"country":12,"_comment_country":"country ID, has to be a country that belongs to the player","numberOfUnits":1,"_comment_player":"player ID","player":1}}}
