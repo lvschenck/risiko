@@ -12,7 +12,7 @@ public interface ServerInterface {
 
   void sendMessageData();
 
-  void sendMessageChat(String chatmessage, String author, String receiver);
+  void sendMessageChat(String author, String chatMessage, String receiver);
 
   void sendMessageError(String errorType, int id);
 

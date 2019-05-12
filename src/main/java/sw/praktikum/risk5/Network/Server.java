@@ -241,7 +241,7 @@ public class Server extends Thread implements ServerInterface {
   }
 
   @Override
-  public void sendMessageChat(String chatMessage, String author, String receiver) {
+  public void sendMessageChat(String author, String chatMessage, String receiver) {
     broadcast(author, receiver, chatMessage);
   }
 

@@ -9,6 +9,6 @@ public interface ClientInterface {
 
   void sendMessage(Message m);
 
-  void sendMessageChat(String chatmessage, String author, String receiver);
+  void sendMessageChat(String author, String chatmessage, String receiver);
 
 }
