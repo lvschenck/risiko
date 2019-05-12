@@ -78,17 +78,12 @@ class BattleHandler {
 
     Player attacker = this.currentMatch.findPlayer(attackerId);
     Player defender = this.currentMatch.findPlayer(targetId);
-    System.out.println("attackerId:" + attackerCountry);
-    System.out.println("defenderId:" + targetCountry);
     Country attackingCountry = this.currentMatch.findCountry(attackerCountry);
     Country defendingCountry = this.currentMatch.findCountry(targetCountry);
-    System.out.println("attackerId after:" + attackingCountry.getId());
-    System.out.println("defenderId after:" + defendingCountry.getId());
     // Prueft alle Errors
     if ((!attackingCountry.getNeighbors().contains(defendingCountry)) || attackerId == targetId
         || !(attackerId == attackingCountry.getOwner().getId()) || attackingCountry.getTroops() <= 1
         || attackingCountry.getTroops() <= attackingTroops || this.currentMatch.getCurrentPlayerId() != attackerId) {
-      System.out.println("PIPI");
       return false;
     }
     while (attackingTroops != 0) {
@@ -110,11 +105,6 @@ class BattleHandler {
       int[] diceDef = this.dice.rollDice(amountDef, false);
 
       boolean[] battleResult = this.attackHandler(diceAtt, diceDef);
-
-      for (int i = 0; i < battleResult.length; i++) {
-        System.out.print(battleResult[i] + ", ");
-      }
-
       // Truppen zerstoeren und Land neu besetzen
       for (int i = 0; i < battleResult.length; i++) {
 
@@ -122,7 +112,6 @@ class BattleHandler {
           defendingCountry.addTroops(-1);
 
           if (defendingCountry.getTroops() == 0) { // Wenn Land erobert
-            System.out.println("LOL");
             defendingCountry.setOwner(attackingCountry.getOwner());
             attackingCountry.getOwner().addCountry(defendingCountry);
             attackingCountry.getOwner().setConquered(true);
@@ -134,7 +123,6 @@ class BattleHandler {
           }
 
         } else { // Verteidiger gewinnt Wuerfel
-          System.out.println("verloren");
           attackingCountry.addTroops(-1);
           attackingTroops--;
         }

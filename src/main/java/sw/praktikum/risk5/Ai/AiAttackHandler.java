@@ -308,6 +308,7 @@ class AiAttackHandler {
       }
     }
     this.inProgress = continueAttacking;
+    System.out.println(this.inProgress + " AI");
   }
 
 

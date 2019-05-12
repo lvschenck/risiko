@@ -54,11 +54,11 @@ public class AiMain implements AiInterface {
     this.type = type;
     this.cards = new int[3];
     this.client = client;
-//    this.aiPlacementHandler = new AiPlacementHandler(aiId, type);
-//    this.aiMoveHandler = new AiMoveHandler(aiId, type);
-//    this.aiAttackHandler = new AiAttackHandler(aiId, type);
-//    this.aiCardRedemptionHandler = new AiCardRedemptionHandler();
-//    this.personalId = aiId;
+    // this.aiPlacementHandler = new AiPlacementHandler(aiId, type);
+    // this.aiMoveHandler = new AiMoveHandler(aiId, type);
+    // this.aiAttackHandler = new AiAttackHandler(aiId, type);
+    // this.aiCardRedemptionHandler = new AiCardRedemptionHandler();
+    // this.personalId = aiId;
   }
 
   /**
@@ -76,9 +76,9 @@ public class AiMain implements AiInterface {
       switch (this.gamePhase) {
 
         case 0:
-         
+
           AiCountry target = this.aiPlacementHandler.placeInEmptyCountries();
-          
+
           if (target != null) {
             j = this.jsonWriter.writePlaceJson(1, target.getId(), this.personalId);
             this.sendJson(j, 'p');
@@ -117,9 +117,18 @@ public class AiMain implements AiInterface {
                     this.personalId, 0, this.aiAttackHandler.getTroopsToAttack(), 0,
                     this.aiAttackHandler.getTargetCountry().getId(),
                     this.aiAttackHandler.getTargetCountry().getOwner());
-                String[] countryNames = RiskMain.getInstance().getDomain().getCountryNames();
-                this.client.sendMessageChat(this.aiName, "I am attacking " + countryNames[this.aiAttackHandler.getTargetCountry().getId()] + " from " + countryNames[this.aiAttackHandler.getSourceCountry().getId()] + ".", "all");
-                this.sendJson(j, 'a');
+                if (this.aiAttackHandler.getTargetCountry().getId() != 0) {
+                  String[] countryNames = RiskMain.getInstance().getDomain().getCountryNames();
+                  this.client.sendMessageChat(this.aiName,
+                      "I am attacking "
+                          + countryNames[this.aiAttackHandler.getTargetCountry().getId()] + " from "
+                          + countryNames[this.aiAttackHandler.getSourceCountry().getId()] + ".",
+                      "all");
+                  this.sendJson(j, 'a');
+                } else {
+                  j = this.jsonWriter.writeSkipTurnJson();
+                  this.sendJson(j, 's');
+                }
               } else {
                 j = this.jsonWriter.writeSkipTurnJson();
                 this.sendJson(j, 's');
@@ -132,13 +141,13 @@ public class AiMain implements AiInterface {
               this.aiMoveHandler.move();
               if (this.aiMoveHandler.getSourceCountry() == null) {
                 j = this.jsonWriter.writeSkipTurnJson();
+                this.sendJson(j, 's');
               } else {
                 j = this.jsonWriter.writeMoveJson(this.aiMoveHandler.getSourceCountry().getId(),
                     this.personalId, 0, this.aiMoveHandler.getAmount(), 0,
                     this.aiMoveHandler.getTargetCountry().getId(), this.personalId);
+                this.sendJson(j, 'm');
               }
-
-              this.sendJson(j, 'm');
               break;
             default:
               break;
@@ -149,7 +158,7 @@ public class AiMain implements AiInterface {
       }
     }
 
-//     return j;
+    // return j;
 
   }
 
