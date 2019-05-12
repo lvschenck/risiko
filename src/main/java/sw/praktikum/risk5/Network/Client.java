@@ -163,6 +163,11 @@ public class Client implements Runnable, ClientInterface {
                 ArrayList<Integer> amountAiWithDifficulty = ml.getAmountAiwithDifficulty();
                 String[] otherPlayerNames = ml.getOtherPlayerNames();
                 String[] pictureOfPlayers = ml.getPictureOfPlayers();
+                System.out.println("jjjj");
+                System.out.println(gameName);
+                System.out.println(amountAiWithDifficulty);
+                System.out.println(otherPlayerNames[0]);
+                System.out.println(pictureOfPlayers[0]);
                 this.lobby.receiveMessageLobby(gameName, amountAiWithDifficulty, otherPlayerNames,
                     pictureOfPlayers);
                 break;

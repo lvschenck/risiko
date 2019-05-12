@@ -323,7 +323,6 @@ public class LobbyPanelController implements LobbyPanelInterface {
   private void openGame(ActionEvent actionEvent) {
     if (!(kiSelected && directStart)) {
     this.serverInterface = new Server(RiskMain.getInstance().getDomain().getPlayerName());
-      RiskMain.getInstance().getDomain().setGameName("SinglePlayer");
       RiskMain.getInstance().getDomain().setServer(serverInterface);
       int countKi = 0;
       for (int i = 0; i < 5; i++) {
@@ -525,6 +524,7 @@ public class LobbyPanelController implements LobbyPanelInterface {
         kiSelected = false;
         startGame.setText("Start Game");
         lobbyHeader.setText("Gamelobby " + "Single Player");
+        RiskMain.getInstance().getDomain().setGameName("SinglePlayer");
         break;
       case 2:
         kiSelected = false;
