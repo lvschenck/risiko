@@ -165,6 +165,7 @@ public class GamePanelController implements Initializable, GuiInterface {
       } else {
         this.currentPlayer = false;
       }
+      this.turnPhase = this.jsonReader.getGameStateCurrentTurnPhase();
       this.ownerIds = this.jsonReader.getGameStateCountriesOwner();
       this.troops = this.jsonReader.getGameStateCountriesTroops();
       updateCountries(troops, ownerIds);
@@ -467,7 +468,7 @@ public class GamePanelController implements Initializable, GuiInterface {
 		selectedCardsArray = new int[] {0, 0, 0};
 		for (int i=0; i< 5; i++) {
 			if (cardButtons.get(i).isSelected()) {
-				System.out.println("Karte" + i +"ist ausgewählt");
+				System.out.println("Karte" + i +"ist ausgewï¿½hlt");
 				selectedCardsArray[a] = cardsOfCurrentPlayer[i];
 				a++;
 			}
