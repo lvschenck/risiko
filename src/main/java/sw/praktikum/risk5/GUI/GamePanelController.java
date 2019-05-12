@@ -37,6 +37,7 @@ import sw.praktikum.risk5.App.RiskMain;
 import sw.praktikum.risk5.Database.Database;
 import sw.praktikum.risk5.Json.ReadJson;
 import sw.praktikum.risk5.Json.WriteJson;
+import sw.praktikum.risk5.Message.MessageUpdateLobby;
 import sw.praktikum.risk5.Network.ClientInterface;
 import sw.praktikum.risk5.Network.ServerInterface;
 import sw.praktikum.risk5.Util.CountryValue;
@@ -830,7 +831,10 @@ public class GamePanelController implements Initializable, GuiInterface {
 
     recipientList.setItems(participantList);
     recipientList.setValue("all");
-
+    if(RiskMain.getInstance().getDomain().isClient()){
+      System.out.println(RiskMain.getInstance().getDomain().isClient()+"    clieeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeent");
+      RiskMain.getInstance().getDomain().getClient().setGui();
+    }
   }
 
   @Override
