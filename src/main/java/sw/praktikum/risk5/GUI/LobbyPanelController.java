@@ -25,6 +25,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import sw.praktikum.risk5.App.RiskMain;
 import sw.praktikum.risk5.Database.Database;
+import sw.praktikum.risk5.Message.MessageLobby;
 import sw.praktikum.risk5.Network.Client;
 import sw.praktikum.risk5.Network.ClientInterface;
 import sw.praktikum.risk5.Network.Server;
@@ -166,6 +167,7 @@ public class LobbyPanelController implements LobbyPanelInterface {
   @Override
   public void receiveMessageLobby(String gameName, ArrayList<Integer> amountAiWithDifficulty,
       String[] allPlayerNames, String[] pictureOfPlayers) {
+    System.out.println("receive message lobby gui");
     switch (allPlayerNames.length) {
       case 6:
         ((Label) player6Pane.getCenter()).setText(playerNames[5]);
@@ -184,6 +186,7 @@ public class LobbyPanelController implements LobbyPanelInterface {
         ((HBox) player3Pane.getLeft()).getStyleClass().clear();
         ((HBox) player3Pane.getLeft()).getStyleClass().add(pictureOfPlayers[2]);
       case 2:
+        System.out.println("lobby player 2" + playerNames[1]);
         player2Pane.setOpacity(1.0);
         ((Label) player2Pane.getCenter()).setText(playerNames[1]);
         ((HBox) player2Pane.getLeft()).getStyleClass().clear();
@@ -245,6 +248,7 @@ public class LobbyPanelController implements LobbyPanelInterface {
 
   @Override
   public void sendMessageLobby() {
+    MessageLobby messageLobby = new MessageLobby(RiskMain.getInstance().getDomain().getGameName(), this.amountAiWithDifficulty, this.playerNames, this.pictures);
   }
 
   @FXML
@@ -471,6 +475,7 @@ public class LobbyPanelController implements LobbyPanelInterface {
    */
   public void initialize() {
     this.amountAiWithDifficulty = new ArrayList<Integer>();
+//    this.playerNames = new String[]{RiskMain.getInstance().getDomain().getPlayerName()};
     this.db = RiskMain.getInstance().getDomain().getData();
     ((Label) player1Pane.getCenter()).setText(RiskMain.getInstance().getDomain().getPlayerName());
     String avatar = db.getPlayerData(
