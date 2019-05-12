@@ -709,10 +709,6 @@ public class GamePanelController implements Initializable, GuiInterface {
       RiskMain.getInstance().getDomain().getServer().startGame();
     }
 
-    // int playerSize = 6;
-
-    // the pane for each player is painted in his respective color
-
     roundButton.setDisable(true);
 
     recipientList.setItems(participantList);

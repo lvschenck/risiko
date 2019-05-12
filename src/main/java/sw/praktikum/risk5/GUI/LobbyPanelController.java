@@ -108,6 +108,7 @@ public class LobbyPanelController implements LobbyPanelInterface {
   private ClientInterface clientInterface4;
   private ClientInterface clientInterface5;
   private Database db;
+  private ActionEvent actionEvent;
 
   private ObservableList<String> kiStatusList1 = FXCollections
       .observableArrayList("Easy", "Medium", "Hard");
@@ -227,7 +228,22 @@ public class LobbyPanelController implements LobbyPanelInterface {
 
   @Override
   public void receiveMessageStart() {
+    System.out.println("spielstart nanan");
+    Parent newContent = null;
 
+    FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/GamePanel.fxml"));
+
+    // GamePanelController controller = new GamePanelController(userName,
+    // serverInterface);
+    // loader.setController(controller);
+    Parent root = null;
+    try {
+      root = loader.load();
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+    Stage primaryStage = (Stage) lobbyHeader.getScene().getWindow();
+    primaryStage.getScene().setRoot(root);
   }
 
   @Override
@@ -386,9 +402,6 @@ public class LobbyPanelController implements LobbyPanelInterface {
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/GamePanel.fxml"));
 
-        // GamePanelController controller = new GamePanelController(userName,
-        // serverInterface);
-        // loader.setController(controller);
         Parent root = null;
         try {
           root = loader.load();
@@ -523,7 +536,7 @@ public class LobbyPanelController implements LobbyPanelInterface {
         break;
     }
     RiskMain.getInstance().getDomain().setLobby(this);
-    if(!RiskMain.getInstance().getDomain().isClient()){
+    if(RiskMain.getInstance().getDomain().isClient()){
       RiskMain.getInstance().getDomain().getClient().setLobby();
     }
   }
