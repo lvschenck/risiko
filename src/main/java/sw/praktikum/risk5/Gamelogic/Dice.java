@@ -1,7 +1,7 @@
 package sw.praktikum.risk5.Gamelogic;
 
 /**
- * This class displays a die and contains several functions like rollDice and sort
+ * This class displays a die and contains several functions like rollDice and sort.
  *
  * @author fahaerte
  */
@@ -9,14 +9,13 @@ package sw.praktikum.risk5.Gamelogic;
 class Dice {
 
   /**
-   * Rolls a specified amount of dice
+   * Rolls a specified amount of dice.
    *
    * @param amount The amount of dice
    * @param attacker true if attacker dice false if defender dice
    * @return Integer-Array with the result of the dice-roll
    * @author fahaerte
    */
-
   protected int[] rollDice(int amount, boolean attacker) {
     int[] result = null;
     if (attacker) {
@@ -40,7 +39,6 @@ class Dice {
    * @return The sorted Integer-Array
    * @author fahaerte
    */
-
   protected int[] sortDice(int[] dice) {
 
     if (dice.length == 1) {

@@ -9,12 +9,11 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
-
 /**
  * Reads all data from the specific json file and safes them into the instances of this class. The
  * instances can be read by using the getter methods.
  * 
- * @author Fabian
+ * @author fahaerte
  */
 public class ReadJson {
 
@@ -57,9 +56,9 @@ public class ReadJson {
   private String jsonName;
 
   /**
-   * Initializes a ReadJSON() - Object;
+   * Initializes a ReadJSON() - Object.
    * 
-   * @author Fabian
+   * @author fahaerte
    */
   public ReadJson() {
     this.attackSourceCountry = 0;
@@ -103,7 +102,7 @@ public class ReadJson {
   }
 
   /**
-   * Reads the command - name of the JSON file
+   * Reads the command - name of the JSON file.
    * 
    * @author lroell
    * @param file JSON file
@@ -130,7 +129,7 @@ public class ReadJson {
    * Reads the attackJSON - data and saves the values in this class. Instances can be returned by
    * the getter-methods.
    * 
-   * @author Fabian
+   * @author fahaerte
    * @param file that should be read
    */
   public void readAttackJSON(File file) {
@@ -168,7 +167,7 @@ public class ReadJson {
    * Reads the endGameJSON - data and saves the values in this class. Instances can be returned by
    * the getter-methods.
    * 
-   * @author Fabian
+   * @author fahaerte
    * @param file that should be read
    */
   public void readEndGameJSON(File file) {
@@ -197,7 +196,7 @@ public class ReadJson {
    * Reads the getStatistcsJSON - data and saves the values in this class. Instances can be returned
    * by the getter-methods.
    * 
-   * @author Fabian
+   * @author fahaerte
    * @param file that should be read
    */
   public void readGetStatisticsJSON(File file) {
@@ -223,7 +222,7 @@ public class ReadJson {
    * Reads the moveJSON - data and saves the values in this class. Instances can be returned by the
    * getter-methods.
    * 
-   * @author Fabian
+   * @author fahaerte
    * @param file that should be read
    */
   public void readMoveJSON(File file) {
@@ -237,12 +236,14 @@ public class ReadJson {
 
       JSONObject source = (JSONObject) command.get("source");
       JSONObject target = (JSONObject) command.get("target");
-      JSONObject units = (JSONObject) source.get("unitsToMove");
 
       this.moveSourceCountry = Integer.parseInt(source.get("country").toString());
       this.moveSourcePlayer = Integer.parseInt(source.get("player").toString());
       this.moveTargetCountry = Integer.parseInt(target.get("country").toString());
       this.moveTargetPlayer = Integer.parseInt(target.get("player").toString());
+      
+      JSONObject units = (JSONObject) source.get("unitsToMove");
+      
       this.moveUnitsInfantry = Integer.parseInt(units.get("infantry").toString());
       this.moveUnitsCavalry = Integer.parseInt(units.get("cavalry").toString());
       this.moveUnitsArtillery = Integer.parseInt(units.get("artillery").toString());
@@ -260,7 +261,7 @@ public class ReadJson {
    * Reads the placeJSON - data and saves the values in this class. Instances can be returned by the
    * getter-methods.
    * 
-   * @author Fabian
+   * @author fahaerte
    * @param file that should be read
    */
   public void readPlaceJSON(File file) {
@@ -290,7 +291,7 @@ public class ReadJson {
    * Reads the getGameStateJSON - data and saves the values in this class. Instances can be returned
    * by the getter-methods.
    * 
-   * @author Fabian
+   * @author fahaerte
    * @param file that should be read
    */
   public void readRiskGetGameStateJSON(File file) {
@@ -371,7 +372,7 @@ public class ReadJson {
    * Reads the cardRedemptionJSON - data and saves the values in this class. Instances can be
    * returned by the getter-methods.
    * 
-   * @author Fabian
+   * @author fahaerte
    * @param file that should be read
    */
   public void readCardRedemption(File file) {
@@ -397,10 +398,10 @@ public class ReadJson {
   }
 
   /**
-   * Getter for all instances
+   * Getter for all instances.
    * 
    * @return Returns The safed instances from this class
-   * @author Fabian
+   * @author fahaerte
    */
 
   public int getAttackSourceCountry() {

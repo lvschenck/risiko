@@ -13,7 +13,7 @@ class BattleHandler {
   private Statistics stats;
 
   /**
-   * Constructer for the Battle-Handler
+   * Constructer for the Battle-Handler.
    *
    * @param d Dice of the gameboard
    * @param m The current match
@@ -27,7 +27,7 @@ class BattleHandler {
   }
 
   /**
-   * Compares the dice and determines the winner
+   * Compares the dice and determines the winner.
    *
    * @param diceAtt Integer-Array with the values of the attackers dice
    * @param diceDef Integer-Array with the values of the defenders dice
