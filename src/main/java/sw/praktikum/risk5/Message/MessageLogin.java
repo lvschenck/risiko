@@ -9,10 +9,12 @@ public class MessageLogin extends Message {
 
   private static final long serialVersionUID = 1L;
   private String username;
+  private String picture;
 
-  public MessageLogin(String username) {
+  public MessageLogin(String username, String picture) {
     super(MessageType.LOGIN);
     this.username = username;
+    this.picture = picture;
 
   }
 
@@ -25,4 +27,7 @@ public class MessageLogin extends Message {
   }
 
 
+  public String getPicture() {
+    return picture;
+  }
 }

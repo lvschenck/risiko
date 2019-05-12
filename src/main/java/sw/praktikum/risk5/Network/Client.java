@@ -42,11 +42,11 @@ public class Client implements Runnable, ClientInterface {
   private boolean aiBool = false;
   private AiInterface ai;
 
-  public Client(String IP, String username, String type, boolean ai) {
+  public Client(String IP, String username, String type, boolean ai, String picture) {
     this.IPString = IP;
     if (this.connect(IP)) {
       try {
-        toServer.writeObject(new MessageLogin(username));
+        toServer.writeObject(new MessageLogin(username, picture));
       } catch (IOException e) {
         e.printStackTrace();
       }

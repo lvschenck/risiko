@@ -1,6 +1,8 @@
 package sw.praktikum.risk5.GUI;
 
 import java.io.IOException;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -116,6 +118,9 @@ public class LobbyPanelController implements LobbyPanelInterface {
   private ObservableList<String> kiStatusList5 = kiStatusList1;
 
   private Integer kiPlayerSize;
+  private String[] playerNames;
+  private String[] pictures;
+  private ArrayList<Integer> amountAiWithDifficulty;
 
   private ObservableList<String> participantList = FXCollections.observableArrayList("all");
 
@@ -132,7 +137,8 @@ public class LobbyPanelController implements LobbyPanelInterface {
     if (RiskMain.getInstance().getDomain().getIsServer()) {
       this.serverInterface = RiskMain.getInstance().getDomain().getServer();
       this.serverInterface
-          .sendMessageChat(RiskMain.getInstance().getDomain().getPlayerName(), messageInput.getText(), recipientList.getValue());
+          .sendMessageChat(RiskMain.getInstance().getDomain().getPlayerName(),
+              messageInput.getText(), recipientList.getValue());
     } else {
       this.clientPlayerInterface = RiskMain.getInstance().getDomain().getClient();
     }
@@ -146,7 +152,8 @@ public class LobbyPanelController implements LobbyPanelInterface {
   @Override
   public void receiveMessageChat(String author, String chatMessage, boolean single) {
     if (single) {
-      messageOutput.appendText(author +"("+RiskMain.getInstance().getDomain().getPlayerName()+")"+ ":   ");
+      messageOutput.appendText(
+          author + "(" + RiskMain.getInstance().getDomain().getPlayerName() + ")" + ":   ");
       messageOutput.appendText(chatMessage + "\n");
     } else {
       messageOutput.appendText(author + "(all):   ");
@@ -155,22 +162,60 @@ public class LobbyPanelController implements LobbyPanelInterface {
   }
 
   @Override
-  public void receiveMessageLobby(String gameName, int[] amountAiWithDifficulty,
+  public void receiveMessageLobby(String gameName, ArrayList<Integer> amountAiWithDifficulty,
       String[] allPlayerNames, String[] pictureOfPlayers) {
-
+    switch (allPlayerNames.length) {
+      case 6:
+        ((Label) player6Pane.getCenter()).setText(playerNames[5]);
+        ((HBox) player6Pane.getLeft()).getStyleClass().clear();
+        ((HBox) player6Pane.getLeft()).getStyleClass().add(pictureOfPlayers[5]);
+      case 5:
+        ((Label) player5Pane.getCenter()).setText(playerNames[4]);
+        ((HBox) player5Pane.getLeft()).getStyleClass().clear();
+        ((HBox) player5Pane.getLeft()).getStyleClass().add(pictureOfPlayers[4]);
+      case 4:
+        ((Label) player4Pane.getCenter()).setText(playerNames[3]);
+        ((HBox) player4Pane.getLeft()).getStyleClass().clear();
+        ((HBox) player4Pane.getLeft()).getStyleClass().add(pictureOfPlayers[3]);
+      case 3:
+        ((Label) player3Pane.getCenter()).setText(playerNames[2]);
+        ((HBox) player3Pane.getLeft()).getStyleClass().clear();
+        ((HBox) player3Pane.getLeft()).getStyleClass().add(pictureOfPlayers[2]);
+      case 2:
+        player2Pane.setOpacity(1.0);
+        ((Label) player2Pane.getCenter()).setText(playerNames[1]);
+        ((HBox) player2Pane.getLeft()).getStyleClass().clear();
+        ((HBox) player2Pane.getLeft()).getStyleClass().add(pictureOfPlayers[1]);
+      case 1:
+        ((Label) player1Pane.getCenter()).setText(playerNames[0]);
+        ((HBox) player1Pane.getLeft()).getStyleClass().clear();
+        ((HBox) player1Pane.getLeft()).getStyleClass().add(pictureOfPlayers[0]);
+        break;
+    }
+    this.playerNames = allPlayerNames;
+    this.pictures = pictureOfPlayers;
+    this.amountAiWithDifficulty = amountAiWithDifficulty;
+    RiskMain.getInstance().getDomain().setGameName(gameName);
+    this.lobbyHeader.setText(gameName);
     int aiCount = 0;
     for (int i = 0; i < allPlayerNames.length; i++) {
-      if ((db.getPlayerData(String.valueOf(db.getUserId(allPlayerNames[i])), "avatar").equals("player-ki"))){
-        switch (aiCount){
-          case 1: kiStatus1.setValue(String.valueOf(amountAiWithDifficulty[aiCount]));
-          break;
-          case 2: kiStatus2.setValue(String.valueOf(amountAiWithDifficulty[aiCount]));
+      if ((db.getPlayerData(String.valueOf(db.getUserId(allPlayerNames[i])), "avatar")
+          .equals("player-ki"))) {
+        switch (aiCount) {
+          case 1:
+            kiStatus1.setValue(String.valueOf(amountAiWithDifficulty.get(aiCount)));
             break;
-          case 3: kiStatus3.setValue(String.valueOf(amountAiWithDifficulty[aiCount]));
+          case 2:
+            kiStatus2.setValue(String.valueOf(amountAiWithDifficulty.get(aiCount)));
             break;
-          case 4: kiStatus4.setValue(String.valueOf(amountAiWithDifficulty[aiCount]));
+          case 3:
+            kiStatus3.setValue(String.valueOf(amountAiWithDifficulty.get(aiCount)));
             break;
-          case 5: kiStatus5.setValue(String.valueOf(amountAiWithDifficulty[aiCount]));
+          case 4:
+            kiStatus4.setValue(String.valueOf(amountAiWithDifficulty.get(aiCount)));
+            break;
+          case 5:
+            kiStatus5.setValue(String.valueOf(amountAiWithDifficulty.get(aiCount)));
             break;
         }
         aiCount++;
@@ -182,6 +227,10 @@ public class LobbyPanelController implements LobbyPanelInterface {
   @Override
   public void receiveMessageStart() {
 
+  }
+
+  @Override
+  public void sendMessageLobby() {
   }
 
   @FXML
@@ -259,35 +308,70 @@ public class LobbyPanelController implements LobbyPanelInterface {
           switch (i) {
             case 0:
               this.clientInterface1 = new Client("localhost", "Gott",
-                  (String) kiStatus1.getValue(), true);
+                  (String) kiStatus1.getValue(), true, "player-ki");
               System.out.println("client" + countKi);
+              if(kiStatus1.getValue() == "Easy"){
+                amountAiWithDifficulty.add(0);
+              }else if(kiStatus1.getValue() == "Medium"){
+                amountAiWithDifficulty.add(1);
+              }else if(kiStatus1.getValue() == "Hard"){
+                amountAiWithDifficulty.add(2);
+              }
               break;
             case 1:
               this.clientInterface2 = new Client("localhost", "E.T.", (String) kiStatus2.getValue(),
-                  true);
+                  true, "player-ki");
               System.out.println("client" + countKi);
+              if(kiStatus2.getValue() == "Easy"){
+                amountAiWithDifficulty.add(0);
+              }else if(kiStatus2.getValue() == "Medium"){
+                amountAiWithDifficulty.add(1);
+              }else if(kiStatus2.getValue() == "Hard"){
+                amountAiWithDifficulty.add(2);
+              }
               break;
             case 2:
               this.clientInterface3 = new Client("localhost", "R2D2", (String) kiStatus3.getValue(),
-                  true);
+                  true, "player-ki");
               System.out.println("client" + countKi);
+              if(kiStatus3.getValue() == "Easy"){
+                amountAiWithDifficulty.add(0);
+              }else if(kiStatus3.getValue() == "Medium"){
+                amountAiWithDifficulty.add(1);
+              }else if(kiStatus3.getValue() == "Hard"){
+                amountAiWithDifficulty.add(2);
+              }
               break;
             case 3:
               this.clientInterface4 = new Client("localhost", "Terminator",
                   (String) kiStatus4.getValue(),
-                  true);
+                  true, "player-ki");
               System.out.println("client" + countKi);
+              if(kiStatus4.getValue() == "Easy"){
+                amountAiWithDifficulty.add(0);
+              }else if(kiStatus4.getValue() == "Medium"){
+                amountAiWithDifficulty.add(1);
+              }else if(kiStatus4.getValue() == "Hard"){
+                amountAiWithDifficulty.add(2);
+              }
               break;
             case 4:
               this.clientInterface5 = new Client("localhost", "Ultron",
                   (String) kiStatus5.getValue(),
-                  true);
+                  true, "player-ki");
               System.out.println("client" + countKi);
+              if(kiStatus5.getValue() == "Easy"){
+                amountAiWithDifficulty.add(0);
+              }else if(kiStatus5.getValue() == "Medium"){
+                amountAiWithDifficulty.add(1);
+              }else if(kiStatus5.getValue() == "Hard"){
+                amountAiWithDifficulty.add(2);
+              }
               break;
           }
-          try{
+          try {
             Thread.sleep(10);
-          }catch (InterruptedException e){
+          } catch (InterruptedException e) {
             e.printStackTrace();
           }
         }

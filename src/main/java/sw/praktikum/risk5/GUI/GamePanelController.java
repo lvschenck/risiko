@@ -704,7 +704,6 @@ public class GamePanelController implements Initializable, GuiInterface {
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
-
     RiskMain.getInstance().getDomain().setGui(this);
     if (RiskMain.getInstance().getDomain().getIsServer()) {
       RiskMain.getInstance().getDomain().getServer().startGame();

@@ -31,6 +31,7 @@ public class ServerProtocol extends Thread {
   private GuiInterface gui = RiskMain.getInstance().getDomain().getGui();
   private ServerInterface server = RiskMain.getInstance().getDomain().getServer();
   private Message message;
+  private String avatar;
 
 
 
@@ -63,6 +64,7 @@ public class ServerProtocol extends Thread {
             case LOGIN:
               if (Server.checkAmount()) {
                 this.username = ((MessageLogin) message).getUsername();
+                this.avatar = ((MessageLogin) message).getPicture();
                 int i = 2;
                 do {
                   if (!Server.checkUsernameAvaible(username)) {
@@ -70,15 +72,14 @@ public class ServerProtocol extends Thread {
                     i++;
                   }
                 } while (!(Server.checkUsernameAvaible(this.username)));
-                
                 Server.addUser(ID, toClient, username);
                 this.ID = Server.getID(this.username);
                 this.server.sendMessageAssignId(this.ID);
+                RiskMain.getInstance().getDomain().getData().setPlayerData("avatar", this.avatar, String.valueOf(this.ID));
               } else {
                 MessageLoginFail m = new MessageLoginFail();
                 this.toClient.writeObject(m);
               }
-
               break;
 
             case LOGOFF:
