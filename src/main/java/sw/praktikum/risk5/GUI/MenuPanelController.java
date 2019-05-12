@@ -2,7 +2,6 @@ package sw.praktikum.risk5.GUI;
 
 import java.io.IOException;
 import java.net.URL;
-import java.sql.ClientInfoStatus;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -28,298 +27,266 @@ import sw.praktikum.risk5.Network.ClientInterface;
 
 public class MenuPanelController implements Initializable, MenuPanelInterface {
 
-	ActionEvent event;
+  ActionEvent event;
 
-	Client client;
+  Client client;
 
-	private Database db;
+  private Database db;
 
-	private boolean connect = false;
+  private boolean connect = false;
 
-	@FXML
-	public Label playerName;
+  @FXML
+  public Label playerName;
 
-	@FXML
-	private TextField ipAdress;
-	@FXML
-	private GridPane manuellJoinPane;
-	@FXML
-	private GridPane manuellJoinPaneParent;
-	@FXML
-	private GridPane hostPane;
-	@FXML
-	private GridPane hostPaneParent;
-	@FXML
-	private TextField gameLobbyName;
+  @FXML
+  private TextField ipAdress;
+  @FXML
+  private GridPane manuellJoinPane;
+  @FXML
+  private GridPane manuellJoinPaneParent;
+  @FXML
+  private GridPane hostPane;
+  @FXML
+  private GridPane hostPaneParent;
+  @FXML
+  private TextField gameLobbyName;
 
-	@FXML
-	private Label connectionJoinError;
+  @FXML
+  private Label connectionJoinError;
 
-	@FXML
-	private Pane avatarPane;
+  @FXML
+  private Pane avatarPane;
 
-	/**
-	 * Closes the HostPanelNotification
-	 * 
-	 * @author esali
-	 */
-	@FXML
-	private void cancelHost() {
-		hostPaneParent.toBack();
-		hostPane.setOpacity(0.0);
-	}
+  /**
+   * Closes the HostPanelNotification
+   *
+   * @author esali
+   */
+  @FXML
+  private void cancelHost() {
+    hostPaneParent.toBack();
+    hostPane.setOpacity(0.0);
+  }
 
-	/**
-	 * sets the name of the game and opens the LobbyPanel
-	 *
-	 * @author esali
-	 */
-	@FXML
-	private void openHostLobby(ActionEvent actionEvent) {
-		RiskMain.getInstance().getDomain().setGameName(gameLobbyName.getText());
-		RiskMain.getInstance().getDomain().setGameType(2);
-		Parent newContent = null;
+  /**
+   * sets the name of the game and opens the LobbyPanel
+   *
+   * @author esali
+   */
+  @FXML
+  private void openHostLobby(ActionEvent actionEvent) {
+    RiskMain.getInstance().getDomain().setGameName(gameLobbyName.getText());
+    RiskMain.getInstance().getDomain().setGameType(2);
+    Parent newContent = null;
 
-		try {
-			newContent = FXMLLoader.load(RiskMain.class.getResource("/view/LobbyPanel.fxml"));
+    try {
+      newContent = FXMLLoader.load(RiskMain.class.getResource("/view/LobbyPanel.fxml"));
 
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		Stage primaryStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-		primaryStage.getScene().setRoot(newContent);
-	}
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+    Stage primaryStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+    primaryStage.getScene().setRoot(newContent);
+  }
 
-	/**
-	 * opens the Host Notification Pane
-	 * 
-	 * @author esali
-	 */
-	@FXML
-	private void openHost() {
-		hostPaneParent.toFront();
-		hostPane.setOpacity(1.0);
-	}
+  /**
+   * opens the Host Notification Pane
+   *
+   * @author esali
+   */
+  @FXML
+  private void openHost() {
+    hostPaneParent.toFront();
+    hostPane.setOpacity(1.0);
+  }
 
-	/**
-	 * opens the Single Player Notification Pane
-	 *
-	 * @author lschenck
-	 */
-	/**
-	 * cancels Connection Pane
-	 * 
-	 * @author esali
-	 */
-	@FXML
-	private void cancelConnection() {
-		manuellJoinPaneParent.toBack();
-		manuellJoinPane.setOpacity(0.0);
-	}
+  /**
+   * opens the Single Player Notification Pane
+   *
+   * @author lschenck
+   */
+  /**
+   * cancels Connection Pane
+   *
+   * @author esali
+   */
+  @FXML
+  private void cancelConnection() {
+    manuellJoinPaneParent.toBack();
+    manuellJoinPane.setOpacity(0.0);
+  }
 
-	/**
-	 * opens Connection Pane and sets the event as the event, that is caused by
-	 * button clicked
-	 * 
-	 * @author esali
-	 * @param event
-	 */
-	@FXML
-	private void openManuellJoin(ActionEvent event) {
-		this.event = event;
-		manuellJoinPaneParent.toFront();
-		manuellJoinPane.setOpacity(1.0);
-	}
+  /**
+   * opens Connection Pane and sets the event as the event, that is caused by button clicked
+   *
+   * @author esali
+   */
+  @FXML
+  private void openManuellJoin(ActionEvent event) {
+    this.event = event;
+    manuellJoinPaneParent.toFront();
+    manuellJoinPane.setOpacity(1.0);
+  }
 
-	/**
-	 * 
-	 * 
-	 * @author esali
-	 * @param actionEvent
-	 */
-	@FXML
-	private void connectSearch(ActionEvent actionEvent) {
-		RiskMain.getInstance().getDomain().setGameType(3);
-		Parent newContent = null;
+  /**
+   * @author esali
+   */
+  @FXML
+  private void connectSearch(ActionEvent actionEvent) {
+    RiskMain.getInstance().getDomain().setGameType(3);
+    Parent newContent = null;
 
-		try {
-			newContent = FXMLLoader.load(RiskMain.class.getResource("/view/LobbyPanel.fxml"));
+    try {
+      newContent = FXMLLoader.load(RiskMain.class.getResource("/view/LobbyPanel.fxml"));
 
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		Stage primaryStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-		primaryStage.getScene().setRoot(newContent);
-	}
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+    Stage primaryStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+    primaryStage.getScene().setRoot(newContent);
+  }
 
-	/**
-	 * opens the Lobby for a SinglePlayer
-	 * 
-	 * @author esali
-	 * @param actionEvent
-	 */
+  /**
+   * opens the Lobby for a SinglePlayer
+   *
+   * @author esali
+   */
 
-	@FXML
-	private void openSingleLobby(ActionEvent actionEvent) {
-		RiskMain.getInstance().getDomain().setGameType(1);
-		Parent newContent = null;
+  @FXML
+  private void openSingleLobby(ActionEvent actionEvent) {
+    RiskMain.getInstance().getDomain().setGameType(1);
+    Parent newContent = null;
 
-		try {
+    try {
 
-			newContent = FXMLLoader.load(RiskMain.class.getResource("/view/LobbyPanel.fxml"));
+      newContent = FXMLLoader.load(RiskMain.class.getResource("/view/LobbyPanel.fxml"));
 
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		Stage primaryStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-		primaryStage.getScene().setRoot(newContent);
-	}
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+    Stage primaryStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+    primaryStage.getScene().setRoot(newContent);
+  }
 
-	/**
-	 * opens the Lobby as a TutorialGame
-	 * 
-	 * @author esali
-	 * @param actionEvent
-	 */
-	@FXML
-	private void openTutorialLobby(ActionEvent actionEvent) {
-		RiskMain.getInstance().getDomain().setGameType(4);
-		Parent newContent = null;
-		try {
-			newContent = FXMLLoader.load(RiskMain.class.getResource("/view/LobbyPanel.fxml"));
+  /**
+   * opens the Lobby as a TutorialGame
+   *
+   * @author esali
+   */
+  @FXML
+  private void openTutorialLobby(ActionEvent actionEvent) {
+    RiskMain.getInstance().getDomain().setGameType(4);
+    Parent newContent = null;
+    try {
+      newContent = FXMLLoader.load(RiskMain.class.getResource("/view/LobbyPanel.fxml"));
 
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		Stage primaryStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-		primaryStage.getScene().setRoot(newContent);
-	}
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+    Stage primaryStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+    primaryStage.getScene().setRoot(newContent);
+  }
 
-	/**
-	 * opens the Settings
-	 * 
-	 * @author esali
-	 * @param actionEvent
-	 */
-	@FXML
-	private void openSettings(ActionEvent actionEvent) {
-		Parent newContent = null;
-		try {
-			newContent = FXMLLoader.load(RiskMain.class.getResource("/view/SettingsPanel.fxml"));
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		Stage primaryStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-		primaryStage.getScene().setRoot(newContent);
-	}
+  /**
+   * opens the Settings
+   *
+   * @author esali
+   */
+  @FXML
+  private void openSettings(ActionEvent actionEvent) {
+    Parent newContent = null;
+    try {
+      newContent = FXMLLoader.load(RiskMain.class.getResource("/view/SettingsPanel.fxml"));
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+    Stage primaryStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+    primaryStage.getScene().setRoot(newContent);
+  }
 
-	/**
-	 * opens StatisticsPanel
-	 * 
-	 * @author esali
-	 * @param actionEvent
-	 */
-	@FXML
-	private void openStatistics(ActionEvent actionEvent) {
-		Parent newContent = null;
-		try {
-			newContent = FXMLLoader.load(RiskMain.class.getResource("/view/StatisticsPanel.fxml"));
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		Stage primaryStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-		primaryStage.getScene().setRoot(newContent);
-	}
+  /**
+   * opens StatisticsPanel
+   *
+   * @author esali
+   */
+  @FXML
+  private void openStatistics(ActionEvent actionEvent) {
+    Parent newContent = null;
+    try {
+      newContent = FXMLLoader.load(RiskMain.class.getResource("/view/StatisticsPanel.fxml"));
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+    Stage primaryStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+    primaryStage.getScene().setRoot(newContent);
+  }
 
-	/**
-	 * sets the Client when a player wants to join a game
-	 * 
-	 * @author esali
-	 * @param actionEvent
-	 */
-	@FXML
-	private void connectManuell(ActionEvent actionEvent) {
-		this.client = new Client(ipAdress.getText(), RiskMain.getInstance().getDomain().getPlayerName(), null, false);
-		if (this.connect) {
-          Parent newContent = null;
-          RiskMain.getInstance().getDomain().setGameType(3);
-          try {
-              newContent = FXMLLoader.load(RiskMain.class.getResource("/view/LobbyPanel.fxml"));
 
-          } catch (IOException e) {
-              e.printStackTrace();
-          }
-          Stage primaryStage = (Stage) ((Node) this.event.getSource()).getScene().getWindow();
-          primaryStage.getScene().setRoot(newContent);
-      }else{
-          connectionJoinError.setOpacity(1.0);
+  /**
+   * @author esali
+   */
+  @FXML
+  private void openJoinLobby() {
+    this.client = new Client(ipAdress.getText(), RiskMain.getInstance().getDomain().getPlayerName(),
+        null, false, RiskMain.getInstance().getDomain().getData().getPlayerData(
+        (String.valueOf(db.getUserId(RiskMain.getInstance().getDomain().getPlayerName()))),
+        "avatar"));
+    if (this.connect) {
+      Parent newContent = null;
+      RiskMain.getInstance().getDomain().setGameType(3);
+      try {
+        newContent = FXMLLoader.load(RiskMain.class.getResource("/view/LobbyPanel.fxml"));
+
+      } catch (IOException e) {
+        e.printStackTrace();
       }
-	}
+      Stage primaryStage = (Stage) ((Node) this.event.getSource()).getScene().getWindow();
+      primaryStage.getScene().setRoot(newContent);
+    } else {
+      connectionJoinError.setOpacity(1.0);
+    }
+  }
 
-	/**
-	 * 
-	 * 
-	 * @author esali
-	 */
-	@FXML
-	private void openJoinLobby() {
-		ClientInterface c = new Client(ipAdress.getText(),
-				RiskMain.getInstance().getDomain().getPlayerName(), null, false);
-		if (this.connect) {
-          Parent newContent = null;
-          RiskMain.getInstance().getDomain().setGameType(3);
-          try {
-              newContent = FXMLLoader.load(RiskMain.class.getResource("/view/LobbyPanel.fxml"));
+  @Override
+  public void initialize(URL location, ResourceBundle resources) {
+    playerName.setText(RiskMain.getInstance().getDomain().getPlayerName());
+    this.db = RiskMain.getInstance().getDomain().getData();
+    RiskMain.getInstance().getDomain().setMenu(this);
+    String avatar = db.getPlayerData(
+        Integer.toString(db.getUserId(RiskMain.getInstance().getDomain().getPlayerName())),
+        "avatar");
+    switch (avatar) {
+      case "player1":
+        avatarPane.getStyleClass().clear();
+        avatarPane.getStyleClass().add("player1");
+        break;
+      case "player2":
+        avatarPane.getStyleClass().clear();
+        avatarPane.getStyleClass().add("player2");
+        break;
+      case "player3":
+        avatarPane.getStyleClass().clear();
+        avatarPane.getStyleClass().add("player3");
+        break;
+      case "player4":
+        avatarPane.getStyleClass().clear();
+        avatarPane.getStyleClass().add("player4");
+        break;
+      case "player5":
+        avatarPane.getStyleClass().clear();
+        avatarPane.getStyleClass().add("player5");
+        break;
+      case "player6":
+        avatarPane.getStyleClass().clear();
+        avatarPane.getStyleClass().add("player6");
+        break;
+      default:
+        avatarPane.getStyleClass().clear();
+    }
+  }
 
-          } catch (IOException e) {
-              e.printStackTrace();
-          }
-          Stage primaryStage = (Stage) ((Node) this.event.getSource()).getScene().getWindow();
-          primaryStage.getScene().setRoot(newContent);
-      }else{
-          connectionJoinError.setOpacity(1.0);
-      }
-	}
-
-	@Override
-	public void initialize(URL location, ResourceBundle resources) {
-		playerName.setText(RiskMain.getInstance().getDomain().getPlayerName());
-		this.db = RiskMain.getInstance().getDomain().getData();
-		RiskMain.getInstance().getDomain().setMenu(this);
-		String avatar = db.getPlayerData(
-				Integer.toString(db.getUserId(RiskMain.getInstance().getDomain().getPlayerName())), "avatar");
-		switch (avatar) {
-		case "player1":
-			avatarPane.getStyleClass().clear();
-			avatarPane.getStyleClass().add("player1");
-			break;
-		case "player2":
-			avatarPane.getStyleClass().clear();
-			avatarPane.getStyleClass().add("player2");
-			break;
-		case "player3":
-			avatarPane.getStyleClass().clear();
-			avatarPane.getStyleClass().add("player3");
-			break;
-		case "player4":
-			avatarPane.getStyleClass().clear();
-			avatarPane.getStyleClass().add("player4");
-			break;
-		case "player5":
-			avatarPane.getStyleClass().clear();
-			avatarPane.getStyleClass().add("player5");
-			break;
-		case "player6":
-			avatarPane.getStyleClass().clear();
-			avatarPane.getStyleClass().add("player6");
-			break;
-		default:
-			avatarPane.getStyleClass().clear();
-		}
-	}
-
-	@Override
-	public void connect(boolean b) {
-		this.connect = b;
-	}
+  @Override
+  public void connect(boolean b) {
+    this.connect = b;
+  }
 }

@@ -6,15 +6,11 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import sw.praktikum.risk5.GUI.*;
 import sw.praktikum.risk5.App.RiskMain;
 import sw.praktikum.risk5.Database.Database;
 
@@ -36,7 +32,7 @@ public class SettingsPanelController {
 
   /*
    * The Player can change his shown Name
-   * 
+   *
    * @author esali
    */
   @FXML
@@ -50,7 +46,7 @@ public class SettingsPanelController {
 
   /*
    * The player can choose another Avatar Player
-   * 
+   *
    * @author esali
    */
   @FXML
@@ -123,7 +119,7 @@ public class SettingsPanelController {
   /*
    * When logging out the player will be redirected to the Login Panel where he can start from
    * beginning
-   * 
+   *
    * @author esali
    */
   @FXML
@@ -160,7 +156,7 @@ public class SettingsPanelController {
 
   /*
    * When clicked on the "Back"-Button the Player will be redirected back to the Main Menu Screen
-   * 
+   *
    * @author esali
    */
   @FXML
@@ -176,7 +172,11 @@ public class SettingsPanelController {
   }
 
   public void initialize() {
-    playerName.setText(RiskMain.getInstance().getDomain().getPlayerName());
+    String playerNameNew = RiskMain.getInstance().getDomain().getPlayerName();
+    playerName.setText(playerNameNew);
     this.db = RiskMain.getInstance().getDomain().getData();
+    playerPicture.getStyleClass().add(RiskMain.getInstance().getDomain().getData().getPlayerData(
+        String.valueOf(RiskMain.getInstance().getDomain().getData().getUserId(playerNameNew)),
+        "avatar"));
   }
 }

@@ -200,7 +200,7 @@ public class GameController implements GameControllerInterface {
     Player player = this.match.getPlayers().get(id);
     player.setAi();
     // Simon methode um namem zu ersetzen
-    ClientInterface clientAi = new Client("localhost", "AIHorst", "Medium", true);
+    ClientInterface clientAi = new Client("localhost", "AIHorst", "Medium", true, null);
   }
 
   /**

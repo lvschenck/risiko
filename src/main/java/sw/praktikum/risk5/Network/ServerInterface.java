@@ -1,6 +1,7 @@
 package sw.praktikum.risk5.Network;
 
 import java.io.File;
+import java.util.ArrayList;
 import sw.praktikum.risk5.Message.*;
 
 public interface ServerInterface {
@@ -15,7 +16,7 @@ public interface ServerInterface {
 
   void sendMessageError(String errorType, int id);
 
-  void sendMessageLobby(String gameName, int[] amountAiWithDifficulty, String[] otherPlayerNames,
+  void sendMessageLobby(String gameName, ArrayList<Integer> amountAiWithDifficulty, String[] otherPlayerNames,
       String[] pictureOfPlayers);
 
   void sendMessageStart();

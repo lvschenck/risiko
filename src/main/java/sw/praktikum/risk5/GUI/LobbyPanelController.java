@@ -370,7 +370,7 @@ public class LobbyPanelController implements LobbyPanelInterface {
               break;
           }
           try {
-            Thread.sleep(10);
+            Thread.sleep(5);
           } catch (InterruptedException e) {
             e.printStackTrace();
           }
@@ -458,6 +458,7 @@ public class LobbyPanelController implements LobbyPanelInterface {
    * @author lvschenck
    */
   public void initialize() {
+    this.amountAiWithDifficulty = new ArrayList<Integer>();
     this.db = RiskMain.getInstance().getDomain().getData();
     ((Label) player1Pane.getCenter()).setText(RiskMain.getInstance().getDomain().getPlayerName());
     String avatar = db.getPlayerData(
