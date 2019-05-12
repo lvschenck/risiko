@@ -13,5 +13,7 @@ public interface ClientInterface {
   void sendMessageChat(String author, String chatmessage, String receiver);
   
   void setLobby();
+  
+  void setGui();
 
 }

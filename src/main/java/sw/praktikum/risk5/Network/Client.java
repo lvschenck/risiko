@@ -298,6 +298,10 @@ public class Client implements Runnable, ClientInterface {
   public void setLobby() {
     this.lobby = RiskMain.getInstance().getDomain().getLobby();
   }
+  
+  public void setGui() {
+    this.gui = RiskMain.getInstance().getDomain().getGui() ;
+        }
 }
 
 
