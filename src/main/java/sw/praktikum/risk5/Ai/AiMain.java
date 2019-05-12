@@ -118,7 +118,7 @@ public class AiMain implements AiInterface {
                     this.aiAttackHandler.getTargetCountry().getId(),
                     this.aiAttackHandler.getTargetCountry().getOwner());
                 String[] countryNames = RiskMain.getInstance().getDomain().getCountryNames();
-                this.client.sendMessageChat("I am attacking" + countryNames[this.aiAttackHandler.getTargetCountry().getId()-1] + "from" + countryNames[this.aiAttackHandler.getSourceCountry().getId()-1] + ".", this.aiName, "all");
+                this.client.sendMessageChat(this.aiName, "I am attacking" + countryNames[this.aiAttackHandler.getTargetCountry().getId()-1] + "from" + countryNames[this.aiAttackHandler.getSourceCountry().getId()-1] + ".", "all");
                 this.sendJson(j, 'a');
               } else {
                 j = this.jsonWriter.writeSkipTurnJson();
