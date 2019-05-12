@@ -39,7 +39,7 @@ public class Client implements Runnable, ClientInterface {
   private Message message;
   private ReadJson reader;
   private GuiInterface gui = RiskMain.getInstance().getDomain().getGui();
-  private LobbyPanelInterface lobby ;
+  private LobbyPanelInterface lobby;
   private boolean aiBool = false;
   private AiInterface ai;
 
@@ -136,9 +136,9 @@ public class Client implements Runnable, ClientInterface {
                 break;
 
               case SHUTDOWN:
-                if(RiskMain.getInstance().getDomain().getInLobby()) {
+                if (RiskMain.getInstance().getDomain().getInLobby()) {
                   this.lobby.receiveMessageShutdown();
-                }else {
+                } else {
                   this.gui.receiveMessageShutdown();
                 }
                 this.fromServer.close();
@@ -180,7 +180,8 @@ public class Client implements Runnable, ClientInterface {
                 break;
               case DATA:
                 MessageData md = (MessageData) this.message;
-                RiskMain.getInstance().getDomain().getData().implementGame(username,md.getPlayerData() ,md.getGame());
+                RiskMain.getInstance().getDomain().getData().implementGame(username,
+                    md.getPlayerData(), md.getGame());
                 break;
               case ID:
                 MessageAssignId maa = (MessageAssignId) this.message;
@@ -189,7 +190,7 @@ public class Client implements Runnable, ClientInterface {
                 } else {
                   RiskMain.getInstance().getDomain().setId(maa.getId());
                 }
-                
+
                 RiskMain.getInstance().getDomain().getMenu().connect(true);
               default:
 
@@ -223,7 +224,7 @@ public class Client implements Runnable, ClientInterface {
   /**
    * Method to send a JSON to the server
    * 
-   * @mgass
+   * @author mgass
    */
 
   @Override
@@ -239,7 +240,7 @@ public class Client implements Runnable, ClientInterface {
   /**
    * Method to send a message to the server
    * 
-   * @mgass
+   * @author mgass
    */
 
   @Override
@@ -260,7 +261,7 @@ public class Client implements Runnable, ClientInterface {
   /**
    * Method to send a messageChat to the server
    * 
-   * @mgass
+   * @author mgass
    */
 
   @Override
@@ -282,11 +283,16 @@ public class Client implements Runnable, ClientInterface {
 
 
   }
+  /**
+   * Method to set Lobby instance for Client
+   * 
+   * @author mgass
+   */
 
   @Override
   public void setLobby() {
-   this.lobby = RiskMain.getInstance().getDomain().getLobby();
-    
+    this.lobby = RiskMain.getInstance().getDomain().getLobby();
+
   }
 }
 
