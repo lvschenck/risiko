@@ -1,7 +1,6 @@
 package sw.praktikum.risk5.GUI;
 
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
@@ -141,6 +140,8 @@ public class LobbyPanelController implements LobbyPanelInterface {
               messageInput.getText(), recipientList.getValue());
     } else {
       this.clientPlayerInterface = RiskMain.getInstance().getDomain().getClient();
+      this.clientPlayerInterface.sendMessageChat(RiskMain.getInstance().getDomain().getPlayerName(),
+          messageInput.getText(), recipientList.getValue());
     }
   }
 
@@ -310,11 +311,11 @@ public class LobbyPanelController implements LobbyPanelInterface {
               this.clientInterface1 = new Client("localhost", "Gott",
                   (String) kiStatus1.getValue(), true, "player-ki");
               System.out.println("client" + countKi);
-              if(kiStatus1.getValue() == "Easy"){
+              if (kiStatus1.getValue() == "Easy") {
                 amountAiWithDifficulty.add(0);
-              }else if(kiStatus1.getValue() == "Medium"){
+              } else if (kiStatus1.getValue() == "Medium") {
                 amountAiWithDifficulty.add(1);
-              }else if(kiStatus1.getValue() == "Hard"){
+              } else if (kiStatus1.getValue() == "Hard") {
                 amountAiWithDifficulty.add(2);
               }
               break;
@@ -322,11 +323,11 @@ public class LobbyPanelController implements LobbyPanelInterface {
               this.clientInterface2 = new Client("localhost", "E.T.", (String) kiStatus2.getValue(),
                   true, "player-ki");
               System.out.println("client" + countKi);
-              if(kiStatus2.getValue() == "Easy"){
+              if (kiStatus2.getValue() == "Easy") {
                 amountAiWithDifficulty.add(0);
-              }else if(kiStatus2.getValue() == "Medium"){
+              } else if (kiStatus2.getValue() == "Medium") {
                 amountAiWithDifficulty.add(1);
-              }else if(kiStatus2.getValue() == "Hard"){
+              } else if (kiStatus2.getValue() == "Hard") {
                 amountAiWithDifficulty.add(2);
               }
               break;
@@ -334,11 +335,11 @@ public class LobbyPanelController implements LobbyPanelInterface {
               this.clientInterface3 = new Client("localhost", "R2D2", (String) kiStatus3.getValue(),
                   true, "player-ki");
               System.out.println("client" + countKi);
-              if(kiStatus3.getValue() == "Easy"){
+              if (kiStatus3.getValue() == "Easy") {
                 amountAiWithDifficulty.add(0);
-              }else if(kiStatus3.getValue() == "Medium"){
+              } else if (kiStatus3.getValue() == "Medium") {
                 amountAiWithDifficulty.add(1);
-              }else if(kiStatus3.getValue() == "Hard"){
+              } else if (kiStatus3.getValue() == "Hard") {
                 amountAiWithDifficulty.add(2);
               }
               break;
@@ -347,11 +348,11 @@ public class LobbyPanelController implements LobbyPanelInterface {
                   (String) kiStatus4.getValue(),
                   true, "player-ki");
               System.out.println("client" + countKi);
-              if(kiStatus4.getValue() == "Easy"){
+              if (kiStatus4.getValue() == "Easy") {
                 amountAiWithDifficulty.add(0);
-              }else if(kiStatus4.getValue() == "Medium"){
+              } else if (kiStatus4.getValue() == "Medium") {
                 amountAiWithDifficulty.add(1);
-              }else if(kiStatus4.getValue() == "Hard"){
+              } else if (kiStatus4.getValue() == "Hard") {
                 amountAiWithDifficulty.add(2);
               }
               break;
@@ -360,11 +361,11 @@ public class LobbyPanelController implements LobbyPanelInterface {
                   (String) kiStatus5.getValue(),
                   true, "player-ki");
               System.out.println("client" + countKi);
-              if(kiStatus5.getValue() == "Easy"){
+              if (kiStatus5.getValue() == "Easy") {
                 amountAiWithDifficulty.add(0);
-              }else if(kiStatus5.getValue() == "Medium"){
+              } else if (kiStatus5.getValue() == "Medium") {
                 amountAiWithDifficulty.add(1);
-              }else if(kiStatus5.getValue() == "Hard"){
+              } else if (kiStatus5.getValue() == "Hard") {
                 amountAiWithDifficulty.add(2);
               }
               break;
