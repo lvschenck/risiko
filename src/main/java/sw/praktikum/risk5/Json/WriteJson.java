@@ -11,7 +11,7 @@ import org.json.simple.parser.JSONParser;
 
 
 /**
- * Writes the JSON files
+ * Writes the JSON files.
  * 
  * @author lroell
  */
@@ -19,7 +19,7 @@ import org.json.simple.parser.JSONParser;
 public class WriteJson {
 
   /**
-   * creates attack json with given parameters
+   * Creates attack json with given parameters.
    * 
    * @author lroell
    * @param attackCountryId id of the country a player attacks from.
@@ -68,7 +68,7 @@ public class WriteJson {
   }
 
   /**
-   * creates endGame json.
+   * Creates endGame json.
    * 
    * @author lroell
    * @param firstPlayerId id of the winner.
@@ -104,7 +104,7 @@ public class WriteJson {
   }
 
   /**
-   * creates statistics json.
+   * Creates statistics json.
    * 
    * @author lroell
    * @param playerId id of the player that wants to get the statistics
@@ -136,7 +136,7 @@ public class WriteJson {
   }
 
   /**
-   * writes move json.
+   * Writes move json.
    * 
    * @author lroell
    * @param sourceCountryId id of the country a player wants to move troops from.
@@ -186,7 +186,7 @@ public class WriteJson {
   }
 
   /**
-   * write place json
+   * Write place json.
    * 
    * @author lroell
    * @param numberOfUnits amount of troops to place in the selected country.
@@ -225,7 +225,7 @@ public class WriteJson {
 
 
   /**
-   * creates GameState json
+   * Creates GameState json.
    * 
    * @author lroell
    * @param countriesName the names of all countries.
@@ -376,15 +376,12 @@ public class WriteJson {
   }
 
   /**
-   * Creates the cardRedemption - File
+   * Creates the cardRedemption - File.
    * 
-   * @author Fabian
+   * @author fahaerte
    * @param card1 ID of card 1
-   * @param card1Symbol symbol of card 1
    * @param card2 ID of card 2
-   * @param card2Symbol symbol of card 2
    * @param card3 ID of card 3
-   * @param card3Symbol symbol of card 3
    * @return The JSON - File
    */
   public File writeCardRedemption(int card1, int card2, int card3) {
@@ -419,7 +416,7 @@ public class WriteJson {
   }
 
   /**
-   * creates skipTurn json
+   * Creates skipTurn json.
    * 
    * @author lroell
    * @return file created json
