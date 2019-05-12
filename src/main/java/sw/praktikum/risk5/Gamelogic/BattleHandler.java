@@ -32,7 +32,7 @@ class BattleHandler {
    * @param diceAtt Integer-Array with the values of the attackers dice
    * @param diceDef Integer-Array with the values of the defenders dice
    * @return Boolean-Array which outlines the winner of each dice-comparison: true - the attacker
-   * wins
+   *         wins
    * @author fahaerte
    */
 
@@ -78,60 +78,75 @@ class BattleHandler {
 
     Player attacker = this.currentMatch.findPlayer(attackerId);
     Player defender = this.currentMatch.findPlayer(targetId);
+    System.out.println("attackerId:" + attackerCountry);
+    System.out.println("defenderId:" + targetCountry);
     Country attackingCountry = this.currentMatch.findCountry(attackerCountry);
     Country defendingCountry = this.currentMatch.findCountry(targetCountry);
-
+    System.out.println("attackerId after:" + attackingCountry.getId());
+    System.out.println("defenderId after:" + defendingCountry.getId());
     // Prueft alle Errors
     if ((!attackingCountry.getNeighbors().contains(defendingCountry)) || attackerId == targetId
         || !(attackerId == attackingCountry.getOwner().getId()) || attackingCountry.getTroops() <= 1
-        || attackingCountry.getTroops() <= attackingTroops) {
+        || attackingCountry.getTroops() <= attackingTroops || this.currentMatch.getCurrentPlayerId() != attackerId) {
       System.out.println("PIPI");
       return false;
     }
+    while (attackingTroops != 0) {
+      int amountAtt = 0;
+      int amountDef = 0;
+      if (attackingTroops >= 3) {
+        amountAtt = 3;
+      } else {
+        amountAtt = attackingTroops;
+      }
 
-    int amountAtt = 0;
-    int amountDef = 0;
-    if (attackingTroops >= 3) {
-      amountAtt = 3;
-    } else {
-      amountAtt = attackingTroops;
-    }
+      if (defendingTroops >= 2) {
+        amountDef = 2;
+      } else {
+        amountDef = 1;
+      }
 
-    if (defendingTroops >= 2) {
-      amountDef = 2;
-    } else {
-      amountDef = 1;
-    }
+      int[] diceAtt = this.dice.rollDice(amountAtt, true);
+      int[] diceDef = this.dice.rollDice(amountDef, false);
 
-    int[] diceAtt = this.dice.rollDice(amountAtt, true);
-    int[] diceDef = this.dice.rollDice(amountDef, false);
+      boolean[] battleResult = this.attackHandler(diceAtt, diceDef);
 
-    boolean[] battleResult = attackHandler(diceAtt, diceDef);
+      for (int i = 0; i < battleResult.length; i++) {
+        System.out.print(battleResult[i] + ", ");
+      }
 
-    //Truppen zerstoeren und Land neu besetzen
-    for (int i = 0; i < battleResult.length; i++) {
+      // Truppen zerstoeren und Land neu besetzen
+      for (int i = 0; i < battleResult.length; i++) {
 
-      if (battleResult[i]) {// Angreifer gewinnt Wuerfel
-        defendingCountry.addTroops(-1);
+        if (battleResult[i]) {// Angreifer gewinnt Wuerfel
+          defendingCountry.addTroops(-1);
 
-        if (defendingCountry.getTroops() == 0) { // Wenn Land erobert
-          System.out.println("LOL");
-          defendingCountry.setOwner(attackingCountry.getOwner());
-          attackingCountry.getOwner().addCountry(defendingCountry);
-          attackingCountry.getOwner().setConquered(true);
-          countryConquered = true;
-          this.currentMatch.checkAmountCountries();
-          this.currentMatch.updateStatistics();
-          attackingCountry.addTroops((-1) * attackingTroops);
-          defendingCountry.addTroops(attackingTroops);
+          if (defendingCountry.getTroops() == 0) { // Wenn Land erobert
+            System.out.println("LOL");
+            defendingCountry.setOwner(attackingCountry.getOwner());
+            attackingCountry.getOwner().addCountry(defendingCountry);
+            attackingCountry.getOwner().setConquered(true);
+            countryConquered = true;
+            this.currentMatch.checkAmountCountries();
+            this.currentMatch.updateStatistics();
+            defendingCountry.addTroops(attackingTroops);
+            break;
+          }
+
+        } else { // Verteidiger gewinnt Wuerfel
+          System.out.println("verloren");
+          attackingCountry.addTroops(-1);
+          attackingTroops--;
+        }
+        if(attackingTroops == 0) {
           break;
         }
-
-      } else { // Verteidiger gewinnt Wuerfel
-        System.out.println("verloren");
-        attackingTroops--;
+      }
+      if (countryConquered) {
+        break;
       }
     }
+
 
     // provisorisch, die Instanz der Klasse Statistics sollte woanders erstellt
     // werden

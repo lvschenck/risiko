@@ -188,6 +188,7 @@ public class GamePanelController implements Initializable, GuiInterface {
   public void receiveMessageError(String errorType) {
     popUpPane.toFront();
     errorPopup.toFront();
+    errorPopup.setOpacity(1.0);
     String attack = "attack Error";
     if (errorType.equals("attack")) {
       errorPopUpText.setText("attack error");
@@ -827,5 +828,11 @@ public class GamePanelController implements Initializable, GuiInterface {
     recipientList.setItems(participantList);
     recipientList.setValue("all");
 
+  }
+
+  @Override
+  public void receiveMessageShutdown() {
+    // TODO Auto-generated method stub
+    
   }
 }

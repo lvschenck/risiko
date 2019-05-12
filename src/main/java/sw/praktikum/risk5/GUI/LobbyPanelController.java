@@ -558,4 +558,10 @@ public class LobbyPanelController implements LobbyPanelInterface {
     }
   }
 
+  @Override
+  public void receiveMessageShutdown() {
+    // TODO Auto-generated method stub
+    
+  }
+
 }
