@@ -27,6 +27,7 @@ import sw.praktikum.risk5.App.RiskMain;
 import sw.praktikum.risk5.Database.Database;
 import sw.praktikum.risk5.Message.MessageAssignId;
 import sw.praktikum.risk5.Message.MessageLobby;
+import sw.praktikum.risk5.Message.MessageUpdateLobby;
 import sw.praktikum.risk5.Network.Client;
 import sw.praktikum.risk5.Network.ClientInterface;
 import sw.praktikum.risk5.Network.Server;
@@ -551,7 +552,7 @@ public class LobbyPanelController implements LobbyPanelInterface {
 
     if(RiskMain.getInstance().getDomain().isClient()){
       RiskMain.getInstance().getDomain().getClient().setLobby();
-      MessageAssignId lobby = new MessageAssignId(0);
+      MessageUpdateLobby lobby = new MessageUpdateLobby();
       RiskMain.getInstance().getDomain().getClient().sendMessage(lobby);
     }
   }
