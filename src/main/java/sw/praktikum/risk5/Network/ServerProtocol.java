@@ -76,6 +76,7 @@ public class ServerProtocol extends Thread {
                 this.ID = Server.getID(this.username);
                 this.server.sendMessageAssignId(this.ID);
                 RiskMain.getInstance().getDomain().getData().setPlayerData("avatar", this.avatar, String.valueOf(this.ID));
+                RiskMain.getInstance().getDomain().getLobby().sendMessageLobby();
               } else {
                 MessageLoginFail m = new MessageLoginFail();
                 this.toClient.writeObject(m);

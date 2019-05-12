@@ -175,7 +175,7 @@ public class Client implements Runnable, ClientInterface {
                 } else {
                   RiskMain.getInstance().getDomain().setId(maa.getId());
                 }
-
+                
                 RiskMain.getInstance().getDomain().getMenu().connect(true);
               default:
 
