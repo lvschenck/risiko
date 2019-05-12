@@ -176,13 +176,7 @@ public class GamePanelController implements Initializable, GuiInterface {
         this.valueFactory = new IntegerSpinnerValueFactory(1, 250, 3);
         troupCount.setValueFactory(this.valueFactory);
       }
-      if (this.turnPhase != this.jsonReader.getGameStateCurrentTurnPhase()) {
-        this.turnPhase = this.jsonReader.getGameStateCurrentTurnPhase();
-        updateCountries(troops, ownerIds);
-      }
     }
-
-    System.out.println("back, backe kuchen " + this.jsonReader.getGameStateCurrentPlayer());
   }
 
   @Override

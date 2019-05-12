@@ -194,7 +194,6 @@ public class LobbyPanelController implements LobbyPanelInterface {
         ((HBox) player2Pane.getLeft()).getStyleClass().clear();
         ((HBox) player2Pane.getLeft()).getStyleClass().add(pictureOfPlayers[1]);
       case 1:
-        System.out.println(allPlayerNames[0] + ":: " + allPlayerNames);
         ((Label) player1Pane.getCenter()).setText(allPlayerNames[0]);
         ((HBox) player1Pane.getLeft()).getStyleClass().clear();
         ((HBox) player1Pane.getLeft()).getStyleClass().add(pictureOfPlayers[0]);
