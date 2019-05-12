@@ -293,7 +293,6 @@ public class LobbyPanelController implements LobbyPanelInterface {
   @FXML
   private void openGame(ActionEvent actionEvent) {
     if (!(kiSelected && directStart)) {
-      RiskMain.getInstance().getDomain().setLobby(this);
       ServerInterface server = new Server(RiskMain.getInstance().getDomain().getPlayerName());
       RiskMain.getInstance().getDomain().setGameName("SinglePlayer");
       RiskMain.getInstance().getDomain().setServer(server);
@@ -522,7 +521,7 @@ public class LobbyPanelController implements LobbyPanelInterface {
         kiSelected = false;
         break;
     }
-
-
+    RiskMain.getInstance().getDomain().setLobby(this);
   }
+
 }
