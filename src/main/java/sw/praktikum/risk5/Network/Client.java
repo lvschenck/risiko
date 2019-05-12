@@ -39,7 +39,7 @@ public class Client implements Runnable, ClientInterface {
   private Message message;
   private ReadJson reader;
   private GuiInterface gui = RiskMain.getInstance().getDomain().getGui();
-  private LobbyPanelInterface lobby = RiskMain.getInstance().getDomain().getLobby();
+  private LobbyPanelInterface lobby ;
   private boolean aiBool = false;
   private AiInterface ai;
 
@@ -266,6 +266,12 @@ public class Client implements Runnable, ClientInterface {
     }
 
 
+  }
+
+  @Override
+  public void setLobby() {
+   this.lobby = RiskMain.getInstance().getDomain().getLobby();
+    
   }
 }
 
