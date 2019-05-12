@@ -12,4 +12,6 @@ public interface LobbyPanelInterface {
   void receiveMessageStart();
 
   void sendMessageLobby();
+  
+  void receiveMessageShutdown();
 }

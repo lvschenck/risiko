@@ -136,7 +136,14 @@ public class Client implements Runnable, ClientInterface {
                 break;
 
               case SHUTDOWN:
-                
+                if(RiskMain.getInstance().getDomain().getInLobby()) {
+                  this.lobby.receiveMessageShutdown();
+                }else {
+                  this.gui.receiveMessageShutdown();
+                }
+                this.fromServer.close();
+                this.toServer.close();
+                this.activeP = false;
                 break;
 
               case ERROR:
