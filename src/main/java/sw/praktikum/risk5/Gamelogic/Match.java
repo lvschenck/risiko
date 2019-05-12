@@ -56,8 +56,8 @@ class Match {
    */
   protected void endTurnPhase() {
     if (this.currentTurnPhase == 2) {
-      int random = (int) (Math.random() * this.allCards.size());
-      this.currentPlayer.drawCard(this.allCards.get(random));
+      int random = (int) (Math.random() * this.availableCards.size());
+      this.currentPlayer.drawCard(this.availableCards.get(random));
       this.currentPlayer.setConquered(false);
       this.currentTurnPhase = 0;
       this.changeCurrentPlayer();

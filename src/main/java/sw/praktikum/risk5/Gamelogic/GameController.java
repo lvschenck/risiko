@@ -22,7 +22,7 @@ public class GameController implements GameControllerInterface {
   private Match match;
   private BattleHandler battleHandler;
   private ArrayList<Country> allCountries = new ArrayList<Country>();
-  private ArrayList<Card> allCards;
+  private ArrayList<Card> allCards = new ArrayList<Card>();
   private WriteJson jsonWriter = new WriteJson();
   private ReadJson jsonReader = new ReadJson();
   private Database database = RiskMain.getInstance().getDomain().getData();
@@ -628,8 +628,7 @@ public class GameController implements GameControllerInterface {
    * @return ArrayList<Card> all initialized cards
    * @author lroell
    */
-  protected ArrayList<Card> initializeCards(ArrayList<Country> country) {
-    ArrayList<Card> cards = new ArrayList<Card>();
+  protected void initializeCards(ArrayList<Country> country) {
     ArrayList<Country> countries = country;
 
     Iterator<Country> it = countries.iterator();
@@ -648,15 +647,13 @@ public class GameController implements GameControllerInterface {
     while (it.hasNext()) {
       Country c = it.next();
       Card card = new Card(c, symbols[i], i + 1);
-      cards.add(card);
+      this.allCards.add(card);
       i++;
     }
     Card wildcard1 = new Card(null, null, 0);
     Card wildcard2 = new Card(null, null, 0);
-    cards.add(wildcard1);
-    cards.add(wildcard2);
-
-    return cards;
+    this.allCards.add(wildcard1);
+    this.allCards.add(wildcard2);
   }
 
   public static void main(String[] args) {

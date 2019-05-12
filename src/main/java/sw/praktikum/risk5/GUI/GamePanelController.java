@@ -255,13 +255,13 @@ public class GamePanelController implements Initializable, GuiInterface {
 
       }
     }
-    if (turnphase == 0) {
+    if (this.currentPlayer && turnphase == 0) {
       phaseButton.setText("finish placing");
       headerText.setText("Place " + ownTroopsToPlace + " troops wisely!");
-    } else if (turnphase == 1) {
+    } else if (this.currentPlayer && turnphase == 1) {
       Platform.runLater(() -> phaseButton.setText("finish attacking"));
       Platform.runLater(() -> headerText.setText("Conquer!"));
-    } else if (turnphase == 2) {
+    } else if (this.currentPlayer && turnphase == 2) {
       Platform.runLater(() -> phaseButton.setText("finish moving"));
       Platform.runLater(() -> headerText.setText("Move your troops wisely"));
     }
@@ -590,13 +590,10 @@ public class GamePanelController implements Initializable, GuiInterface {
     } else if (turnPhase == 1) {
       phaseButton.setText("finish moving");
       this.sendJson('s', 0, 0, 0, 0, 0);
-      turnPhase++;
     } else if (turnPhase == 2) {
       phaseButton.setText("finish fortifying");
-      this.jsonWriter.writeSkipTurnJson();
-      turnPhase++;
+      this.sendJson('s', 0, 0, 0, 0, 0);
     }
-    phaseButton.setDisable(true);
   }
 
   /**
