@@ -248,7 +248,7 @@ public class LobbyPanelController implements LobbyPanelInterface {
 
   @Override
   public void sendMessageLobby() {
-    MessageLobby messageLobby = new MessageLobby(RiskMain.getInstance().getDomain().getGameName(), this.amountAiWithDifficulty, this.playerNames, this.pictures);
+  this.serverInterface.sendMessageLobby(RiskMain.getInstance().getDomain().getGameName(), this.amountAiWithDifficulty, this.playerNames, this.pictures);
   }
 
   @FXML
@@ -311,9 +311,9 @@ public class LobbyPanelController implements LobbyPanelInterface {
   @FXML
   private void openGame(ActionEvent actionEvent) {
     if (!(kiSelected && directStart)) {
-      ServerInterface server = new Server(RiskMain.getInstance().getDomain().getPlayerName());
+    this.serverInterface = new Server(RiskMain.getInstance().getDomain().getPlayerName());
       RiskMain.getInstance().getDomain().setGameName("SinglePlayer");
-      RiskMain.getInstance().getDomain().setServer(server);
+      RiskMain.getInstance().getDomain().setServer(serverInterface);
       int countKi = 0;
       for (int i = 0; i < 5; i++) {
         System.out.println(!((BorderPane) kiPlayerGrid.getChildren().get(i)).getRight()
