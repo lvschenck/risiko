@@ -551,6 +551,7 @@ public class LobbyPanelController implements LobbyPanelInterface {
     RiskMain.getInstance().getDomain().setLobby(this);
 
     if(RiskMain.getInstance().getDomain().isClient()){
+      System.out.println(RiskMain.getInstance().getDomain().isClient()+"    clieeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeent");
       RiskMain.getInstance().getDomain().getClient().setLobby();
       MessageUpdateLobby lobby = new MessageUpdateLobby();
       RiskMain.getInstance().getDomain().getClient().sendMessage(lobby);
