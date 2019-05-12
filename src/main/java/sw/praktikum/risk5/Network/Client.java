@@ -136,7 +136,7 @@ public class Client implements Runnable, ClientInterface {
                 break;
 
               case SHUTDOWN:
-
+                
                 break;
 
               case ERROR:
