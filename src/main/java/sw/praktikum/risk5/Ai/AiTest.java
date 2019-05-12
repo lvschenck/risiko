@@ -30,13 +30,13 @@ class AiTest {
     int currentPlayer = 1;
     int currentTurnPhase = 0;
     int currentGamePhase = 0;
-//    AiMain ai = new AiMain(AiType.EASY, 1, null);
-//    AiMain ai2 = new AiMain(AiType.EASY, 2, null);
-//
-//    System.out.println("start");
-//    System.out.println();
-//    
-//    //Choosing countries
+    AiMain ai = new AiMain(AiType.EASY, 1, null, "");
+    AiMain ai2 = new AiMain(AiType.EASY, 2, null, "");
+
+    System.out.println("start");
+    System.out.println();
+    
+    //Choosing countries
 //    for (int i = 0; i < 21; i++) {
 //      File result = ai.performAction(writer.writeGetGameStateJson(names, countriesId,
 //          countriesOwner, countriesUnits, neigh, "", 0, pIds, pAi, pNames, playerTroops,
@@ -45,7 +45,8 @@ class AiTest {
 //
 //      countriesUnits[reader.getPlaceCountry() - 1] += reader.getPlaceNumberOfUnits();
 //      countriesOwner[reader.getPlaceCountry() - 1] = reader.getPlacePlayer();
-//     
+//      System.out.println(reader.getPlaceCountry());
+//      
 //      currentPlayer = 2;
 //      result = ai2.performAction(writer.writeGetGameStateJson(names, countriesId, countriesOwner,
 //          countriesUnits, neigh, "", 0, pIds, pAi, pNames, playerTroops, playerCards, currentPlayer,
@@ -57,7 +58,9 @@ class AiTest {
 //      currentPlayer = 1;
 //      playerTroops[0] -= 1;
 //      playerTroops[1] -= 1;
-//    }
+//      System.out.println(reader.getPlaceCountry());
+//      System.out.println("performed: " + i);
+    }
 //    
 //    //Troops Placement
 //    currentTurnPhase = 0;
@@ -92,6 +95,6 @@ class AiTest {
 //      System.out.println("ID: " + countriesId[i]);
 //      System.out.println("Owner: " + countriesOwner[i]);
 //      System.out.println("Units: " + countriesUnits[i]);
-    }
+//    }
    
 }

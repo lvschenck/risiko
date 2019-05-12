@@ -54,6 +54,11 @@ public class AiMain implements AiInterface {
     this.type = type;
     this.cards = new int[3];
     this.client = client;
+//    this.aiPlacementHandler = new AiPlacementHandler(aiId, type);
+//    this.aiMoveHandler = new AiMoveHandler(aiId, type);
+//    this.aiAttackHandler = new AiAttackHandler(aiId, type);
+//    this.aiCardRedemptionHandler = new AiCardRedemptionHandler();
+//    this.personalId = aiId;
   }
 
   /**
@@ -64,14 +69,16 @@ public class AiMain implements AiInterface {
    */
   @Override
   public void performAction(File json) {
-    File j;
+    File j;;
     this.receiveData(json);
     System.out.println(this.currentPlayer + ", " + personalId);
-    if (this.currentPlayer == personalId) {
+    if (this.currentPlayer == this.personalId) {
       switch (this.gamePhase) {
 
         case 0:
+         
           AiCountry target = this.aiPlacementHandler.placeInEmptyCountries();
+          
           if (target != null) {
             j = this.jsonWriter.writePlaceJson(1, target.getId(), this.personalId);
             this.sendJson(j, 'p');
@@ -142,7 +149,7 @@ public class AiMain implements AiInterface {
       }
     }
 
-    // return j;
+//     return j;
 
   }
 

@@ -223,7 +223,7 @@ class AiPlacementHandler {
    */
   private void placementEasy(int availableTroops) {
     System.out.println("Size " + this.allCountriesFromAi().size());
-    
+
     for (AiCountry a : this.allCountriesFromAi()) {
       System.out.println("OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO");
       this.target = a;
@@ -567,15 +567,18 @@ class AiPlacementHandler {
    */
   private AiCountry placeInEmptyCountriesEasy() {
     AiCountry output = null;
+    ArrayList<AiCountry> emptyCountries = new ArrayList<AiCountry>();
 
     for (AiCountry a : this.allCountries) {
       if (a.getOwner() == 0) {
-        output = a;
-        a.setOwner(this.aiId);
-        a.setTroops(1);
-        break;
+        emptyCountries.add(a);
       }
     }
+    int target = (int) (Math.random() * emptyCountries.size());
+    output = emptyCountries.get(target);
+    output.setTroops(1);
+    output.setOwner(this.aiId);
+
     return output;
   }
 
