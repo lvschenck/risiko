@@ -115,6 +115,10 @@ public class ServerProtocol extends Thread {
             case ERROR:
               
               this.gameController = RiskMain.getInstance().getDomain().getGame();
+              
+              
+            case ID:
+              RiskMain.getInstance().getDomain().getLobby().sendMessageLobby();
             default:
 
               break;
