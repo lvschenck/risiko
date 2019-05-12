@@ -171,8 +171,6 @@ public class Server extends Thread implements ServerInterface {
 
   public void startGame() {
     RiskMain.getInstance().getDomain().setInLobby(false);
-    Message m = new MessageStart();
-    this.sendMessage(m);
     int length = users.size();
     int[] ids = new int[length];
     String[] usernames = new String[length];
@@ -189,7 +187,8 @@ public class Server extends Thread implements ServerInterface {
     this.gui = RiskMain.getInstance().getDomain().getGui();
     this.gameController = new GameController();
     RiskMain.getInstance().getDomain().setGame(gameController);
-    
+    Message m = new MessageStart();
+    this.sendMessage(m);
     this.gameController.startGame(ids, usernames);
     
   }
