@@ -249,7 +249,7 @@ public class Client implements Runnable, ClientInterface {
    */
 
   @Override
-  public void sendMessageChat(String chatmessage, String author, String receiver) {
+  public void sendMessageChat(String author, String chatmessage, String receiver) {
     MessageChat message;
     if (receiver.equals("all")) {
       message = new MessageChat(chatmessage, author, receiver, false);
